@@ -9,9 +9,6 @@ public class MoveController
         objTransform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
     }
 
-    public static void MoveToTarget(Transform objTransform, Vector3 targetPos, float speed) {
-        objTransform.position = Vector3.MoveTowards(objTransform.position, targetPos, speed * Time.fixedDeltaTime);
-    }
 
     public static void LookTarget(Transform objTransform, Transform targetTransform, float speed) {
         Vector3 dir = new Vector3(objTransform.position.x - targetTransform.transform.position.x, 0, objTransform.position.z - targetTransform.transform.position.z);

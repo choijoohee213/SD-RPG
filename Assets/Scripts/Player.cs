@@ -9,7 +9,7 @@ public class Player : FSMBase {
     private Joystick joystick;
 
     [SerializeField]
-    ParticleSystem dust;
+    ParticleSystem[] hitEffect;
 
 
     protected override void Awake() {
@@ -23,6 +23,7 @@ public class Player : FSMBase {
         if(state != CharacterState.Attack && !joystick.IsPointerUp)
             movePos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
         //movePos = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
     }
 
     //모든 개체는 Idle 상태를 가진다.
@@ -53,9 +54,18 @@ public class Player : FSMBase {
     protected IEnumerator Attack() {
         do {
             yield return null;
+            Debug.DrawRay(transform.position + new Vector3(0,0.3f,0), transform.forward * 3f, Color.blue);
+            if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 3f, 1 << LayerMask.NameToLayer("Monster"))) {
+                ParticleController.ModifyParticlesAwake(hitEffect, true);
+            }
+            else {
+                ParticleController.ModifyParticlesAwake(hitEffect, false);
+            }
 
-            if(!isAttack)
+            if(!isAttack && joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
+            else if(!isAttack && !joystick.IsPointerUp)
+                SetState(CharacterState.Walk);
         } while(!isNewState);
     }
 
@@ -65,7 +75,7 @@ public class Player : FSMBase {
 
     public void PlayerJump() {
         if(!isJumping) {
-            rigid.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * 100, ForceMode.Impulse);
             isJumping = true;
         }
     }
