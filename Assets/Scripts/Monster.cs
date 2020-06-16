@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Monster : FSMBase {
     [SerializeField]
-    int Health;
-
-    [SerializeField]
     private Player player;
 
-    bool collisionWithPlayer;
+    private Vector3 movePos;
 
     float DistanceFromPlayer {
         get {
@@ -16,8 +15,16 @@ public class Monster : FSMBase {
         }
     }
 
+    //************************나중에 지워라!!!!*****************//
+    private void Update() {
+        Debug.DrawRay(transform.position + new Vector3(0, 0.3f, 0), transform.forward * 1.5f, Color.blue);
+        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.right * 1.5f, Color.blue);
+        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -transform.right * 1.5f, Color.blue);
+    }
+
     protected override void Awake() {
         base.Awake();
+       
     }
 
     protected IEnumerator Idle() {
@@ -26,11 +33,12 @@ public class Monster : FSMBase {
 
             //플레이어와의 거리가 10 이하이고,높이차가 1 미만일 경우 Trace 상태로 전환
             if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1)
-                SetState(CharacterState.Trace);
+                 SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Walk 상태로 전환
             else if(Random.Range(1, 20) == 2)
                 SetState(CharacterState.Walk);
+
 
         } while(!isNewState);
     }
@@ -46,7 +54,7 @@ public class Monster : FSMBase {
                 SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Idle 상태로 전환
-            else if(Random.Range(1,30) == 2)
+            else if(Random.Range(1, 30) == 2)
                 SetState(CharacterState.Idle);
 
         } while(!isNewState);
@@ -55,39 +63,44 @@ public class Monster : FSMBase {
     protected IEnumerator Trace() {
         do {
             yield return null;
-            MoveController.LookTarget(transform, player.transform, 3f);
-            transform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
+
+            if(!player.IsJumping) {
+                MoveController.LookTarget(transform, player.transform, 3f);
+                transform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
+            }
 
             //플레이어와의 거리가 10 이상이고, 높이차이가 1이상일 경우 Idle 상태로 전환
             if(DistanceFromPlayer > 10 && player.transform.position.y - transform.position.y >= 1)
                 SetState(CharacterState.Idle);
 
-            //플레이어와 충돌했을 경우 Attack 상태로 전환
-            else if(collisionWithPlayer)
+            ////플레이어와 충돌했을 경우 Attack 상태로 전환
+            else if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))
+                || Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))
+                || Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0), -transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
                 SetState(CharacterState.Attack);
+            }
+
+            
         } while(!isNewState); //do 문 종료조건.
         
     }
+
 
     protected IEnumerator Attack() {
         do {
             yield return null;
             MoveController.LookTarget(transform, player.transform, 3f);
 
-            if(!collisionWithPlayer)
+            if(!Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
                 SetState(CharacterState.Trace);
+            }
+            else {
+                if(AttackEvent) {
+                    Hit(hit.collider.GetComponent<FSMBase>());
+                    AttackEvent = false;
+                }
+            }
         } while(!isNewState); //do 문 종료조건.
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.layer.Equals(9)) {
-            collisionWithPlayer = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        if(collision.gameObject.layer.Equals(9)) {
-            collisionWithPlayer = false;
-        }
-    }
 }

@@ -11,7 +11,7 @@ public class MoveController
 
 
     public static void LookTarget(Transform objTransform, Transform targetTransform, float speed) {
-        Vector3 dir = new Vector3(objTransform.position.x - targetTransform.transform.position.x, 0, objTransform.position.z - targetTransform.transform.position.z);
+       Vector3 dir = new Vector3(objTransform.position.x - targetTransform.transform.position.x, 0, objTransform.position.z - targetTransform.transform.position.z);
         objTransform.rotation = Quaternion.Lerp(objTransform.rotation, Quaternion.LookRotation(-dir), speed * Time.fixedDeltaTime);
     }
 }

@@ -9,9 +9,18 @@ public enum CharacterState {
 }
 
 public class FSMBase : MonoBehaviour {
-    public Animator anim;
-    public Rigidbody rigid;
-    public Vector3 movePos;
+    private Animator anim;
+    public Animator Anim { get => anim;}
+
+    private Rigidbody rigid;
+    public Rigidbody Rigid { get => rigid;  }
+
+    public bool IsDie { get => Health <= 0; }
+    public bool AttackEvent { get; set; }
+
+    public int Health;
+    public int Damage;
+
 
     //캐릭터(플레이어,몬스터)의 상태변화를 제어하는 변수
     public CharacterState state;
@@ -46,6 +55,18 @@ public class FSMBase : MonoBehaviour {
 
             //해당 캐릭터의 애니메이터에 상태 값을 전달
             anim.SetInteger("state", (int)state);
+        }
+    }
+
+    private void AttackAnimEvent() {
+        AttackEvent = true;
+    }
+
+    public void Hit(FSMBase target) {
+        if(!target.IsDie) {
+            target.Health -= Damage;
+            if(target.Health < 0)
+                target.Health = 0;
         }
     }
 

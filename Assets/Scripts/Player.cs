@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class Player : FSMBase {
     private float speed = 10;
-    private bool isJumping, isAttack;
+    private bool isJumping, isAttack, attackEvent;
+    public bool IsJumping { get => isJumping; }
+
+    private Vector3 movePos;
 
     [SerializeField]
     private Joystick joystick;
 
     [SerializeField]
     ParticleSystem[] hitEffect;
+
 
 
     protected override void Awake() {
@@ -55,8 +59,13 @@ public class Player : FSMBase {
         do {
             yield return null;
             Debug.DrawRay(transform.position + new Vector3(0,0.3f,0), transform.forward * 3f, Color.blue);
+            
             if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 3f, 1 << LayerMask.NameToLayer("Monster"))) {
                 ParticleController.ModifyParticlesAwake(hitEffect, true);
+                if(AttackEvent) {
+                    Hit(hit.collider.GetComponent<FSMBase>());
+                    AttackEvent = false;
+                }
             }
             else {
                 ParticleController.ModifyParticlesAwake(hitEffect, false);
@@ -75,7 +84,7 @@ public class Player : FSMBase {
 
     public void PlayerJump() {
         if(!isJumping) {
-            rigid.AddForce(Vector3.up * 100, ForceMode.Impulse);
+            Rigid.AddForce(Vector3.up *80, ForceMode.Impulse);
             isJumping = true;
         }
     }
