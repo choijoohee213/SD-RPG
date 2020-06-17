@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class Monster : FSMBase {
     [SerializeField]
@@ -24,7 +22,7 @@ public class Monster : FSMBase {
 
     protected override void Awake() {
         base.Awake();
-       
+        
     }
 
     protected IEnumerator Idle() {
@@ -47,7 +45,7 @@ public class Monster : FSMBase {
         Vector3 movePos = new Vector3(Random.Range(-1, 2), 0, Random.Range(-1, 2));
         do {
             yield return null;
-            MoveController.MoveControl(transform, movePos);
+            MoveController.MoveControl(transform, movePos, 8);
 
             //플레이어와의 거리가 10 이하이고, 높이차가 1 미만일 경우 Trace 상태로 전환
             if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1)
@@ -66,7 +64,7 @@ public class Monster : FSMBase {
 
             if(!player.IsJumping) {
                 MoveController.LookTarget(transform, player.transform, 3f);
-                transform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
+                MoveController.RigidMovePos(transform, Rigid, player.transform.position - transform.position, 8);
             }
 
             //플레이어와의 거리가 10 이상이고, 높이차이가 1이상일 경우 Idle 상태로 전환
@@ -74,13 +72,12 @@ public class Monster : FSMBase {
                 SetState(CharacterState.Idle);
 
             ////플레이어와 충돌했을 경우 Attack 상태로 전환
-            else if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))
+            if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))
                 || Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))
                 || Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0), -transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
                 SetState(CharacterState.Attack);
             }
 
-            
         } while(!isNewState); //do 문 종료조건.
         
     }
@@ -90,13 +87,15 @@ public class Monster : FSMBase {
         do {
             yield return null;
             MoveController.LookTarget(transform, player.transform, 3f);
+            
+            
 
             if(!Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
                 SetState(CharacterState.Trace);
             }
             else {
                 if(AttackEvent) {
-                    Hit(hit.collider.GetComponent<FSMBase>());
+                    hit.collider.GetComponent<FSMBase>().TakeDamage(Damage);
                     AttackEvent = false;
                 }
             }

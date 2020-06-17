@@ -46,7 +46,7 @@ public class Player : FSMBase {
     protected IEnumerator Walk() {
         do {
             yield return null;
-            MoveController.MoveControl(transform, movePos);
+            MoveController.MoveControl(transform, movePos, 10);
 
             if(joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
@@ -63,7 +63,7 @@ public class Player : FSMBase {
             if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 3f, 1 << LayerMask.NameToLayer("Monster"))) {
                 ParticleController.ModifyParticlesAwake(hitEffect, true);
                 if(AttackEvent) {
-                    Hit(hit.collider.GetComponent<FSMBase>());
+                    hit.collider.GetComponent<FSMBase>().TakeDamage(Damage);
                     AttackEvent = false;
                 }
             }

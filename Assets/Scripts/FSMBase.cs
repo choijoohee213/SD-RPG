@@ -15,12 +15,14 @@ public class FSMBase : MonoBehaviour {
     private Rigidbody rigid;
     public Rigidbody Rigid { get => rigid;  }
 
-    public bool IsDie { get => Health <= 0; }
+    public bool IsDie { get => CurrentHealth <= 0; }
     public bool AttackEvent { get; set; }
 
-    public int Health;
-    public int Damage;
+    public event System.Action<float, float> OnHealthChanged; 
 
+    public float MaxHealth;
+    public float CurrentHealth;
+    public float Damage;
 
     //캐릭터(플레이어,몬스터)의 상태변화를 제어하는 변수
     public CharacterState state;
@@ -31,6 +33,7 @@ public class FSMBase : MonoBehaviour {
     protected virtual void Awake() {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
+        CurrentHealth = MaxHealth;
     }
 
     //모든 캐릭터는 처음에 Idle 상태이며, FSMMain 코루틴을 실행
@@ -62,12 +65,20 @@ public class FSMBase : MonoBehaviour {
         AttackEvent = true;
     }
 
-    public void Hit(FSMBase target) {
-        if(!target.IsDie) {
-            target.Health -= Damage;
-            if(target.Health < 0)
-                target.Health = 0;
-        }
+    public void TakeDamage(float damage) {        
+        CurrentHealth -= damage;
+        if(CurrentHealth < 0) 
+            CurrentHealth = 0;
+
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+
+
+        if(IsDie)
+            Die();
     }
 
+    protected void Die() {
+        //gameObject.SetActive(false);
+        Debug.Log(gameObject.name);
+    }
 }
