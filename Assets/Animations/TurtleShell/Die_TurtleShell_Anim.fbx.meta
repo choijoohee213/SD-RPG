@@ -1,79 +1,215 @@
 fileFormatVersion: 2
 guid: d57bb9f35b232f546851ae283a6a4310
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Body
-    100002: BottomCover
-    100004: //RootNode
-    100006: Eyeball
-    100008: Head
-    100010: HornL01
-    100012: HornL02
-    100014: HornL03
-    100016: HornL04
-    100018: HornLTip01
-    100020: HornLTip02
-    100022: HornLTip03
-    100024: HornLTip04
-    100026: HornMid01
-    100028: HornMid02
-    100030: HornMid03
-    100032: HornMidTip01
-    100034: HornMidTip02
-    100036: HornMidTip03
-    100038: HornR01
-    100040: HornR02
-    100042: HornR03
-    100044: HornR04
-    100046: HornRTip01
-    100048: HornRTip02
-    100050: HornRTip03
-    100052: HornRTip04
-    100054: Shell
-    100056: Spine01
-    100058: Spine02
-    100060: TurtleShell
-    100062: UpperCover
-    400000: Body
-    400002: BottomCover
-    400004: //RootNode
-    400006: Eyeball
-    400008: Head
-    400010: HornL01
-    400012: HornL02
-    400014: HornL03
-    400016: HornL04
-    400018: HornLTip01
-    400020: HornLTip02
-    400022: HornLTip03
-    400024: HornLTip04
-    400026: HornMid01
-    400028: HornMid02
-    400030: HornMid03
-    400032: HornMidTip01
-    400034: HornMidTip02
-    400036: HornMidTip03
-    400038: HornR01
-    400040: HornR02
-    400042: HornR03
-    400044: HornR04
-    400046: HornRTip01
-    400048: HornRTip02
-    400050: HornRTip03
-    400052: HornRTip04
-    400054: Shell
-    400056: Spine01
-    400058: Spine02
-    400060: TurtleShell
-    400062: UpperCover
-    4300000: TurtleShell
-    7400000: Die
-    9500000: //RootNode
-    13700000: TurtleShell
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Body
+  - first:
+      1: 100002
+    second: BottomCover
+  - first:
+      1: 100004
+    second: //RootNode
+  - first:
+      1: 100006
+    second: Eyeball
+  - first:
+      1: 100008
+    second: Head
+  - first:
+      1: 100010
+    second: HornL01
+  - first:
+      1: 100012
+    second: HornL02
+  - first:
+      1: 100014
+    second: HornL03
+  - first:
+      1: 100016
+    second: HornL04
+  - first:
+      1: 100018
+    second: HornLTip01
+  - first:
+      1: 100020
+    second: HornLTip02
+  - first:
+      1: 100022
+    second: HornLTip03
+  - first:
+      1: 100024
+    second: HornLTip04
+  - first:
+      1: 100026
+    second: HornMid01
+  - first:
+      1: 100028
+    second: HornMid02
+  - first:
+      1: 100030
+    second: HornMid03
+  - first:
+      1: 100032
+    second: HornMidTip01
+  - first:
+      1: 100034
+    second: HornMidTip02
+  - first:
+      1: 100036
+    second: HornMidTip03
+  - first:
+      1: 100038
+    second: HornR01
+  - first:
+      1: 100040
+    second: HornR02
+  - first:
+      1: 100042
+    second: HornR03
+  - first:
+      1: 100044
+    second: HornR04
+  - first:
+      1: 100046
+    second: HornRTip01
+  - first:
+      1: 100048
+    second: HornRTip02
+  - first:
+      1: 100050
+    second: HornRTip03
+  - first:
+      1: 100052
+    second: HornRTip04
+  - first:
+      1: 100054
+    second: Shell
+  - first:
+      1: 100056
+    second: Spine01
+  - first:
+      1: 100058
+    second: Spine02
+  - first:
+      1: 100060
+    second: TurtleShell
+  - first:
+      1: 100062
+    second: UpperCover
+  - first:
+      4: 400000
+    second: Body
+  - first:
+      4: 400002
+    second: BottomCover
+  - first:
+      4: 400004
+    second: //RootNode
+  - first:
+      4: 400006
+    second: Eyeball
+  - first:
+      4: 400008
+    second: Head
+  - first:
+      4: 400010
+    second: HornL01
+  - first:
+      4: 400012
+    second: HornL02
+  - first:
+      4: 400014
+    second: HornL03
+  - first:
+      4: 400016
+    second: HornL04
+  - first:
+      4: 400018
+    second: HornLTip01
+  - first:
+      4: 400020
+    second: HornLTip02
+  - first:
+      4: 400022
+    second: HornLTip03
+  - first:
+      4: 400024
+    second: HornLTip04
+  - first:
+      4: 400026
+    second: HornMid01
+  - first:
+      4: 400028
+    second: HornMid02
+  - first:
+      4: 400030
+    second: HornMid03
+  - first:
+      4: 400032
+    second: HornMidTip01
+  - first:
+      4: 400034
+    second: HornMidTip02
+  - first:
+      4: 400036
+    second: HornMidTip03
+  - first:
+      4: 400038
+    second: HornR01
+  - first:
+      4: 400040
+    second: HornR02
+  - first:
+      4: 400042
+    second: HornR03
+  - first:
+      4: 400044
+    second: HornR04
+  - first:
+      4: 400046
+    second: HornRTip01
+  - first:
+      4: 400048
+    second: HornRTip02
+  - first:
+      4: 400050
+    second: HornRTip03
+  - first:
+      4: 400052
+    second: HornRTip04
+  - first:
+      4: 400054
+    second: Shell
+  - first:
+      4: 400056
+    second: Spine01
+  - first:
+      4: 400058
+    second: Spine02
+  - first:
+      4: 400060
+    second: TurtleShell
+  - first:
+      4: 400062
+    second: UpperCover
+  - first:
+      43: 4300000
+    second: TurtleShell
+  - first:
+      74: 7400000
+    second: Die
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: TurtleShell
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -102,6 +238,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Die
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 60
       wrapMode: 0
@@ -122,7 +259,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: DieAnimEvent
+        data: 
+        objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -198,6 +343,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -205,18 +351,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -225,10 +372,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -238,13 +385,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

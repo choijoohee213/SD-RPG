@@ -5,7 +5,8 @@ public enum CharacterState {
     Idle = 0,
     Walk = 1,
     Attack = 2,
-    Trace = 3  //몬스터가 플레이어를 쫓아가는 상태
+    Trace = 3,  //몬스터가 플레이어를 쫓아가는 상태
+    Die = 4
 }
 
 public class FSMBase : MonoBehaviour {
@@ -33,12 +34,12 @@ public class FSMBase : MonoBehaviour {
     protected virtual void Awake() {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
-        CurrentHealth = MaxHealth;
     }
 
     //모든 캐릭터는 처음에 Idle 상태이며, FSMMain 코루틴을 실행
     protected virtual void OnEnable() {
         state = CharacterState.Idle;
+        CurrentHealth = MaxHealth;
         StartCoroutine(FSMMain());
     }
 
@@ -72,13 +73,10 @@ public class FSMBase : MonoBehaviour {
 
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 
-
         if(IsDie)
-            Die();
+            SetState(CharacterState.Die);
+
     }
 
-    protected void Die() {
-        //gameObject.SetActive(false);
-        Debug.Log(gameObject.name);
-    }
+   
 }

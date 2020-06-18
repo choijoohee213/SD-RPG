@@ -13,12 +13,6 @@ public class Monster : FSMBase {
         }
     }
 
-    //************************나중에 지워라!!!!*****************//
-    private void Update() {
-        Debug.DrawRay(transform.position + new Vector3(0, 0.3f, 0), transform.forward * 1.5f, Color.blue);
-        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.right * 1.5f, Color.blue);
-        Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), -transform.right * 1.5f, Color.blue);
-    }
 
     protected override void Awake() {
         base.Awake();
@@ -30,7 +24,7 @@ public class Monster : FSMBase {
             yield return null;
 
             //플레이어와의 거리가 10 이하이고,높이차가 1 미만일 경우 Trace 상태로 전환
-            if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1)
+            if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1 && !player.IsDie)
                  SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Walk 상태로 전환
@@ -48,7 +42,7 @@ public class Monster : FSMBase {
             MoveController.MoveControl(transform, movePos, 8);
 
             //플레이어와의 거리가 10 이하이고, 높이차가 1 미만일 경우 Trace 상태로 전환
-            if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1)
+            if(DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1 && !player.IsDie)
                 SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Idle 상태로 전환
@@ -67,15 +61,16 @@ public class Monster : FSMBase {
                 MoveController.RigidMovePos(transform, Rigid, player.transform.position - transform.position, 8);
             }
 
-            //플레이어와의 거리가 10 이상이고, 높이차이가 1이상일 경우 Idle 상태로 전환
-            if(DistanceFromPlayer > 10 && player.transform.position.y - transform.position.y >= 1)
+            //플레이어와의 거리가 10 이상이거나 높이차이가 1이상일 경우 Idle 상태로 전환
+            if(DistanceFromPlayer > 10 || player.transform.position.y - transform.position.y >= 1)
                 SetState(CharacterState.Idle);
 
             ////플레이어와 충돌했을 경우 Attack 상태로 전환
             if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))
                 || Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))
                 || Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0), -transform.right, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
-                SetState(CharacterState.Attack);
+                if(hit.collider!= null && !hit.collider.GetComponent<FSMBase>().IsDie)
+                    SetState(CharacterState.Attack);
             }
 
         } while(!isNewState); //do 문 종료조건.
@@ -90,16 +85,35 @@ public class Monster : FSMBase {
             
             
 
-            if(!Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {
-                SetState(CharacterState.Trace);
+            if(!Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 1.5f, 1 << LayerMask.NameToLayer("Player"))) {          
+                if(player.IsDie) SetState(CharacterState.Walk);
+                else SetState(CharacterState.Trace);
             }
             else {
-                if(AttackEvent) {
+                if(AttackEvent && !player.IsDie) {
                     hit.collider.GetComponent<FSMBase>().TakeDamage(Damage);
                     AttackEvent = false;
                 }
             }
+            
         } while(!isNewState); //do 문 종료조건.
+    }
+
+    protected IEnumerator Die() {
+        do {
+            yield return null;
+            
+        } while(!isNewState); //do 문 종료조건.
+    }
+
+    void DieAnimEvent() {
+        GetComponent<HealthUI>().healthBar.SetActive(false);
+        gameObject.SetActive(false);
+        Invoke("Resurrect", 3);
+    }
+
+    void Resurrect() {
+        gameObject.SetActive(true);
     }
 
 }

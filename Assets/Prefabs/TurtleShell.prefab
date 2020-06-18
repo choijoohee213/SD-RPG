@@ -5707,6 +5707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6ca78b05c16d44e94d4fdcbddb3a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 10
+  CurrentHealth: 0
+  Damage: 3
   state: 0
   isNewState: 0
   player: {fileID: 0}
@@ -5722,7 +5725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723cbcd4834e8874f918d0481e10eb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthGauge: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!65 &1531839034
 BoxCollider:
   m_ObjectHideFlags: 0

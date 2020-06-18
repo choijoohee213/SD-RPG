@@ -5,22 +5,32 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour {
-    private GameObject healthBar;
-    public Image healthGauge;
+    public GameObject healthBar;
+    private Image healthGauge;
+    private Text healthText;
 
     float visibleTime = 5;
     float lastMadeVisibleTime;
-    float currentHP = 1, maxHP = 1, currentFill = 1;
+    float currentHP, maxHP, currentFill;
 
-    // Start is called before the first frame update
-    void Start() {
-       
-        healthBar = GameManager.Instance.objectPool.GetObject("HealthBar");
+    void Awake() {
+        if(gameObject.layer.Equals(10)) {  //몬스터
+            healthBar = GameManager.Instance.objectPool.GetObject("HealthBar");
+            healthBar.SetActive(false);
+        }
         healthGauge = healthBar.transform.GetChild(0).GetComponent<Image>();
-        healthGauge.fillAmount = 1;
-        healthBar.SetActive(false);
+        healthText = healthBar.transform.GetChild(1).GetComponent<Text>();
 
         GetComponent<FSMBase>().OnHealthChanged += OnHealthChanged;
+    }
+
+    void OnEnable() {
+        if(currentHP == 0) {
+            maxHP = GetComponent<FSMBase>().MaxHealth;
+            currentHP = maxHP;
+            currentFill = 1;
+            healthGauge.fillAmount = 1;
+        }
     }
 
     void OnHealthChanged(float currentHealth, float maxHealth) {
@@ -28,8 +38,10 @@ public class HealthUI : MonoBehaviour {
         maxHP = maxHealth;
         currentFill = currentHP / maxHP;
 
-        healthBar.SetActive(true);
-        lastMadeVisibleTime = Time.time;
+        if(gameObject.layer.Equals(10)) {
+            healthBar.SetActive(true);
+            lastMadeVisibleTime = Time.time;
+        }
     }
 
 
@@ -37,18 +49,19 @@ public class HealthUI : MonoBehaviour {
         if(currentFill != healthGauge.fillAmount) {
             healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentFill, 2f * Time.deltaTime);
         }
-        if(healthGauge.fillAmount <= 0.05f)
-            healthBar.SetActive(false);
+ 
+        healthText.text = currentHP.ToString() + " / " + maxHP.ToString();
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
-        healthBar.transform.position = transform.position + new Vector3(0, 2f, 0);
-        healthBar.transform.forward = -GameManager.Instance.cam.transform.forward;
-    
-        if(Time.time - lastMadeVisibleTime > visibleTime) {
-            healthBar.SetActive(false);
-        }        
+        if(gameObject.layer.Equals(10)) {
+            healthBar.transform.position = transform.position + new Vector3(0, 2f, 0);
+            healthBar.transform.forward = GameManager.Instance.Cam.transform.forward;
+
+            if(Time.time - lastMadeVisibleTime > visibleTime) {
+                healthBar.SetActive(false);
+            }
+        }
     }
 }

@@ -18,8 +18,6 @@ public class Player : FSMBase {
 
     protected override void Awake() {
         base.Awake();
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
     }
 
 
@@ -59,27 +57,36 @@ public class Player : FSMBase {
         do {
             yield return null;
             Debug.DrawRay(transform.position + new Vector3(0,0.3f,0), transform.forward * 3f, Color.blue);
-            
-            if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 3f, 1 << LayerMask.NameToLayer("Monster"))) {
+            if(Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out RaycastHit hit, 3f, 1 << LayerMask.NameToLayer("Monster"))
+                && !hit.collider.GetComponent<FSMBase>().IsDie) {
                 ParticleController.ModifyParticlesAwake(hitEffect, true);
                 if(AttackEvent) {
-                    hit.collider.GetComponent<FSMBase>().TakeDamage(Damage);
                     AttackEvent = false;
+                    hit.collider.GetComponent<FSMBase>().TakeDamage(Damage);
                 }
             }
             else {
                 ParticleController.ModifyParticlesAwake(hitEffect, false);
             }
 
-            if(!isAttack && joystick.IsPointerUp)
+            if(!isAttack && joystick.IsPointerUp || hit.collider != null && hit.collider.GetComponent<FSMBase>().IsDie)
                 SetState(CharacterState.Idle);
             else if(!isAttack && !joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
+            
         } while(!isNewState);
     }
 
     public void PlayerAttack(bool _isAttack) {
         isAttack = _isAttack;
+    }
+
+
+    protected IEnumerator Die() {
+        do {
+            yield return null;
+
+        } while(!isNewState); //do 문 종료조건.
     }
 
     public void PlayerJump() {
@@ -89,13 +96,14 @@ public class Player : FSMBase {
         }
     }
 
+    private void DieAnimEvent() {
+        GameManager.Instance.PlayerResurrect();
+    }
+
     private void OnCollisionEnter(Collision collision) {
         //플레이어가 플랫폼과 충돌할 때
         if(collision.gameObject.layer.Equals(8)) {
             isJumping = false;
-        }
-        if(collision.gameObject.layer.Equals(10)) {
-
         }
     }
 }
