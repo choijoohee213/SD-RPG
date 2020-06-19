@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //Singleton Design Pattern
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour {

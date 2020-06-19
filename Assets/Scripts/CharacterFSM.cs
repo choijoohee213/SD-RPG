@@ -9,21 +9,8 @@ public enum CharacterState {
     Die = 4
 }
 
-public class FSMBase : MonoBehaviour {
-    private Animator anim;
-    public Animator Anim { get => anim;}
-
-    private Rigidbody rigid;
-    public Rigidbody Rigid { get => rigid;  }
-
-    public bool IsDie { get => CurrentHealth <= 0; }
-    public bool AttackEvent { get; set; }
-
-    public event System.Action<float, float> OnHealthChanged; 
-
-    public float MaxHealth;
-    public float CurrentHealth;
-    public float Damage;
+public abstract class CharacterFSM : MonoBehaviour {
+    protected CharacterBase characterBase;
 
     //캐릭터(플레이어,몬스터)의 상태변화를 제어하는 변수
     public CharacterState state;
@@ -32,15 +19,18 @@ public class FSMBase : MonoBehaviour {
     public bool isNewState;
 
     protected virtual void Awake() {
-        anim = GetComponent<Animator>();
-        rigid = GetComponent<Rigidbody>();
+        characterBase = GetComponent<CharacterBase>();
     }
 
     //모든 캐릭터는 처음에 Idle 상태이며, FSMMain 코루틴을 실행
     protected virtual void OnEnable() {
         state = CharacterState.Idle;
-        CurrentHealth = MaxHealth;
         StartCoroutine(FSMMain());
+    }
+
+    private void Update() {
+        if(characterBase.IsDie)
+            SetState(CharacterState.Die);
     }
 
     private IEnumerator FSMMain() {
@@ -58,25 +48,7 @@ public class FSMBase : MonoBehaviour {
             state = newState;
 
             //해당 캐릭터의 애니메이터에 상태 값을 전달
-            anim.SetInteger("state", (int)state);
+            characterBase.Anim.SetInteger("state", (int)state);
         }
     }
-
-    private void AttackAnimEvent() {
-        AttackEvent = true;
-    }
-
-    public void TakeDamage(float damage) {        
-        CurrentHealth -= damage;
-        if(CurrentHealth < 0) 
-            CurrentHealth = 0;
-
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
-
-        if(IsDie)
-            SetState(CharacterState.Die);
-
-    }
-
-   
 }

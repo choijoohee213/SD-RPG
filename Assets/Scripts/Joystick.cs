@@ -18,14 +18,13 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public AxisOptions AxisOptions { get { return AxisOptions; } set { axisOptions = value; } }
     public bool SnapX { get { return snapX; } set { snapX = value; } }
     public bool SnapY { get { return snapY; } set { snapY = value; } }
-    public bool IsPointerUp { get { return isPointerUp; } }
 
     private float handleRange = 1;
     private float deadZone = 0;
     private AxisOptions axisOptions = AxisOptions.Both;
     private bool snapX = false;
     private bool snapY = false;
-    private bool isPointerUp = true;
+    public static bool IsPointerUp { get; set; }
 
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
@@ -37,6 +36,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     private Vector2 input = Vector2.zero;
 
     protected virtual void Start() {
+        IsPointerUp = true;
+
         HandleRange = handleRange;
         DeadZone = deadZone;
         baseRect = GetComponent<RectTransform>();
@@ -55,7 +56,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     }
 
     public void OnDrag(PointerEventData eventData) {
-        isPointerUp = false;
+        IsPointerUp = false;
         cam = null;
         if(canvas.renderMode == RenderMode.ScreenSpaceCamera)
             cam = canvas.worldCamera;
@@ -114,7 +115,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     }
 
     public virtual void OnPointerUp(PointerEventData eventData) {
-        isPointerUp = true;
+        IsPointerUp = true;
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }

@@ -1,18 +1,30 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 #pragma warning disable CS0618
 
-public class ParticleController
-{
-    public static void ModifyParticleAwake(ParticleSystem particle, bool awakeOn) {
-        particle.playOnAwake = awakeOn;
+[Serializable]
+public class Particle {
+    public string effectName;    
+    public ParticleSystem[] particleSystems;
+}
+
+public class ParticleController : MonoBehaviour {
+    public Particle[] particles;
+
+    public void ModifyParticlesAwake(string name, bool awakeOn) {
+        ParticleSystem[] effect;
+        int index = 0;
+        for(int i = 0; i < particles.Length; i++) {
+            if(particles[i].effectName.Equals(name)) {
+                index = i;
+                break;
+            }
+        }
+        effect = particles[index].particleSystems;
+
+        for(int i = 0; i < effect.Length; i++)
+            effect[i].playOnAwake = awakeOn;
     }
-
-    public static void ModifyParticlesAwake(ParticleSystem[] particles, bool awakeOn) {
-        for(int i = 0; i < particles.Length; i++)
-            particles[i].playOnAwake = awakeOn;
-    }
-
-
 }

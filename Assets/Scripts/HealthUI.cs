@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour {
@@ -9,11 +6,11 @@ public class HealthUI : MonoBehaviour {
     private Image healthGauge;
     private Text healthText;
 
-    float visibleTime = 5;
-    float lastMadeVisibleTime;
-    float currentHP, maxHP, currentFill;
+    private float visibleTime = 5;
+    private float lastMadeVisibleTime;
+    private float currentHP, maxHP, currentFill;
 
-    void Awake() {
+    private void Awake() {
         if(gameObject.layer.Equals(10)) {  //몬스터
             healthBar = GameManager.Instance.objectPool.GetObject("HealthBar");
             healthBar.SetActive(false);
@@ -21,19 +18,19 @@ public class HealthUI : MonoBehaviour {
         healthGauge = healthBar.transform.GetChild(0).GetComponent<Image>();
         healthText = healthBar.transform.GetChild(1).GetComponent<Text>();
 
-        GetComponent<FSMBase>().OnHealthChanged += OnHealthChanged;
+        GetComponent<CharacterBase>().OnHealthChanged += OnHealthChanged;
     }
 
-    void OnEnable() {
+    private void OnEnable() {
         if(currentHP == 0) {
-            maxHP = GetComponent<FSMBase>().MaxHealth;
+            maxHP = GetComponent<CharacterBase>().MaxHealth;
             currentHP = maxHP;
             currentFill = 1;
             healthGauge.fillAmount = 1;
         }
     }
 
-    void OnHealthChanged(float currentHealth, float maxHealth) {
+    private void OnHealthChanged(float currentHealth, float maxHealth) {
         currentHP = currentHealth;
         maxHP = maxHealth;
         currentFill = currentHP / maxHP;
@@ -44,17 +41,15 @@ public class HealthUI : MonoBehaviour {
         }
     }
 
-
     private void Update() {
         if(currentFill != healthGauge.fillAmount) {
             healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentFill, 2f * Time.deltaTime);
         }
- 
+
         healthText.text = currentHP.ToString() + " / " + maxHP.ToString();
     }
 
-    void LateUpdate()
-    {
+    private void LateUpdate() {
         if(gameObject.layer.Equals(10)) {
             healthBar.transform.position = transform.position + new Vector3(0, 2f, 0);
             healthBar.transform.forward = GameManager.Instance.Cam.transform.forward;

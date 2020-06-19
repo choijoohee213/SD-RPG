@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectPool : MonoBehaviour {
-    [SerializeField]
-    GameObject[] objectPrefabs;
-
-    List<GameObject> pooledObjs = new List<GameObject>();
 
     [SerializeField]
-    Transform HPCanvas;
+    private GameObject[] objectPrefabs;
+
+    private List<GameObject> pooledObjs = new List<GameObject>();
+
+    [SerializeField]
+    private Transform HPCanvas;
 
     private GameObject Generate(string type, bool isActive) {
         for(int i = 0; i < objectPrefabs.Length; i++) {
@@ -27,7 +28,6 @@ public class ObjectPool : MonoBehaviour {
         }
         return null;
     }
-
 
     public GameObject GetObject(string type) {
         foreach(GameObject obj in pooledObjs) {
@@ -52,7 +52,6 @@ public class ObjectPool : MonoBehaviour {
     }
 
     public void ReleaseObject(GameObject gameObject) {
-
         gameObject.SetActive(false);
     }
 }
