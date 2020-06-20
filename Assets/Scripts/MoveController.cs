@@ -16,4 +16,5 @@ public class MoveController {
     public static void RigidMovePos(Transform objTransform, Vector3 dir, float speed) {
         objTransform.gameObject.GetComponent<Rigidbody>().MovePosition(objTransform.position + new Vector3(dir.x, 0, dir.z).normalized * speed * Time.fixedDeltaTime);
     }
+
 }

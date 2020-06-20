@@ -260,9 +260,17 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.07088978
+      - time: 0.36028805
         functionName: AttackAnimEvent
         data: 
+        objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4010987
+        functionName: AttackEffect
+        data: MonsterAttackParticle
         objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
           type: 3}
         floatParameter: 0
