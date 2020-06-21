@@ -10,7 +10,7 @@ public class ObjectPool : MonoBehaviour {
     private List<GameObject> pooledObjs = new List<GameObject>();
 
     [SerializeField]
-    private Transform HPCanvas, Particle;
+    private Transform Canvas, HPCanvas, Particle;
 
     private GameObject Generate(string type, bool isActive) {
         for(int i = 0; i < objectPrefabs.Length; i++) {
@@ -20,8 +20,10 @@ public class ObjectPool : MonoBehaviour {
 
                 if(objectPrefabs[i].name.Contains("HealthBar"))
                     newObject.transform.SetParent(HPCanvas);
-                if(objectPrefabs[i].name.Contains("Particle"))
+                else if(objectPrefabs[i].name.Contains("Particle"))
                     newObject.transform.SetParent(Particle);
+                else if(objectPrefabs[i].name.Contains("DamageText"))
+                    newObject.transform.SetParent(Canvas);
 
                 pooledObjs.Add(newObject);
                 newObject.name = type;

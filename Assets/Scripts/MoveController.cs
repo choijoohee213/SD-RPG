@@ -2,7 +2,7 @@
 
 public class MoveController {
 
-    public static void MoveControl(Transform objTransform, Vector3 moveDir, float speed) {
+    public static void MoveDir(Transform objTransform, Vector3 moveDir, float speed) {
         objTransform.rotation = Quaternion.LookRotation(moveDir.x * Vector3.right + moveDir.z * Vector3.forward);
         //objTransform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
         RigidMovePos(objTransform, moveDir, speed);
@@ -15,6 +15,10 @@ public class MoveController {
 
     public static void RigidMovePos(Transform objTransform, Vector3 dir, float speed) {
         objTransform.gameObject.GetComponent<Rigidbody>().MovePosition(objTransform.position + new Vector3(dir.x, 0, dir.z).normalized * speed * Time.fixedDeltaTime);
+    }
+
+    public static void LimitMoveRange(Transform objTransform, Vector3 minRange, Vector3 maxRange) {
+        objTransform.position = new Vector3(Mathf.Clamp(objTransform.position.x, minRange.x, maxRange.x), objTransform.position.y, Mathf.Clamp(objTransform.position.z, minRange.z, maxRange.z));
     }
 
 }

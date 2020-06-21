@@ -37,6 +37,10 @@ public class CharacterBase : MonoBehaviour {
         return Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out raycastHit, 2f, 1 << LayerMask.NameToLayer(layerName)) && raycastHit.collider != null;
     }
 
+    public bool IsWithInRange(Vector3 minRange, Vector3 maxRange) {
+        return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
+    }
+
     public bool AttackToTarget(string layerName) {
 
         bool isCollider = CheckRaycastHit(layerName);
@@ -51,7 +55,7 @@ public class CharacterBase : MonoBehaviour {
         return isCollider;
     }
 
-    public void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage) {
         CurrentHealth -= damage;
         if(CurrentHealth < 0) {
             CurrentHealth = 0;

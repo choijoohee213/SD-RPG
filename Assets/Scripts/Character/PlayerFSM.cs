@@ -24,7 +24,7 @@ public class PlayerFSM : CharacterFSM {
 
         do {
             yield return null;
-            MoveController.MoveControl(transform, playerBase.MovePos, 10);
+            MoveController.MoveDir(transform, playerBase.MovePos, 10);
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);

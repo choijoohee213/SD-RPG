@@ -42,6 +42,7 @@ public class PlayerBase : CharacterBase {
         isAttack = _isAttack;
     }
 
+   
     protected override void DieAnimEvent() {
         gameObject.SetActive(false);
         ResurrectUI.SetActive(true);
@@ -55,6 +56,7 @@ public class PlayerBase : CharacterBase {
         else {
             ResurrectUI.SetActive(false);
             transform.position = StartPos;
+            transform.rotation = Quaternion.identity;
             resurrectCountDown = 5;
             gameObject.SetActive(true);
         }
