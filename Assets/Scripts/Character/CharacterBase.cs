@@ -13,7 +13,7 @@ public class CharacterBase : MonoBehaviour {
     protected RaycastHit raycastHit;
 
     public bool IsDie { get => CurrentHealth <= 0; }
-    public bool AttackEvent { get; set; }
+    public bool AttackStart { get; set; }
     public bool IsColliderDie { get { return raycastHit.collider != null && raycastHit.collider.GetComponent<CharacterBase>().IsDie; } }
 
     public event System.Action<float, float> OnHealthChanged;
@@ -22,7 +22,10 @@ public class CharacterBase : MonoBehaviour {
     [Header("Character Inform")]
     public float MaxHealth;
     public float CurrentHealth;
-    public float Damage;
+    
+    [SerializeField]
+    private int MinimalDamage;
+    public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); } 
 
     protected virtual void Awake() {
         anim = GetComponent<Animator>();
@@ -44,13 +47,9 @@ public class CharacterBase : MonoBehaviour {
     public bool AttackToTarget(string layerName) {
 
         bool isCollider = CheckRaycastHit(layerName);
-        if(isCollider && !raycastHit.collider.GetComponent<CharacterBase>().IsDie) {
-            if(AttackEvent) {
-                AttackEvent = false;
-                raycastHit.collider.GetComponent<CharacterBase>().TakeDamage(Damage);
-                if(gameObject.layer.Equals(10)) {
-                }
-            }
+        if(isCollider && !raycastHit.collider.GetComponent<CharacterBase>().IsDie && AttackStart) {
+            AttackStart = false;
+            raycastHit.collider.GetComponent<CharacterBase>().TakeDamage(Damage);
         }
         return isCollider;
     }
@@ -61,11 +60,12 @@ public class CharacterBase : MonoBehaviour {
             CurrentHealth = 0;
         }
 
+        //체력바 게이지 감소
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
     private void AttackAnimEvent() {
-        AttackEvent = true;
+        AttackStart = true;
     }
 
     private void AttackEffect(string particleName) {

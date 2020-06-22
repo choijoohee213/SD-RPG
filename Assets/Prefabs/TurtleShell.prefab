@@ -863,11 +863,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   AttackEffectPos: {fileID: 2639386304824983795}
-  MaxHealth: 10
+  MaxHealth: 20
   CurrentHealth: 0
-  Damage: 3
+  MinimalDamage: 1
   limitRange_Min: {x: 95, y: 0, z: 60}
   limitRange_Max: {x: 130, y: 0, z: 80}
+  DropItemName: TurtleShellItem
 --- !u!114 &2105169267
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour {
+public class HealthBar : MonoBehaviour {
     public GameObject healthBar;
     private Image healthGauge;
     private Text healthText;
