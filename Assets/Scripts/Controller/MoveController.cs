@@ -2,10 +2,8 @@
 
 public class MoveController {
 
-    public static void MoveDir(Transform objTransform, Vector3 moveDir, float speed) {
+    public static void LookDirection(Transform objTransform, Vector3 moveDir) {
         objTransform.rotation = Quaternion.LookRotation(moveDir.x * Vector3.right + moveDir.z * Vector3.forward);
-        //objTransform.Translate(Vector3.forward * 10 * Time.fixedDeltaTime);
-        RigidMovePos(objTransform, moveDir, speed);
     }
 
     public static void LookTarget(Transform objTransform, Transform targetTransform, float speed) {

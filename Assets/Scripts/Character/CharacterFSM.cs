@@ -51,4 +51,10 @@ public class CharacterFSM : MonoBehaviour {
             characterBase.Anim.SetInteger("state", (int)state);
         }
     }
+
+    protected virtual IEnumerator Die() {
+        do {
+            yield return null;
+        } while(!isNewState);
+    }
 }

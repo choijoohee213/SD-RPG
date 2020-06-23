@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1191893284655030314}
   - component: {fileID: 1191893284655030312}
   - component: {fileID: 5600850608346661268}
-  - component: {fileID: -3995721142130731065}
+  - component: {fileID: -4680557224745689292}
   m_Layer: 11
   m_Name: TurtleShellItem
   m_TagString: Untagged
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e94744b195caf5468e38ff95b0348b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemName: TurtleShellItem
-  SourceMonsterName: TurtleShell
+  item: {fileID: 11400000, guid: b0e2214bdf6cb6044b315cf347b636e5, type: 2}
 --- !u!212 &1191893284655030312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,16 +114,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &-3995721142130731065
+--- !u!65 &-4680557224745689292
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191893284655030319}
-  m_Material: {fileID: 13400000, guid: 420e455fec046cd44984370a60f06c62, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.59234446, y: 0.68, z: 0.493707}
-  m_Center: {x: 0.0028471649, y: 0, z: 0.032197654}
+  m_Size: {x: 0.734428, y: 0.8947368, z: 0.5812493}
+  m_Center: {x: -0.009388477, y: 0, z: 0.018225849}

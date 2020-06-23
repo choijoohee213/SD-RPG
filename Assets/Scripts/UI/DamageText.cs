@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DamageText : MonoBehaviour
 {
     private readonly float lifeTime = 1.3f;
-    private float startTime;
+    private float startTime, moveupSpeed = 35f, transparentSpeed = 0.7f ;
     Text damageText;
     Color alpha;
 
@@ -25,8 +25,8 @@ public class DamageText : MonoBehaviour
 
     IEnumerator MoveText() {
         while(Time.time - startTime <= lifeTime) {
-            damageText.transform.Translate(Vector3.up * 40f * Time.deltaTime);
-            alpha.a = Mathf.Lerp(alpha.a, 0f, 0.7f * Time.deltaTime);
+            damageText.transform.Translate(Vector3.up * moveupSpeed * Time.deltaTime);
+            alpha.a = Mathf.Lerp(alpha.a, 0f, transparentSpeed * Time.deltaTime);
             damageText.color = alpha;
             yield return null;
         }

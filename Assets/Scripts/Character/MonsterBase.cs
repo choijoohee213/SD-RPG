@@ -23,6 +23,7 @@ public class MonsterBase : CharacterBase {
 
     protected override void DieAnimEvent() {
         GetComponent<HealthBar>().healthBar.SetActive(false);
+        ParticleController.PlayParticles("MonsterDieParticle", transform);
         gameObject.SetActive(false);
 
         var dropNum = Random.Range(0, 4);
@@ -32,7 +33,7 @@ public class MonsterBase : CharacterBase {
     }
 
     private void DropItem() {
-        Item item = GameManager.Instance.objectPool.GetObject(DropItemName).GetComponent<Item>();
+        ItemPickup item = GameManager.Instance.objectPool.GetObject(DropItemName).GetComponent<ItemPickup>();
         item.Init(transform);
     }
 

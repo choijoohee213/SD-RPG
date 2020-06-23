@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class PlayerFSM : CharacterFSM {
+    private float moveSpeed = 10f;
     private PlayerBase playerBase;
 
     protected override void Awake() {
@@ -24,7 +25,8 @@ public class PlayerFSM : CharacterFSM {
 
         do {
             yield return null;
-            MoveController.MoveDir(transform, playerBase.MovePos, 10);
+            MoveController.LookDirection(transform, playerBase.MovePos);
+            MoveController.RigidMovePos(transform, playerBase.MovePos, moveSpeed);
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
@@ -46,9 +48,4 @@ public class PlayerFSM : CharacterFSM {
         } while(!isNewState);
     }
 
-    protected IEnumerator Die() {
-        do {
-            yield return null;
-        } while(!isNewState); //do 문 종료조건.
-    }
 }

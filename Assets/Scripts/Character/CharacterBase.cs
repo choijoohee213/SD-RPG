@@ -32,7 +32,7 @@ public class CharacterBase : MonoBehaviour {
         rigid = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         CurrentHealth = MaxHealth;
     }
 
@@ -40,9 +40,6 @@ public class CharacterBase : MonoBehaviour {
         return Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out raycastHit, 2f, 1 << LayerMask.NameToLayer(layerName)) && raycastHit.collider != null;
     }
 
-    public bool IsWithInRange(Vector3 minRange, Vector3 maxRange) {
-        return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
-    }
 
     public bool AttackToTarget(string layerName) {
 

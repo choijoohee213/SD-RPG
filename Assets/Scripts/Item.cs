@@ -1,26 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "New Item", menuName = "Item", order = 1)]
+public class Item : ScriptableObject
 {
-    public string ItemName;
-    public string SourceMonsterName;
-
-    private Rigidbody rigid;
-
-    private void Awake() {
-        rigid = GetComponent<Rigidbody>();    
-    }
-
-    public void Init(Transform monsterPos) {
-        transform.position = monsterPos.position;
-        rigid.AddForce(new Vector3(Random.Range(-2,2), Random.Range(4,7), Random.Range(-2,2)) , ForceMode.Impulse);
-    }
-
-    private void OnCollisionEnter(Collision collision) {
-        if(collision != null && collision.gameObject.layer.Equals(9)) {
-            gameObject.SetActive(false);
-        }
-    }
+    public new string name = "New Item";
+    public Sprite icon = null;
 }

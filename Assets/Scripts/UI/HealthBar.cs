@@ -6,8 +6,7 @@ public class HealthBar : MonoBehaviour {
     private Image healthGauge;
     private Text healthText;
 
-    private float visibleTime = 5;
-    private float lastMadeVisibleTime;
+    private float visibleTime = 5, lastMadeVisibleTime, decreaseSpeed = 2f;
     private float currentHP, maxHP, currentFill;
 
     private void Awake() {
@@ -39,11 +38,12 @@ public class HealthBar : MonoBehaviour {
             healthBar.SetActive(true);
             lastMadeVisibleTime = Time.time;
         }
+
     }
 
     private void Update() {
         if(currentFill != healthGauge.fillAmount) {
-            healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentFill, 2f * Time.deltaTime);
+            healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentFill, decreaseSpeed * Time.deltaTime);
         }
 
         healthText.text = currentHP.ToString() + " / " + maxHP.ToString();

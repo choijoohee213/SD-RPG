@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerBase : CharacterBase {
+    public static PlayerBase instance;
     private Vector3 movePos;
     public Vector3 MovePos { get => movePos; }
 
@@ -24,11 +25,19 @@ public class PlayerBase : CharacterBase {
     public bool IsAttack { get => isAttack; }
     public bool IsJumping { get => isJumping; }
 
+    protected override void OnEnable() {
+        base.OnEnable();
+        transform.position = StartPos;
+        transform.rotation = Quaternion.identity;
+    }
+
     private void FixedUpdate() {
         if(GetComponent<CharacterFSM>().state != CharacterState.Attack && !Joystick.IsPointerUp) 
             movePos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-
-        //movePos = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    }
+    
+    public bool PlayerInMonsterRange(Vector3 minRange, Vector3 maxRange) {
+        return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
     }
 
     public void PlayerJumpBtn() {
@@ -42,7 +51,7 @@ public class PlayerBase : CharacterBase {
         isAttack = _isAttack;
     }
 
-   
+    
     protected override void DieAnimEvent() {
         gameObject.SetActive(false);
         ResurrectUI.SetActive(true);
@@ -54,11 +63,10 @@ public class PlayerBase : CharacterBase {
         if(resurrectCountDown-- != 0)
             Invoke("ResurrectTimer", 1f);
         else {
-            ResurrectUI.SetActive(false);
-            transform.position = StartPos;
-            transform.rotation = Quaternion.identity;
             resurrectCountDown = 5;
+            ResurrectUI.SetActive(false);
             gameObject.SetActive(true);
+            ParticleController.PlayParticles("PlayerResurrectParticle", transform);
         }
     }
 
