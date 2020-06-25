@@ -4,13 +4,9 @@ using UnityEngine.UI;
 
 public class ObjectPool : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject[] objectPrefabs;
-
+    public GameObject[] objectPrefabs;
     private List<GameObject> pooledObjs = new List<GameObject>();
-
-    [SerializeField]
-    private Transform Canvas, HPCanvas, Particle;
+    public Transform Canvas, HPCanvas, Particle;
 
     private GameObject Generate(string type, bool isActive) {
         for(int i = 0; i < objectPrefabs.Length; i++) {

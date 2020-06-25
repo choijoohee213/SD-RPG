@@ -2,9 +2,15 @@
 using UnityEngine;
 
 public class MonsterBase : CharacterBase {
-
+    private PlayerBase player;
     public Vector3 limitRange_Min, limitRange_Max;
-    public string DropItemName;
+    public string[] DropItemName;
+
+
+    protected override void Awake() {
+        base.Awake();
+        player = GameManager.Instance.player;
+    }
 
     public override bool CheckRaycastHit(string layerName) {
         return (Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out raycastHit, 1.5f, 1 << LayerMask.NameToLayer(layerName))
@@ -23,18 +29,26 @@ public class MonsterBase : CharacterBase {
 
     protected override void DieAnimEvent() {
         GetComponent<HealthBar>().healthBar.SetActive(false);
-        ParticleController.PlayParticles("MonsterDieParticle", transform);
-        gameObject.SetActive(false);
+        base.DieAnimEvent();
 
+        //플레이어 능력치 추가
+        IncreasePlayerExp();
+
+        //아이템 드랍
         var dropNum = Random.Range(0, 4);
         for(int i=0; i< dropNum; i++) DropItem();
         
         Invoke("Resurrect", 3);
     }
 
+    private void IncreasePlayerExp() {
+        player.CurrentExp += CurrentExp;
+       
+    }
+
     private void DropItem() {
-        ItemPickup item = GameManager.Instance.objectPool.GetObject(DropItemName).GetComponent<ItemPickup>();
-        item.Init(transform);
+        ItemPickup itemPickup = GameManager.Instance.objectPool.GetObject(DropItemName[0]).GetComponent<ItemPickup>();
+        itemPickup.Init(transform, player.transform);
     }
 
     private void Resurrect() {

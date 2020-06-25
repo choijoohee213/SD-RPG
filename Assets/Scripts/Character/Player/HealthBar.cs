@@ -2,17 +2,21 @@
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
-    public GameObject healthBar;
-    private Image healthGauge;
-    private Text healthText;
+    public GameObject healthBar, expBar;
+    private Image healthGauge, expGauge;
+    private Text healthText, expText;
 
     private float visibleTime = 5, lastMadeVisibleTime, decreaseSpeed = 2f;
-    private float currentHP, maxHP, currentFill;
+    private float currentHP, maxHP, currentHPFill;
 
     private void Awake() {
         if(gameObject.layer.Equals(10)) {  //몬스터
             healthBar = GameManager.Instance.objectPool.GetObject("HealthBar");
             healthBar.SetActive(false);
+        }
+        else {
+            expGauge = expBar.transform.GetChild(0).GetComponent<Image>();
+            expText = expBar.transform.GetChild(0).GetComponent<Text>();
         }
         healthGauge = healthBar.transform.GetChild(0).GetComponent<Image>();
         healthText = healthBar.transform.GetChild(1).GetComponent<Text>();
@@ -24,7 +28,7 @@ public class HealthBar : MonoBehaviour {
         if(currentHP == 0) {
             maxHP = GetComponent<CharacterBase>().MaxHealth;
             currentHP = maxHP;
-            currentFill = 1;
+            currentHPFill = 1;
             healthGauge.fillAmount = 1;
         }
     }
@@ -32,7 +36,7 @@ public class HealthBar : MonoBehaviour {
     private void OnHealthChanged(float currentHealth, float maxHealth) {
         currentHP = currentHealth;
         maxHP = maxHealth;
-        currentFill = currentHP / maxHP;
+        currentHPFill = currentHP / maxHP;
 
         if(gameObject.layer.Equals(10)) {
             healthBar.SetActive(true);
@@ -42,8 +46,8 @@ public class HealthBar : MonoBehaviour {
     }
 
     private void Update() {
-        if(currentFill != healthGauge.fillAmount) {
-            healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentFill, decreaseSpeed * Time.deltaTime);
+        if(currentHPFill != healthGauge.fillAmount) {
+            healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentHPFill, decreaseSpeed * Time.deltaTime);
         }
 
         healthText.text = currentHP.ToString() + " / " + maxHP.ToString();

@@ -18,21 +18,21 @@ public class PlayerFSM : CharacterFSM {
                 SetState(CharacterState.Walk);
             else if(playerBase.IsAttack)
                 SetState(CharacterState.Attack);
-        } while(!isNewState); //do 문 종료조건.
+        } while(!IsNewState); //do 문 종료조건.
     }
 
     protected IEnumerator Walk() {
 
         do {
             yield return null;
-            MoveController.LookDirection(transform, playerBase.MovePos);
-            MoveController.RigidMovePos(transform, playerBase.MovePos, moveSpeed);
+            MoveController.LookDirection(transform, playerBase.MoveDir);
+            MoveController.RigidMovePos(transform, playerBase.MoveDir, moveSpeed);
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
             if(playerBase.IsAttack)
                 SetState(CharacterState.Attack);
-        } while(!isNewState);
+        } while(!IsNewState);
     }
 
     protected IEnumerator Attack() {
@@ -45,7 +45,7 @@ public class PlayerFSM : CharacterFSM {
                 SetState(CharacterState.Idle);
             else if(!playerBase.IsAttack && !Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
-        } while(!isNewState);
+        } while(!IsNewState);
     }
 
 }

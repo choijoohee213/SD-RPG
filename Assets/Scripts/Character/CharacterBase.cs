@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 
 public class CharacterBase : MonoBehaviour {
-    [SerializeField]
-    PlayerBase player;
-
-    private Animator anim;
-    public Animator Anim { get => anim; }
-
-    private Rigidbody rigid;
-    public Rigidbody Rigid { get => rigid; }
+    public Animator Anim { get; set; }
+    public Rigidbody Rigid { get; set; }
 
     protected RaycastHit raycastHit;
 
@@ -22,14 +16,16 @@ public class CharacterBase : MonoBehaviour {
     [Header("Character Inform")]
     public float MaxHealth;
     public float CurrentHealth;
+
+    public float MaxExp;
+    public float CurrentExp;
     
-    [SerializeField]
-    private int MinimalDamage;
+    public int MinimalDamage;
     public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); } 
 
     protected virtual void Awake() {
-        anim = GetComponent<Animator>();
-        rigid = GetComponent<Rigidbody>();
+        Anim = GetComponent<Animator>();
+        Rigid = GetComponent<Rigidbody>();
     }
 
     protected virtual void OnEnable() {
@@ -71,5 +67,8 @@ public class CharacterBase : MonoBehaviour {
     }
 
     protected virtual void DieAnimEvent() {
+        ParticleController.PlayParticles("DieParticle", transform);
+        gameObject.SetActive(false);
+
     }
 }

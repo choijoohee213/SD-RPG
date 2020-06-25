@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
+    public GameObject InventoryUI;
+
+    public int Space { get; set; }
+    public bool NotEnoughRoom => items.Count >= Space;
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
-
-    [SerializeField]
-    private int space = 20;
-
-    public bool NotEnoughRoom => items.Count >= space;
 
     public List<Item> items = new List<Item>();
 
@@ -18,12 +18,14 @@ public class Inventory : Singleton<Inventory>
         if(Input.GetButtonDown("Jump")) {
             Remove(items[0]);
             print("removed!!");
-        }    
+        }
+        if(Input.GetKeyDown(KeyCode.I)) {
+            InventoryUI.SetActive(!InventoryUI.activeSelf);
+        }
     }
 
     public bool Add (Item item) {
         if(NotEnoughRoom) {
-            Debug.Log("Not enoubh room");
             return false;
         }
         items.Add(item);
@@ -36,8 +38,6 @@ public class Inventory : Singleton<Inventory>
 
     public void Remove(Item item) {
         items.Remove(item);
-
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Item"), false);
 
         if(onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

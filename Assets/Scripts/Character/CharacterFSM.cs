@@ -12,11 +12,10 @@ public enum CharacterState {
 public class CharacterFSM : MonoBehaviour {
     protected CharacterBase characterBase;
 
-    //캐릭터(플레이어,몬스터)의 상태변화를 제어하는 변수
     public CharacterState state;
 
     //캐릭터의 상태가 바꼈는지 체크하는 변수.
-    public bool isNewState;
+    protected bool IsNewState { get; set; }
 
     protected virtual void Awake() {
         characterBase = GetComponent<CharacterBase>();
@@ -36,7 +35,7 @@ public class CharacterFSM : MonoBehaviour {
     private IEnumerator FSMMain() {
         //상태가 바뀌면 해당 상태 코루틴 메소드를 실행
         while(true) {
-            isNewState = false;
+            IsNewState = false;
             yield return StartCoroutine(state.ToString());
         }
     }
@@ -44,7 +43,7 @@ public class CharacterFSM : MonoBehaviour {
     //캐릭터 상태가 바뀔때마다 메소드 실행
     public void SetState(CharacterState newState) {
         if(state != newState) {
-            isNewState = true;
+            IsNewState = true;
             state = newState;
 
             //해당 캐릭터의 애니메이터에 상태 값을 전달
@@ -55,6 +54,6 @@ public class CharacterFSM : MonoBehaviour {
     protected virtual IEnumerator Die() {
         do {
             yield return null;
-        } while(!isNewState);
+        } while(!IsNewState);
     }
 }

@@ -2,12 +2,10 @@
 using UnityEngine;
 
 public class MonsterFSM : CharacterFSM {
-    private float moveSpeed = 8f, rotateSpeed = 3f;
-
-    [SerializeField]
     private PlayerBase playerBase;
     private MonsterBase monsterBase;
 
+    private float moveSpeed = 8f, rotateSpeed = 3f;
     public float DistanceFromPlayer => Vector3.Distance(transform.position, playerBase.transform.position);
     
     bool PlayerInAttackRange => DistanceFromPlayer <= 10 && playerBase.transform.position.y - transform.position.y < 1 && !playerBase.IsDie
@@ -15,6 +13,7 @@ public class MonsterFSM : CharacterFSM {
 
     protected override void Awake() {
         base.Awake();
+        playerBase = GameManager.Instance.player;
         monsterBase = GetComponent<MonsterBase>();
     }
 
@@ -31,7 +30,7 @@ public class MonsterFSM : CharacterFSM {
             //랜덤한 확률로 Walk 상태로 전환
             else if(Random.Range(1, 20) == 2)
                 SetState(CharacterState.Walk);
-        } while(!isNewState);
+        } while(!IsNewState);
     }
 
     protected IEnumerator Walk() {
@@ -50,7 +49,7 @@ public class MonsterFSM : CharacterFSM {
             //랜덤한 확률로 Idle 상태로 전환
             else if(Random.Range(1, 30) == 2)
                 SetState(CharacterState.Idle);
-        } while(!isNewState);
+        } while(!IsNewState);
     }
 
     protected IEnumerator Trace() {
@@ -69,7 +68,7 @@ public class MonsterFSM : CharacterFSM {
             ////플레이어와 충돌했을 경우 Attack 상태로 전환
             if(characterBase.CheckRaycastHit("Player") && !characterBase.IsColliderDie)
                 SetState(CharacterState.Attack);
-        } while(!isNewState); //do 문 종료조건.
+        } while(!IsNewState); //do 문 종료조건.
     }
 
     protected IEnumerator Attack() {
@@ -84,7 +83,7 @@ public class MonsterFSM : CharacterFSM {
                 else
                     SetState(CharacterState.Trace);
             }
-        } while(!isNewState); //do 문 종료조건.
+        } while(!IsNewState); //do 문 종료조건.
     }
 
 }

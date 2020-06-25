@@ -6,8 +6,7 @@ public class Effect : MonoBehaviour {
 
     public ParticleSystem[] particles;
     
-    [SerializeField]
-    private float lifeTime;
+    public float lifeTime;
 
     private void OnEnable() {
         Invoke("Disable", lifeTime);

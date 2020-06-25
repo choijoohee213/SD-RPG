@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e94744b195caf5468e38ff95b0348b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1169643454756559063, guid: 6b693d24975d722419e23373d6c6968d, type: 3}
   item: {fileID: 11400000, guid: b0e2214bdf6cb6044b315cf347b636e5, type: 2}
 --- !u!212 &1191893284655030312
 SpriteRenderer:
@@ -121,7 +122,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191893284655030319}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 420e455fec046cd44984370a60f06c62, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
