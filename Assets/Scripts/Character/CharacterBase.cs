@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-public class CharacterBase : MonoBehaviour {
+public abstract class CharacterBase : MonoBehaviour {
     public Animator Anim { get; set; }
     public Rigidbody Rigid { get; set; }
+    protected HealthBar healthBar;
 
     protected RaycastHit raycastHit;
 
@@ -10,7 +11,6 @@ public class CharacterBase : MonoBehaviour {
     public bool AttackStart { get; set; }
     public bool IsColliderDie { get { return raycastHit.collider != null && raycastHit.collider.GetComponent<CharacterBase>().IsDie; } }
 
-    public event System.Action<float, float> OnHealthChanged;
     public Transform AttackEffectPos;
 
     [Header("Character Inform")]
@@ -18,7 +18,7 @@ public class CharacterBase : MonoBehaviour {
     public float CurrentHealth;
 
     public float MaxExp;
-    public float CurrentExp;
+    public float CurrentExp { get; set; }
     
     public int MinimalDamage;
     public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); } 
@@ -26,6 +26,7 @@ public class CharacterBase : MonoBehaviour {
     protected virtual void Awake() {
         Anim = GetComponent<Animator>();
         Rigid = GetComponent<Rigidbody>();
+        healthBar = GetComponent<HealthBar>();
     }
 
     protected virtual void OnEnable() {
@@ -54,7 +55,7 @@ public class CharacterBase : MonoBehaviour {
         }
 
         //체력바 게이지 감소
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
     private void AttackAnimEvent() {

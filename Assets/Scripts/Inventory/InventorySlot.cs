@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour
 {
     Item item;
     public Image icon;
+    public InventoryUI inventoryUI;
     
     public void AddItem(Item newItem) {
         item = newItem;
@@ -23,9 +24,9 @@ public class InventorySlot : MonoBehaviour
 
     }
 
-    public void UseItem() {
+    public void OnSlotBtn() {
         if(item != null)
-            item.Use();
+            inventoryUI.ShowItemInform(item);
     }
     
 }

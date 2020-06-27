@@ -28,11 +28,11 @@ public class MonsterBase : CharacterBase {
 
 
     protected override void DieAnimEvent() {
-        GetComponent<HealthBar>().healthBar.SetActive(false);
+        healthBar.healthBarObj.SetActive(false);
         base.DieAnimEvent();
 
         //플레이어 능력치 추가
-        IncreasePlayerExp();
+        player.IncreaseExp(MaxExp);
 
         //아이템 드랍
         var dropNum = Random.Range(0, 4);
@@ -41,10 +41,6 @@ public class MonsterBase : CharacterBase {
         Invoke("Resurrect", 3);
     }
 
-    private void IncreasePlayerExp() {
-        player.CurrentExp += CurrentExp;
-       
-    }
 
     private void DropItem() {
         ItemPickup itemPickup = GameManager.Instance.objectPool.GetObject(DropItemName[0]).GetComponent<ItemPickup>();

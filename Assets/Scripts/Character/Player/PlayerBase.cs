@@ -3,14 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerBase : CharacterBase {
+    public int Level = 1;
 
+    private ExpBar expBar;
     public Vector3 MoveDir { get; set; }
     public Vector3 StartPos { get { return new Vector3(74, 21.79191f, 44); } }
 
     private int resurrectCountDown = 5;
 
     public bool IsJumping {get; set;}
-    public bool IsAttack { get; set; }
+    public bool AttackBtnPressed { get; set; }
     private readonly bool attackEvent;
 
     [Header("UI")]
@@ -18,8 +20,10 @@ public class PlayerBase : CharacterBase {
     public GameObject resurrectUI;
     public Text countDownText;
 
-
-
+    protected override void Awake() {
+        base.Awake();
+        expBar = GetComponent<ExpBar>();
+    }
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -36,6 +40,32 @@ public class PlayerBase : CharacterBase {
         return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
     }
 
+    public void IncreaseExp(float monsterExp) {
+        CurrentExp += monsterExp;
+        expBar.OnExpChanged(CurrentExp, MaxExp);
+
+        if(CurrentExp.Equals(MaxExp))
+            LevelUp();
+    }
+
+    private void LevelUp() {
+        Level++;
+
+        MaxHealth += 50;
+        CurrentHealth = MaxHealth;
+
+        MaxExp += 100;
+        CurrentExp = 0;
+
+        MinimalDamage += 1;
+
+        healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
+        expBar.OnExpChanged(CurrentExp, MaxExp);
+
+        ParticleController.PlayParticles("PlayerLevelUpParticle", transform);
+    }
+
+
     public void PlayerJumpBtn() {
         if(!IsJumping) {
             Rigid.AddForce(Vector3.up * 80, ForceMode.Impulse);
@@ -43,8 +73,8 @@ public class PlayerBase : CharacterBase {
         }
     }
 
-    public void PlayerAttackBtn(bool _isAttack) {
-        IsAttack = _isAttack;
+    public void PlayerAttackBtn(bool pressed) {
+        AttackBtnPressed = pressed;
     }
 
     

@@ -864,6 +864,7 @@ MonoBehaviour:
   AttackEffectPos: {fileID: 7285017202982692042}
   MaxHealth: 200
   CurrentHealth: 0
+  MaxExp: 20
   MinimalDamage: 10
   joystick: {fileID: 0}
   resurrectUI: {fileID: 0}
@@ -894,6 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  expBar: {fileID: 0}
 --- !u!95 &1169643454749669131
 Animator:
   serializedVersion: 3

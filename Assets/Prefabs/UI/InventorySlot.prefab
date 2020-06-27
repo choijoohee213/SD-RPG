@@ -119,7 +119,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3629736518855343191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9184739429880734727}
+        m_MethodName: OnSlotBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9184739429880734727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 5969713041410545142}
+  inventoryUI: {fileID: 0}
 --- !u!1 &7995189116171358989
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4070809062747282841, guid: 942ef30022ad8ed4eb20cbbdfed23b38,
+  m_Sprite: {fileID: 8816985397661653145, guid: 942ef30022ad8ed4eb20cbbdfed23b38,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

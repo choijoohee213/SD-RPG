@@ -28,8 +28,8 @@ public class CharacterFSM : MonoBehaviour {
     }
 
     private void Update() {
-        if(characterBase.IsDie)
-            SetState(CharacterState.Die);
+        //if(characterBase.IsDie)
+        //    SetState(CharacterState.Die);
     }
 
     private IEnumerator FSMMain() {

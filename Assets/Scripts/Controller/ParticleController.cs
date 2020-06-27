@@ -5,13 +5,14 @@ using UnityEngine;
 #pragma warning disable CS0618
 
 public class ParticleController : MonoBehaviour {
-    public static void PlayParticles(string name, Transform effectPos) {
-        GameObject obj = GameManager.Instance.objectPool.GetObject(name);
-        obj.transform.position = effectPos.position;
-        ParticleSystem[] effects = obj.GetComponent<Effect>().particles;
-        for(int i = 0; i < effects.Length; i++) {
-            effects[i].Play();
-        }
-    }
+    public static Effect PlayParticles(string name, Transform effectPos) {
+        Effect effect = GameManager.Instance.objectPool.GetObject(name).GetComponent<Effect>();
+        effect.Init(effectPos);
+        
+        ParticleSystem[] particles = effect.particles;
+        for(int i = 0; i < particles.Length; i++)
+            particles[i].Play();
 
+        return effect;
+    }
 }

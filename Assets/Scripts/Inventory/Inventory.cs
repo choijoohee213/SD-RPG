@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    public GameObject InventoryUI;
+    public GameObject InventoryUI, ItemDetailsUI;
 
     public int Space { get; set; }
     public bool NotEnoughRoom => items.Count >= Space;
@@ -20,8 +20,13 @@ public class Inventory : Singleton<Inventory>
             print("removed!!");
         }
         if(Input.GetKeyDown(KeyCode.I)) {
-            InventoryUI.SetActive(!InventoryUI.activeSelf);
+            InventoryUI.gameObject.SetActive(!InventoryUI.gameObject.activeSelf);
+            ItemDetailsUI.SetActive(false);
         }
+    }
+
+    public void Init() {
+        onItemChangedCallback?.Invoke();
     }
 
     public bool Add (Item item) {

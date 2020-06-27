@@ -16,7 +16,7 @@ public class PlayerFSM : CharacterFSM {
             yield return null;
             if(!Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
-            else if(playerBase.IsAttack)
+            else if(playerBase.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState); //do 문 종료조건.
     }
@@ -30,7 +30,7 @@ public class PlayerFSM : CharacterFSM {
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
-            if(playerBase.IsAttack)
+            if(playerBase.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState);
     }
@@ -41,9 +41,9 @@ public class PlayerFSM : CharacterFSM {
 
             bool raycastTarget = playerBase.AttackToTarget("Monster");
             
-            if(!playerBase.IsAttack && Joystick.IsPointerUp || playerBase.IsColliderDie)
+            if(!playerBase.AttackBtnPressed && Joystick.IsPointerUp || playerBase.IsColliderDie)
                 SetState(CharacterState.Idle);
-            else if(!playerBase.IsAttack && !Joystick.IsPointerUp)
+            else if(!playerBase.AttackBtnPressed && !Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
         } while(!IsNewState);
     }

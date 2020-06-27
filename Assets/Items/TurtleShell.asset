@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704cca7549a5a6948b2a7b246942f966, type: 3}
   m_Name: TurtleShell
   m_EditorClassIdentifier: 
-  name: TurtleShell
+  name: "\uD30C\uB780\uB2EC\uD33D\uC774 \uB4F1\uAECD\uC9C8"
   icon: {fileID: -4070809062747282841, guid: 942ef30022ad8ed4eb20cbbdfed23b38, type: 3}
-  isDefaultItem: 0
+  isConsumable: 0

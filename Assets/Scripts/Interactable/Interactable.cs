@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
 
     protected bool hasInteracted = false;
 
-    float radius = 1f;
+    float radius = 1.5f;
     float DistanceFromPlayer => Vector3.Distance(playerTransform.position, transform.position);
 
     private void OnEnable() {
