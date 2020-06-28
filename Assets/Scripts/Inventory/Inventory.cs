@@ -2,49 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class InventoryItem {
+    public Item item;
+    public int NumPerCell;
+    public bool IsFull => NumPerCell.Equals(30);
+
+    public InventoryItem(Item item) {
+        this.item = item;
+        NumPerCell = 1;
+    }
+}
+
 public class Inventory : Singleton<Inventory>
 {
     public GameObject InventoryUI, ItemDetailsUI;
+    public InventoryUI inventoryUIScript;
 
     public int Space { get; set; }
     public bool NotEnoughRoom => items.Count >= Space;
 
-    public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallback;
+    public List<InventoryItem> items = new List<InventoryItem>();
 
-    public List<Item> items = new List<Item>();
-
-    private void Update() {
-        if(Input.GetButtonDown("Jump")) {
-            Remove(items[0]);
-            print("removed!!");
-        }
-        if(Input.GetKeyDown(KeyCode.I)) {
-            InventoryUI.gameObject.SetActive(!InventoryUI.gameObject.activeSelf);
-            ItemDetailsUI.SetActive(false);
-        }
-    }
 
     public void Init() {
-        onItemChangedCallback?.Invoke();
+        inventoryUIScript.UpdateUI();
     }
 
-    public bool Add (Item item) {
-        if(NotEnoughRoom) {
-            return false;
+    public bool Add (Item _item) {
+        
+        for(int i =0; i<items.Count; i++) {
+            if(items[i].item.Equals(_item) && !items[i].IsFull) {
+                items[i].NumPerCell++;
+                inventoryUIScript.slots[i].UpdateNumText();
+                return true;
+            }
         }
-        items.Add(item);
-        
-        if(onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
-        
+
+        if(NotEnoughRoom) return false;
+        else items.Add(new InventoryItem(_item));
+
+        inventoryUIScript.UpdateUI();
+
         return true;
     }
 
-    public void Remove(Item item) {
-        items.Remove(item);
+    public bool Remove(int slotNum) {
+        if(!items[slotNum].NumPerCell.Equals(1)) {
+            items[slotNum].NumPerCell--;
+            inventoryUIScript.slots[slotNum].UpdateNumText();
+            return false;
+        }
+        else {
+            items.Remove(items[slotNum]);
+            inventoryUIScript.UpdateUI();
+            return true;
+        }
 
-        if(onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+    }
+
+    public void OnInventoryBtn() {
+        InventoryUI.gameObject.SetActive(!InventoryUI.gameObject.activeSelf);
+        ItemDetailsUI.SetActive(false);
     }
 }

@@ -7,26 +7,32 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    Item item;
+    InventoryItem inventoryItem;
     public Image icon;
-    public InventoryUI inventoryUI;
+    public Text num;
     
-    public void AddItem(Item newItem) {
-        item = newItem;
-        icon.sprite = item.icon;
+    public void AddItem(InventoryItem newItem) {
+        inventoryItem = newItem;
+        icon.sprite = inventoryItem.item.icon;
         icon.enabled = true;
+        UpdateNumText();
     }
 
     public void ClearSlot() {
-        item = null;
+        inventoryItem = null;
         icon.sprite = null;
         icon.enabled = false;
-
+        num.enabled = false;
     }
 
-    public void OnSlotBtn() {
-        if(item != null)
-            inventoryUI.ShowItemInform(item);
+    public void UpdateNumText() {
+        num.text = inventoryItem.NumPerCell.ToString();
+        num.enabled = true;
+    }
+
+    public void OnSlotBtn(int slotNum) {
+        if(inventoryItem != null)
+            Inventory.Instance.inventoryUIScript.ShowItemInform(slotNum);
     }
     
 }

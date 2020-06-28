@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour
     public InventorySlot[] slots;
 
     //DetailsUI
-    public Item selectedItem;
+    private int selectedSlotNum;
     public Text ItemNameText;
     public Image ItemImg;
     public GameObject UseItemBtn;
@@ -21,31 +21,33 @@ public class InventoryUI : MonoBehaviour
     {
         Inventory.Instance.Space = slots.Length;
         inventory = Inventory.Instance;
-        inventory.onItemChangedCallback += UpdateUI;
         Inventory.Instance.Init();
     }
 
-    void UpdateUI() {
-        for(int i=0; i<slots.Length; i++) {
-            if(i < inventory.items.Count) 
+    public void UpdateUI() {
+        for(int i = 0; i < slots.Length; i++) {
+            if(i < inventory.items.Count)
                 slots[i].AddItem(inventory.items[i]);
-            
-            else 
+            else
                 slots[i].ClearSlot();
-            
+
         }
     }
 
-    public void ShowItemInform(Item item) {
-        selectedItem = item; 
+
+    public void ShowItemInform(int slotNum) {
+        selectedSlotNum = slotNum;
+        
+        Item item = inventory.items[selectedSlotNum].item;        
         ItemNameText.text = item.name;
         ItemImg.sprite = item.icon;
         UseItemBtn.SetActive(item.isConsumable);
-        Inventory.Instance.ItemDetailsUI.SetActive(true);
+
+        inventory.ItemDetailsUI.SetActive(true);
     }
 
     public void OnDiscardBtn() {
-        Inventory.Instance.Remove(selectedItem);
-        Inventory.Instance.ItemDetailsUI.SetActive(false);
+        bool deleteFromCell = inventory.Remove(selectedSlotNum);
+        inventory.ItemDetailsUI.SetActive(!deleteFromCell);
     }
 }

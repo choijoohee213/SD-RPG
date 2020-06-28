@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ public class PlayerBase : CharacterBase {
     public Joystick joystick;
     public GameObject resurrectUI;
     public Text countDownText;
+
 
     protected override void Awake() {
         base.Awake();
