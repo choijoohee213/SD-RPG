@@ -9,13 +9,13 @@ public class ItemPickup : Interactable
     private Effect particle;
     private Rigidbody rigid;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         rigid = GetComponent<Rigidbody>();
     }
 
-    public void Init(Transform monsterPos, Transform _playerTransform) {
+    public void Init(Transform monsterPos) {
         transform.position = monsterPos.position;
-        playerTransform = _playerTransform;
         rigid.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(4, 7), Random.Range(-2, 2)), ForceMode.Impulse);
         
         particle = ParticleController.PlayParticles("ItemIdleParticle", transform);

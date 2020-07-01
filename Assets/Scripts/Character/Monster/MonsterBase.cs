@@ -4,12 +4,13 @@ using UnityEngine;
 public class MonsterBase : CharacterBase {
     private PlayerBase player;
     public Vector3 limitRange_Min, limitRange_Max;
-    public string[] DropItemName;
+    private DropItemController dropItemController;
 
 
     protected override void Awake() {
         base.Awake();
         player = GameManager.Instance.player;
+        dropItemController = GetComponent<DropItemController>();
     }
 
     public override bool CheckRaycastHit(string layerName) {
@@ -35,17 +36,11 @@ public class MonsterBase : CharacterBase {
         player.IncreaseExp(MaxExp);
 
         //아이템 드랍
-        var dropNum = Random.Range(0, 4);
-        for(int i=0; i< dropNum; i++) DropItem();
+        dropItemController.DropItem();
         
         Invoke("Resurrect", 3);
     }
 
-
-    private void DropItem() {
-        ItemPickup itemPickup = GameManager.Instance.objectPool.GetObject(DropItemName[0]).GetComponent<ItemPickup>();
-        itemPickup.Init(transform, player.transform);
-    }
 
     private void Resurrect() {
         transform.position = new Vector3(Random.Range(limitRange_Min.x, limitRange_Max.x), transform.position.y, Random.Range(limitRange_Min.z, limitRange_Max.z));

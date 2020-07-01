@@ -8,8 +8,12 @@ public class Interactable : MonoBehaviour
 
     protected bool hasInteracted = false;
 
-    float radius = 1.5f;
+    protected float radius = 1.5f;
     float DistanceFromPlayer => Vector3.Distance(playerTransform.position, transform.position);
+
+    protected virtual void Awake() {
+        playerTransform = GameManager.Instance.player.transform;    
+    }
 
     private void OnEnable() {
         hasInteracted = false;

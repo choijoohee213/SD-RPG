@@ -822,6 +822,7 @@ GameObject:
   - component: {fileID: 5708801482832452134}
   - component: {fileID: 2105169267}
   - component: {fileID: 5193780481941967705}
+  - component: {fileID: 5492885776760208206}
   - component: {fileID: 2105169270}
   - component: {fileID: 1531839034}
   - component: {fileID: 95528395651247964}
@@ -868,8 +869,6 @@ MonoBehaviour:
   MinimalDamage: 1
   limitRange_Min: {x: 95, y: 0, z: 60}
   limitRange_Max: {x: 130, y: 0, z: 80}
-  DropItemName:
-  - TurtleShellItem
 --- !u!114 &2105169267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,7 +894,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723cbcd4834e8874f918d0481e10eb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBarObj: {fileID: 0}
+--- !u!114 &5492885776760208206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837317425425208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a944aa405ac2749b15dc7b23f5374b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropProbability: 4
+  itemProbabilities:
+  - ItemName: HealthPotion30Item
+    DropProbability: 2
+  - ItemName: TurtleShellItem
+    DropProbability: 10
 --- !u!54 &2105169270
 Rigidbody:
   m_ObjectHideFlags: 0

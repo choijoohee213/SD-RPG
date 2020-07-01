@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerBase : CharacterBase {
     public int Level = 1;
@@ -16,15 +15,14 @@ public class PlayerBase : CharacterBase {
     public bool AttackBtnPressed { get; set; }
     private readonly bool attackEvent;
 
-    [Header("UI")]
-    public Joystick joystick;
-    public GameObject resurrectUI;
-    public Text countDownText;
+    private Joystick joystick;
 
-
+    
     protected override void Awake() {
         base.Awake();
         expBar = GetComponent<ExpBar>();
+        joystick = GameManager.Instance.joystick;
+        GameManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
     }
 
     protected override void OnEnable() {
@@ -40,6 +38,14 @@ public class PlayerBase : CharacterBase {
     
     public bool PlayerInMonsterRange(Vector3 minRange, Vector3 maxRange) {
         return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
+    }
+
+    public void Heal(float healthGain) {
+        CurrentHealth += healthGain;
+        if(CurrentHealth > MaxHealth)
+            CurrentHealth = MaxHealth;
+
+        healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
     public void IncreaseExp(float monsterExp) {
@@ -63,6 +69,7 @@ public class PlayerBase : CharacterBase {
 
         healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
         expBar.OnExpChanged(CurrentExp, MaxExp);
+        GameManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
 
         ParticleController.PlayParticles("PlayerLevelUpParticle", transform);
     }
@@ -82,17 +89,17 @@ public class PlayerBase : CharacterBase {
     
     protected override void DieAnimEvent() {
         base.DieAnimEvent();
-        resurrectUI.SetActive(true);
+        GameManager.Instance.resurrectUI.SetActive(true);
         ResurrectTimer();
     }
 
     private void ResurrectTimer() {
-        countDownText.text = resurrectCountDown.ToString();
+        GameManager.Instance.countDownText.text = resurrectCountDown.ToString();
         if(resurrectCountDown-- != 0)
             Invoke("ResurrectTimer", 1f);
         else {
             resurrectCountDown = 5;
-            resurrectUI.SetActive(false);
+            GameManager.Instance.resurrectUI.SetActive(false);
             gameObject.SetActive(true);
             ParticleController.PlayParticles("PlayerResurrectParticle", transform);
         }
