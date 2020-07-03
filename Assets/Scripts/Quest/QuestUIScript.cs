@@ -6,40 +6,71 @@ using UnityEngine.UI;
 
 public class QuestUIScript : Singleton<QuestUIScript>
 {
-    List<QuestSlot> slots;
+    public List<QuestSlot> questSlots;
 
     public Text titleText, contentText, listCountText;
+    public GameObject[] objectives;
     int beforeSlotNum;
 
     private void Awake() {
-        slots = new List<QuestSlot>();
+        questSlots = new List<QuestSlot>();
         beforeSlotNum = 9999;
-        listCountText.text = 0 + " / " + slots.Count;
+        listCountText.text = 0 + " / " + questSlots.Count;
 
         for(int i=0; i<10; i++) GameManager.Instance.objectPool.Generate("QuestListSlot", false);
     }
 
     public void AddQuest(Quest _quest) {
-        QuestSlot questSlot = GameManager.Instance.objectPool.GetObject("QuestListSlot").GetComponent<QuestSlot>();
+        QuestSlot slot = GameManager.Instance.objectPool.GetObject("QuestListSlot").GetComponent<QuestSlot>();
 
-        questSlot.quest = _quest;
-        questSlot.Init(slots.Count);
-        
-        slots.Add(questSlot);
+        slot.quest = _quest;
+        slot.Init(questSlots.Count);
+
+        questSlots.Add(slot);
     }
 
    public void ShowQuestContent(int _slotNum) {
-        if(beforeSlotNum != 9999) 
-            slots[beforeSlotNum].selected = false;
+        if(beforeSlotNum != 9999)
+            questSlots[beforeSlotNum].selected = false;
         
         beforeSlotNum = _slotNum;
 
-        titleText.text = slots[_slotNum].quest.title;
-        contentText.text = slots[_slotNum].quest.content;
-        ChangeCountText();
+        titleText.text = questSlots[_slotNum].quest.title;
+        contentText.text = questSlots[_slotNum].quest.content + "\n\n";
+
+        SetObjectives();
+        SetListCountText();
     }
 
-    public void ChangeCountText() {
-        listCountText.text = beforeSlotNum+1 + " / " + slots.Count;
+
+    private void SetObjectives() {
+        int objectiveCount = 0;
+        for(int i = 0; i < objectives.Length; i++)
+            objectives[i].SetActive(false);
+
+        foreach(var obj in questSlots[beforeSlotNum].quest.collectObjectives) {
+            obj.UpdateItemCount();
+
+            objectives[objectiveCount].SetActive(true);
+
+            Image objectiveItem = objectives[objectiveCount].GetComponent<Image>();
+            objectiveItem.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            objectiveItem.sprite = obj.item.icon;
+           
+            Text objectiveText = objectiveItem.transform.GetChild(0).GetComponent<Text>();
+            objectiveText.text = obj.item.name + "\n" + obj.currentAmount + "/" + obj.amount;
+
+            objectiveCount++;
+        }
+    }
+
+    public void SetListCountText() {       
+        listCountText.text = beforeSlotNum + 1 + " / " + questSlots.Count;
+    }
+
+    public void SetSeletedQuestObjectivesCount() {
+        foreach(var o in questSlots[beforeSlotNum].quest.collectObjectives) {
+            o.UpdateItemCount();
+        }
     }
 }

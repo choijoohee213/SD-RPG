@@ -11,14 +11,24 @@ public class Quest : ScriptableObject
     [TextArea(2, 6)]
     public string content;
 
-    public Objectives[] objectives;
+    public CollectObjective[] collectObjectives;
     public bool isCompleted = false;
 }
 
 
 [Serializable]
-public class Objectives 
+public abstract class Objective
 {
     public Item item;
-    public int itemCount; 
+    public int amount;
+    public int currentAmount { get; set; }
+}
+
+[Serializable]
+public class CollectObjective : Objective 
+{
+    public void UpdateItemCount() {
+        currentAmount = Inventory.Instance.GetItemCount(item);
+        Debug.Log("updateItem!!!!!!!!!!!!");
+    }   
 }

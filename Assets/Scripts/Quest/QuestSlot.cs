@@ -24,7 +24,7 @@ public class QuestSlot : MonoBehaviour
 
     private void OnEnable() {
         if(selected) 
-            StartChangeColor(new Color(1, 0.9221995f, 0.5607843f, 1));
+            StartSetColor(new Color(1, 0.9221995f, 0.5607843f, 1));
 
     }
 
@@ -38,17 +38,17 @@ public class QuestSlot : MonoBehaviour
 
     public void OnSlotBtn() {
         if(!selected) {
-            StartChangeColor(new Color(1, 0.9221995f, 0.5607843f, 1));
+            StartSetColor(new Color(1, 0.9221995f, 0.5607843f, 1));
             QuestUIScript.Instance.ShowQuestContent(slotNum);
         }
     }
 
-    public void StartChangeColor(Color newColor) {
+    public void StartSetColor(Color newColor) {
         selected = true;
-        StartCoroutine(ChangeColor(newColor));
+        StartCoroutine(SetColor(newColor));
     }
 
-    IEnumerator ChangeColor(Color newColor) {
+    IEnumerator SetColor(Color newColor) {
         while(selected) {
             //선택된 버튼이므로 노란색으로
             if(!selected) break;

@@ -15,6 +15,7 @@ public class InventorySlot : MonoBehaviour
         inventoryItem = newItem;
         icon.sprite = inventoryItem.item.icon;
         icon.enabled = true;
+        num.enabled = true;
         UpdateNumText();
     }
 
@@ -25,6 +26,7 @@ public class InventorySlot : MonoBehaviour
         num.enabled = false;
     }
 
+    //인벤토리 UI에서 아이템의 개수가 바뀌어 Text를 바꿀 때 호출
     public void UpdateNumText() {
         num.text = inventoryItem.NumPerCell.ToString();
         num.enabled = true;

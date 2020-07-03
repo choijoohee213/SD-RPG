@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\uB108\uAC00 \uC5BC\uB9C8\uB098 \uAC15\uD55C\uC9C0 \uC99D\uBA85\uD574\uC918!"
   content: "\uACF5\uC8FC\uB2D8\uC744 \uAD6C\uD558\uB824\uBA74 \uAC15\uD55C \uC0AC\uB78C\uB9CC\uC774
-    \uAC08 \uC218 \uC788\uC5B4..! \n\n\uD30C\uB780\uB2EC\uD33D\uC774\uB97C \uCC98\uCE58\uD558\uBA74
+    \uAC08 \uC218 \uC788\uC5B4..!  \uD30C\uB780\uB2EC\uD33D\uC774\uB97C \uCC98\uCE58\uD558\uBA74
     \uB098\uC624\uB294 <color=red>\uD30C\uB780\uB2EC\uD33D\uC774 \uB4F1\uAECD\uC9C8
     20\uAC1C</color>\uB97C \uAC00\uC838\uB2E4\uC918!"
-  objectives:
-  - item: {fileID: 0}
-    itemCount: 0
+  collectObjectives:
+  - item: {fileID: 11400000, guid: b0e2214bdf6cb6044b315cf347b636e5, type: 2}
+    amount: 20
+  - item: {fileID: 11400000, guid: 53ba314436087af4fb7af8fcacbbb057, type: 2}
+    amount: 10
   isCompleted: 0

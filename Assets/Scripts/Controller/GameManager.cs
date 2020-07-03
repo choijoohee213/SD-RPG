@@ -35,7 +35,8 @@ public class GameManager : Singleton<GameManager> {
 
     public void OnQuestBtn() {
         QuestUI.SetActive(!QuestUI.activeSelf);
-        QuestUIScript.Instance.ChangeCountText();
+        QuestUIScript.Instance.SetListCountText();
+        QuestUIScript.Instance.SetSeletedQuestObjectivesCount();
         UITransition(QuestUI);
     }
 

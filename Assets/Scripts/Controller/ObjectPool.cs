@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour {
     public GameObject[] objectPrefabs;
     private List<GameObject> pooledObjs = new List<GameObject>();
 
-    public Transform Canvas, HPCanvas, Particles, Items, QuestArea;
+    public Transform Canvas, HPCanvas, Particles, Items, QuestArea, DescriptionArea;
 
     public GameObject Generate(string type, bool isActive) {
         for(int i = 0; i < objectPrefabs.Length; i++) {
@@ -25,6 +25,8 @@ public class ObjectPool : MonoBehaviour {
                     newObject.transform.SetParent(Items);
                 else if(objectPrefabs[i].name.Contains("QuestListSlot"))
                     newObject.transform.SetParent(QuestArea);
+                else if(objectPrefabs[i].name.Contains("QuestObjectives"))
+                    newObject.transform.SetParent(DescriptionArea);
 
                 pooledObjs.Add(newObject);
                 newObject.name = type;

@@ -14,11 +14,10 @@ public class Inventory : Singleton<Inventory>
 
 
     public void Init() {
-        inventoryUIScript.UpdateUI();
+        //inventoryUIScript.UpdateUI();
     }
 
     public bool Add (Item _item) {
-        
         for(int i =0; i<items.Count; i++) {
             if(items[i].item.Equals(_item) && !items[i].IsFull) {
                 items[i].NumPerCell++;
@@ -46,7 +45,16 @@ public class Inventory : Singleton<Inventory>
             inventoryUIScript.UpdateUI();
             return true;
         }
+    }
 
+    public int GetItemCount(Item _item) {
+        int itemCount = 0;
+        foreach(var inventoryItem in items) {
+            if(inventoryItem != null && inventoryItem.item.name.Equals(_item.name)){
+                itemCount += inventoryItem.NumPerCell;
+            }
+        }
+        return itemCount;
     }
 }
 

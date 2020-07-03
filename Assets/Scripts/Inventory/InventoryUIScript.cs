@@ -21,7 +21,7 @@ public class InventoryUIScript : MonoBehaviour
     {
         Inventory.Instance.Space = slots.Length;
         inventory = Inventory.Instance;
-        Inventory.Instance.Init();
+        UpdateUI();
     }
 
     public void UpdateUI() {
@@ -30,7 +30,6 @@ public class InventoryUIScript : MonoBehaviour
                 slots[i].AddItem(inventory.items[i]);
             else
                 slots[i].ClearSlot();
-
         }
     }
 
