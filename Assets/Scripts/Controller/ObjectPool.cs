@@ -40,7 +40,7 @@ public class ObjectPool : MonoBehaviour {
         foreach(GameObject obj in pooledObjs) {
             if(obj.name.Equals(type) && !obj.activeInHierarchy) {
                 if(obj.name.Equals("HealthBar") && obj.transform.GetChild(0).GetComponent<Image>().fillAmount != 0
-                    || obj.name.Equals("QuestListSlot") && obj.GetComponent<QuestSlot>().added)
+                    || obj.name.Equals("QuestListSlot") && obj.GetComponent<QuestSlot>().quest != null)
                     continue;
                 obj.SetActive(true);
                 return obj;

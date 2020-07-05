@@ -16,7 +16,6 @@ public class PlayerBase : CharacterBase {
     private readonly bool attackEvent;
 
     private Joystick joystick;
-
     
     protected override void Awake() {
         base.Awake();

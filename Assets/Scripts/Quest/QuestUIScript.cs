@@ -14,7 +14,7 @@ public class QuestUIScript : Singleton<QuestUIScript>
 
     private void Awake() {
         questSlots = new List<QuestSlot>();
-        beforeSlotNum = 9999;
+        beforeSlotNum = -1;
         listCountText.text = 0 + " / " + questSlots.Count;
 
         for(int i=0; i<10; i++) GameManager.Instance.objectPool.Generate("QuestListSlot", false);
@@ -30,7 +30,7 @@ public class QuestUIScript : Singleton<QuestUIScript>
     }
 
    public void ShowQuestContent(int _slotNum) {
-        if(beforeSlotNum != 9999)
+        if(beforeSlotNum != -1)
             questSlots[beforeSlotNum].selected = false;
         
         beforeSlotNum = _slotNum;
@@ -38,19 +38,26 @@ public class QuestUIScript : Singleton<QuestUIScript>
         titleText.text = questSlots[_slotNum].quest.title;
         contentText.text = questSlots[_slotNum].quest.content + "\n\n";
 
-        SetObjectives();
+        SetObjectivesUI();
         SetListCountText();
     }
 
+    public void UpdateAllObjectives() {
+        foreach(var slot in questSlots) {
+            foreach(var obj in slot.quest.collectObjectives) 
+                obj.UpdateItemCount();
+            slot.CheckCompletable();
+        }
+    }
 
-    private void SetObjectives() {
+    public void SetObjectivesUI() {
         int objectiveCount = 0;
         for(int i = 0; i < objectives.Length; i++)
             objectives[i].SetActive(false);
+        
+        if(questSlots.Count <= 0 || beforeSlotNum.Equals(-1)) return;
 
         foreach(var obj in questSlots[beforeSlotNum].quest.collectObjectives) {
-            obj.UpdateItemCount();
-
             objectives[objectiveCount].SetActive(true);
 
             Image objectiveItem = objectives[objectiveCount].GetComponent<Image>();
@@ -63,14 +70,10 @@ public class QuestUIScript : Singleton<QuestUIScript>
             objectiveCount++;
         }
     }
+    
 
     public void SetListCountText() {       
-        listCountText.text = beforeSlotNum + 1 + " / " + questSlots.Count;
-    }
-
-    public void SetSeletedQuestObjectivesCount() {
-        foreach(var o in questSlots[beforeSlotNum].quest.collectObjectives) {
-            o.UpdateItemCount();
-        }
+        if(questSlots.Count > 0)
+            listCountText.text = beforeSlotNum + 1 + " / " + questSlots.Count;
     }
 }

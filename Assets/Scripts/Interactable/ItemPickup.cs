@@ -30,7 +30,7 @@ public class ItemPickup : Interactable
     }
 
     private void DisableItem() {
-        hasInteracted = true;
+        HasInteracted = true;
         particle.Disable();
         gameObject.SetActive(false);
     }

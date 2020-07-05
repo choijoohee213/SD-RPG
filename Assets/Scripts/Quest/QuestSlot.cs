@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class QuestSlot : MonoBehaviour
 {    
     public Quest quest;
-    public Text questTitleText;
+    public Text questTitleText, questStateText;
     
     Button slotBtn;
     ColorBlock cb;
 
-    public bool added { get; set; }
     public bool selected { get; set; }
     int slotNum;
 
@@ -19,21 +18,20 @@ public class QuestSlot : MonoBehaviour
         slotBtn = GetComponent<Button>();
         cb = slotBtn.colors;
         selected = false;
-        added = false;
     }
 
     private void OnEnable() {
         if(selected) 
             StartSetColor(new Color(1, 0.9221995f, 0.5607843f, 1));
-
     }
 
     public void Init(int _slotNum) {
-        added = true;
+        quest.state = QuestState.Progressing;
         slotNum = _slotNum;
         transform.localScale = new Vector3(1, 1, 1);
 
         questTitleText.text = quest.title;
+        questStateText.text = "";
     }
 
     public void OnSlotBtn() {
@@ -60,6 +58,15 @@ public class QuestSlot : MonoBehaviour
         //하얀색으로 다시 변경
         cb.normalColor = new Color(1, 1, 1, 0.6f);
         slotBtn.colors = cb;
+    }
+
+    public void CheckCompletable() {
+        if(quest.IsCompleteObjectives) {
+            questStateText.text = "완료가능";
+            quest.state = QuestState.Completable;
+        }
+        else
+            questStateText.text = "";
     }
 
 }

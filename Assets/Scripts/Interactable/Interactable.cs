@@ -6,29 +6,39 @@ public class Interactable : MonoBehaviour
 {
     protected Transform playerTransform;
 
-    protected bool hasInteracted = false;
+    public bool HasInteracted { get; set; }
 
     protected float radius = 1.5f;
     float DistanceFromPlayer => Vector3.Distance(playerTransform.position, transform.position);
 
     protected virtual void Awake() {
-        playerTransform = GameManager.Instance.player.transform;    
+        playerTransform = GameManager.Instance.player.transform;
+        HasInteracted = false;
     }
 
     private void OnEnable() {
-        hasInteracted = false;
+        HasInteracted = false;
     }
 
     public virtual void Interact() {
         
     }
 
+    public virtual void NonInteract() {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(!hasInteracted) {
+        if(!HasInteracted) {
             if(DistanceFromPlayer <= radius) {
                 Interact();
+            }
+        }
+        else {
+            if(DistanceFromPlayer > radius) {
+                NonInteract();
             }
         }
     }

@@ -35,9 +35,14 @@ public class GameManager : Singleton<GameManager> {
 
     public void OnQuestBtn() {
         QuestUI.SetActive(!QuestUI.activeSelf);
+        
         QuestUIScript.Instance.SetListCountText();
-        QuestUIScript.Instance.SetSeletedQuestObjectivesCount();
+        QuestUIScript.Instance.UpdateAllObjectives();
+        QuestUIScript.Instance.SetObjectivesUI();
+
         UITransition(QuestUI);
     }
+
+   
 
 }
