@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -22,7 +23,7 @@ public class Inventory : Singleton<Inventory>
             if(items[i].item.Equals(_item) && !items[i].IsFull) {
                 items[i].NumPerCell++;
                 inventoryUIScript.slots[i].UpdateNumText();
-                return true;
+                return true; 
             }
         }
 
@@ -34,7 +35,8 @@ public class Inventory : Singleton<Inventory>
         return true;
     }
 
-    public bool Remove(int slotNum) {
+    public bool Remove() {
+        int slotNum = inventoryUIScript.selectedSlotNum;
         if(!items[slotNum].NumPerCell.Equals(1)) {
             items[slotNum].NumPerCell--;
             inventoryUIScript.slots[slotNum].UpdateNumText();
@@ -46,6 +48,19 @@ public class Inventory : Singleton<Inventory>
             return true;
         }
     }
+
+    //public void RemoveMultiple(Item removeItem, int count) {
+    //    List<InventorySlot> itemSlots = new List<InventorySlot>();
+    //    foreach(var slot in inventoryUIScript.slots) {
+    //        if(slot.inventoryItem.item.Equals(removeItem))
+    //            itemSlots.Add(slot);
+    //    }
+    //    itemSlots.OrderByDescending(InventorySlot => InventorySlot.inventoryItem.NumPerCell).ThenByDescending(InventorySlot => InventorySlot.slotNum);
+        
+    //    while(count--.Equals(0)) {
+    //        removeItem
+    //    }
+    //}
 
     public int GetItemCount(Item _item) {
         int itemCount = 0;

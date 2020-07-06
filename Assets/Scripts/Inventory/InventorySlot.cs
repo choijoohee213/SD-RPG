@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    public int slotNum;
     public InventoryItem inventoryItem;
     public Image icon;
     public Text num;

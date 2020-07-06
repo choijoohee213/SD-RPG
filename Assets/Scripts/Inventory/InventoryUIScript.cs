@@ -11,7 +11,7 @@ public class InventoryUIScript : MonoBehaviour
     public InventorySlot[] slots;
 
     //DetailsUI
-    private int selectedSlotNum;
+    public int selectedSlotNum { get; set; }
     public Text ItemNameText;
     public Image ItemImg;
     public GameObject UseItemBtn;
@@ -55,7 +55,7 @@ public class InventoryUIScript : MonoBehaviour
     }
 
     private void DeleteFromInventory() {
-        bool deleteFromCell = inventory.Remove(selectedSlotNum);
+        bool deleteFromCell = inventory.Remove();
         GameManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
     }
    

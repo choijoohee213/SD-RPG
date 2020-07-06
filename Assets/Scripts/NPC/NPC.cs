@@ -4,11 +4,12 @@ using UnityEngine;
 
 public abstract class NPC : Interactable
 {
-    public NPCUIScript npcUIScript;
+    NPCUIScript npcUIScript;
 
     protected override void Awake() {
         base.Awake();
         radius = 2.3f;
+        npcUIScript = NPCUIScript.Instance;
     }
 
     public override void Interact() {

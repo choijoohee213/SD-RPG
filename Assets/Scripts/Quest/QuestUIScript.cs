@@ -10,33 +10,52 @@ public class QuestUIScript : Singleton<QuestUIScript>
 
     public Text titleText, contentText, listCountText;
     public GameObject[] objectives;
-    int beforeSlotNum;
+    QuestSlot beforeSlot;
 
     private void Awake() {
         questSlots = new List<QuestSlot>();
-        beforeSlotNum = -1;
         listCountText.text = 0 + " / " + questSlots.Count;
 
-        for(int i=0; i<10; i++) GameManager.Instance.objectPool.Generate("QuestListSlot", false);
+        for(int i=0; i<3; i++) GameManager.Instance.objectPool.Generate("QuestListSlot", false);
     }
 
     public void AddQuest(Quest _quest) {
         QuestSlot slot = GameManager.Instance.objectPool.GetObject("QuestListSlot").GetComponent<QuestSlot>();
 
         slot.quest = _quest;
-        slot.Init(questSlots.Count);
+        slot.Init();
 
         questSlots.Add(slot);
+        SetSlotNums();
     }
 
-   public void ShowQuestContent(int _slotNum) {
-        if(beforeSlotNum != -1)
-            questSlots[beforeSlotNum].selected = false;
-        
-        beforeSlotNum = _slotNum;
+    public void RemoveQuest(Quest _quest) {
+        QuestSlot slotToRemove = questSlots[0];
+        foreach(var slot in questSlots) {
+            if(slot.quest.Equals(_quest)) {
+                slotToRemove = slot;
+                break;
+            }
+        }
+        slotToRemove.Removed();
+        questSlots.Remove(slotToRemove);
+        if(beforeSlot.Equals(slotToRemove)) {
+            beforeSlot = null;
+            titleText.text = "";
+            contentText.text = "";
+        }
+        SetSlotNums();
+    }
 
-        titleText.text = questSlots[_slotNum].quest.title;
-        contentText.text = questSlots[_slotNum].quest.content + "\n\n";
+    public void ShowQuestContent(QuestSlot slot) {
+        if(beforeSlot != null) 
+            beforeSlot.Selected = false;
+        
+        
+        beforeSlot = slot;
+
+        titleText.text = slot.quest.title;
+        contentText.text = slot.quest.content + "\n\n";
 
         SetObjectivesUI();
         SetListCountText();
@@ -55,9 +74,9 @@ public class QuestUIScript : Singleton<QuestUIScript>
         for(int i = 0; i < objectives.Length; i++)
             objectives[i].SetActive(false);
         
-        if(questSlots.Count <= 0 || beforeSlotNum.Equals(-1)) return;
+        if(beforeSlot == null) return;
 
-        foreach(var obj in questSlots[beforeSlotNum].quest.collectObjectives) {
+        foreach(var obj in beforeSlot.quest.collectObjectives) {
             objectives[objectiveCount].SetActive(true);
 
             Image objectiveItem = objectives[objectiveCount].GetComponent<Image>();
@@ -72,8 +91,16 @@ public class QuestUIScript : Singleton<QuestUIScript>
     }
     
 
-    public void SetListCountText() {       
-        if(questSlots.Count > 0)
-            listCountText.text = beforeSlotNum + 1 + " / " + questSlots.Count;
+    public void SetListCountText() {
+        if(beforeSlot !=  null)
+            listCountText.text = beforeSlot.slotNum + 1 + " / " + questSlots.Count;
+        else
+            listCountText.text = "0 / " + questSlots.Count;
+    }
+
+    private void SetSlotNums() {
+        for(int i=0; i<questSlots.Count; i++) {
+            questSlots[i].slotNum = i;
+        }
     }
 }

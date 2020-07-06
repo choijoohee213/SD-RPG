@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCUIScript : MonoBehaviour
+public class NPCUIScript : Singleton<NPCUIScript>
 {
     public NPC InteractableNPC { get; set; }
+
+    public QuestGiverUIScript questGiverUIScript;
+
     public GameObject StartTalkingBtn;
     
     public void OnStartTalkingBtn() {

@@ -31,6 +31,8 @@ public class Quest : ScriptableObject
             return true;
         }
     }
+
+    public Rewards rewards;
 }
 
 
@@ -51,4 +53,17 @@ public class CollectObjective : Objective
         currentAmount = Inventory.Instance.GetItemCount(item);
         Debug.Log("updateItem!!!!!!!!!!!!");
     }   
+}
+
+[Serializable]
+public class Rewards {
+    public Item ItemReward;
+    public int ItemRewardCount;
+    public float EXPReward;
+
+    public void Reward() {
+        for(int i=0; i<ItemRewardCount; i++)
+            Inventory.Instance.Add(ItemReward);
+        GameManager.Instance.player.IncreaseExp(EXPReward);
+    }
 }
