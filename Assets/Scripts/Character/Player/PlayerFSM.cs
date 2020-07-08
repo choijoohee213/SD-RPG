@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEngine;
 
 public class PlayerFSM : CharacterFSM {
     private float moveSpeed = 10f;
@@ -22,7 +21,6 @@ public class PlayerFSM : CharacterFSM {
     }
 
     protected IEnumerator Walk() {
-
         do {
             yield return null;
             MoveController.LookDirection(transform, playerBase.MoveDir);
@@ -40,12 +38,11 @@ public class PlayerFSM : CharacterFSM {
             yield return null;
 
             bool raycastTarget = playerBase.AttackToTarget("Monster");
-            
+
             if(!playerBase.AttackBtnPressed && Joystick.IsPointerUp || playerBase.IsColliderDie)
                 SetState(CharacterState.Idle);
             else if(!playerBase.AttackBtnPressed && !Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
         } while(!IsNewState);
     }
-
 }

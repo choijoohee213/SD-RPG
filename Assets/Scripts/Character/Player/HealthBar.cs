@@ -9,7 +9,6 @@ public class HealthBar : MonoBehaviour {
     private float visibleTime = 5, lastMadeVisibleTime, gaugeMoveSpeed = 2f;
     private float currentHP, maxHP, currentHPFill;
 
-
     private void Awake() {
         //몬스터
         if(gameObject.layer.Equals(10)) {
@@ -31,11 +30,10 @@ public class HealthBar : MonoBehaviour {
     }
 
     private void Update() {
-        if(currentHPFill != healthGauge.fillAmount) 
+        if(currentHPFill != healthGauge.fillAmount)
             healthGauge.fillAmount = Mathf.Lerp(healthGauge.fillAmount, currentHPFill, gaugeMoveSpeed * Time.deltaTime);
 
         healthText.text = currentHP.ToString() + " / " + maxHP.ToString();
-
     }
 
     private void LateUpdate() {

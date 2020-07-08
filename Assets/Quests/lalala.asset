@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67901067f0a6394b9d3050950c65749, type: 3}
   m_Name: lalala
   m_EditorClassIdentifier: 
-  state: 1
+  state: 0
   title: "\uB77C\uB77C\uB77C\uB77C"
   content: "\uD57C\uB85C\uC6B0 \uD5EC\uB85C\uC6B0 !!!!!! \uBC18\uAC00\uC6CC"
   collectObjectives:

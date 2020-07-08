@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonsterBase : CharacterBase {
     private PlayerBase player;
     public Vector3 limitRange_Min, limitRange_Max;
     private DropItemController dropItemController;
-
 
     protected override void Awake() {
         base.Awake();
@@ -27,7 +25,6 @@ public class MonsterBase : CharacterBase {
         damageText.Init(damageText.gameObject, transform.position, damage);
     }
 
-
     protected override void DieAnimEvent() {
         healthBar.healthBarObj.SetActive(false);
         base.DieAnimEvent();
@@ -37,14 +34,12 @@ public class MonsterBase : CharacterBase {
 
         //아이템 드랍
         dropItemController.DropItem();
-        
+
         Invoke("Resurrect", 3);
     }
-
 
     private void Resurrect() {
         transform.position = new Vector3(Random.Range(limitRange_Min.x, limitRange_Max.x), transform.position.y, Random.Range(limitRange_Min.z, limitRange_Max.z));
         gameObject.SetActive(true);
     }
-
 }

@@ -1,49 +1,53 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public class QuestGiver : NPC
-{
-    QuestGiverUIScript UIScript;
+public class QuestGiver : NPC {
+    private QuestGiverUIScript giverUIScript;
     public Quest[] QuestList;
 
-    [TextArea(2,6)]
+    [TextArea(2, 6)]
     public string defaultDialog;
 
-    bool noQuest;
+    private bool noQuest;
 
-    int questIndex;
-    int QuestIndex {
+    private int questIndex;
+
+    private int QuestIndex {
         get { return questIndex; }
         set {
-            if(value >= QuestList.Length) noQuest = true;
-            else noQuest = false;
+            if(value >= QuestList.Length)
+                noQuest = true;
+            else
+                noQuest = false;
             questIndex = value;
-        } 
+        }
     }
-
 
     protected override void Awake() {
         base.Awake();
         QuestIndex = 0;
-        UIScript = NPCUIScript.Instance.questGiverUIScript;
+        giverUIScript = NPCUIScript.Instance.questGiverUIScript;
     }
 
-
     public override void ShowNPCUI() {
-        UIScript.QuestGiverUI.SetActive(true);
-        
-        if(!noQuest) {
-            UIScript.QuestGiverContentText.text = QuestList[QuestIndex].title + "\n\n" + QuestList[QuestIndex].content;
+        Quest curQuest = QuestList[questIndex];
+        giverUIScript.QuestGiverUI.SetActive(true);
 
-            if(QuestList[QuestIndex].state.Equals(QuestState.Progressing))
+        if(!noQuest) {
+            if(curQuest.state.Equals(QuestState.Startable))
+                giverUIScript.DisabledRewardsUI();
+            if(curQuest.state.Equals(QuestState.Progressing))
                 QuestUIScript.Instance.UpdateAllObjectives();
+            if(curQuest.state.Equals(QuestState.Completable))
+                giverUIScript.SetRewardsUI(curQuest);
+
+            print(curQuest.state);
+            giverUIScript.SetDialog(curQuest);
         }
-        else 
-            UIScript.QuestGiverContentText.text = defaultDialog;
+        else
+            giverUIScript.SetDialog(null);
 
         CheckQuestState();
     }
-
 
     public void AcceptQuest() {
         QuestUIScript.Instance.AddQuest(QuestList[QuestIndex]);
@@ -55,18 +59,27 @@ public class QuestGiver : NPC
     }
 
     public void CompleteQuest() {
-        QuestUIScript.Instance.RemoveQuest(QuestList[QuestIndex]);
-        QuestList[questIndex].rewards.Reward();
-        QuestIndex++;
+        if(QuestList[questIndex].rewards.Reward()) {
+            RemoveObjectivesItem();
+            QuestList[QuestIndex].state = QuestState.Complete;
+            QuestUIScript.Instance.RemoveQuest(QuestList[QuestIndex]);
+            QuestIndex++;
+        }
+    }
+
+    private void RemoveObjectivesItem() {
+        foreach(var o in QuestList[QuestIndex].collectObjectives) {
+            Inventory.Instance.RemoveMultiple(o.item, o.amount);
+        }
     }
 
     private void CheckQuestState() {
         QuestState questState = 0;
-        if(!noQuest) questState = QuestList[QuestIndex].state;
+        if(!noQuest)
+            questState = QuestList[QuestIndex].state;
 
-        UIScript.AcceptBtn.SetActive(!noQuest && questState.Equals(QuestState.Startable));
-        UIScript.AbandonmentBtn.SetActive(!noQuest && questState.Equals(QuestState.Progressing));
-        UIScript.CompleteBtn.SetActive(!noQuest && questState.Equals(QuestState.Completable));
+        giverUIScript.AcceptBtn.SetActive(!noQuest && questState.Equals(QuestState.Startable));
+        giverUIScript.AbandonmentBtn.SetActive(!noQuest && questState.Equals(QuestState.Progressing));
+        giverUIScript.CompleteBtn.SetActive(!noQuest && questState.Equals(QuestState.Completable));
     }
-
 }

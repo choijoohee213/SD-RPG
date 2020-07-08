@@ -18,5 +18,4 @@ public class MoveController {
     public static void LimitMoveRange(Transform objTransform, Vector3 minRange, Vector3 maxRange) {
         objTransform.position = new Vector3(Mathf.Clamp(objTransform.position.x, minRange.x, maxRange.x), objTransform.position.y, Mathf.Clamp(objTransform.position.z, minRange.z, maxRange.z));
     }
-
 }

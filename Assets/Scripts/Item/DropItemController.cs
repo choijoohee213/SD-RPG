@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DropItemController : MonoBehaviour
-{
+public class DropItemController : MonoBehaviour {
     public int DropProbability = 4;
 
     [SerializeField]
     private List<ItemProbability> itemProbabilities = null;
-    
+
     private Transform player;
 
     private void Awake() {
@@ -28,8 +27,8 @@ public class DropItemController : MonoBehaviour
     private void CreateItemObj() {
         var randomItem = Random.Range(1, 11);
         int index = 0;
-        
-        for(int i=0; i<itemProbabilities.Count; i++) {
+
+        for(int i = 0; i < itemProbabilities.Count; i++) {
             if(randomItem <= itemProbabilities[i].DropProbability) {
                 index = i;
                 break;

@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Effect : MonoBehaviour {
-
     public ParticleSystem[] particles;
     public Vector3 plusPos;
     public Transform StartTransform { get; set; }

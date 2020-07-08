@@ -1,24 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUIScript : MonoBehaviour
-{
-    Inventory inventory;
+public class InventoryUIScript : MonoBehaviour {
+    private Inventory inventory;
 
     public Transform itemsParent;
     public InventorySlot[] slots;
 
     //DetailsUI
     public int selectedSlotNum { get; set; }
+
     public Text ItemNameText;
     public Image ItemImg;
     public GameObject UseItemBtn;
 
-
-    void Awake()
-    {
+    private void Awake() {
         Inventory.Instance.Space = slots.Length;
         inventory = Inventory.Instance;
         UpdateUI();
@@ -33,11 +29,10 @@ public class InventoryUIScript : MonoBehaviour
         }
     }
 
-
     public void ShowItemInform(int slotNum) {
         selectedSlotNum = slotNum;
-        
-        Item item = inventory.items[selectedSlotNum].item;        
+
+        Item item = inventory.items[selectedSlotNum].item;
         ItemNameText.text = item.name;
         ItemImg.sprite = item.icon;
         UseItemBtn.SetActive(item.isConsumable);
@@ -49,7 +44,7 @@ public class InventoryUIScript : MonoBehaviour
         slots[selectedSlotNum].inventoryItem.item.Use();
         DeleteFromInventory();
     }
-    
+
     public void OnDiscardBtn() {
         DeleteFromInventory();
     }
@@ -58,5 +53,8 @@ public class InventoryUIScript : MonoBehaviour
         bool deleteFromCell = inventory.Remove();
         GameManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
     }
-   
+
+    public void NotifyInventoryFull() {
+        Debug.Log("inventory is full!!!!! remove items plz");
+    }
 }

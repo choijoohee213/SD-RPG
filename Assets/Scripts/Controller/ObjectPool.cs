@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectPool : MonoBehaviour {
-
     public GameObject[] objectPrefabs;
     private List<GameObject> pooledObjs = new List<GameObject>();
 

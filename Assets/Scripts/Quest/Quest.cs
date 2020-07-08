@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestState {
-    Startable, 
+    Startable,
     Progressing,
     Completable,
     Complete
 }
 
 [CreateAssetMenu(fileName = "New Quest", menuName = "RPG/Quest")]
-public class Quest : ScriptableObject
-{
+public class Quest : ScriptableObject {
     public QuestState state = QuestState.Startable;
 
     public string title;
 
     [TextArea(2, 6)]
-    public string content;
+    public string content, completeDialog;
 
     public CollectObjective[] collectObjectives;
 
@@ -35,10 +32,8 @@ public class Quest : ScriptableObject
     public Rewards rewards;
 }
 
-
 [Serializable]
-public abstract class Objective
-{
+public abstract class Objective {
     public Item item;
     public int amount;
     public int currentAmount { get; set; }
@@ -47,12 +42,12 @@ public abstract class Objective
 }
 
 [Serializable]
-public class CollectObjective : Objective 
-{
+public class CollectObjective : Objective {
+
     public void UpdateItemCount() {
         currentAmount = Inventory.Instance.GetItemCount(item);
         Debug.Log("updateItem!!!!!!!!!!!!");
-    }   
+    }
 }
 
 [Serializable]
@@ -61,9 +56,10 @@ public class Rewards {
     public int ItemRewardCount;
     public float EXPReward;
 
-    public void Reward() {
-        for(int i=0; i<ItemRewardCount; i++)
-            Inventory.Instance.Add(ItemReward);
-        GameManager.Instance.player.IncreaseExp(EXPReward);
+    public bool Reward() {
+        bool addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
+        if(addable)
+            GameManager.Instance.player.IncreaseExp(EXPReward);
+        return addable;
     }
 }

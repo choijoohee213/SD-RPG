@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Interactable : MonoBehaviour
-{
+public class Interactable : MonoBehaviour {
     protected Transform playerTransform;
 
     public bool HasInteracted { get; set; }
 
     protected float radius = 1.5f;
-    float DistanceFromPlayer => Vector3.Distance(playerTransform.position, transform.position);
+    private float DistanceFromPlayer => Vector3.Distance(playerTransform.position, transform.position);
 
     protected virtual void Awake() {
         playerTransform = GameManager.Instance.player.transform;
@@ -21,16 +18,13 @@ public class Interactable : MonoBehaviour
     }
 
     public virtual void Interact() {
-        
     }
 
     public virtual void NonInteract() {
-
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
         if(!HasInteracted) {
             if(DistanceFromPlayer <= radius) {
                 Interact();

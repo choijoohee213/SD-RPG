@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBase : CharacterBase {
     public int Level = 1;
@@ -11,12 +9,12 @@ public class PlayerBase : CharacterBase {
 
     private int resurrectCountDown = 5;
 
-    public bool IsJumping {get; set;}
+    public bool IsJumping { get; set; }
     public bool AttackBtnPressed { get; set; }
     private readonly bool attackEvent;
 
     private Joystick joystick;
-    
+
     protected override void Awake() {
         base.Awake();
         expBar = GetComponent<ExpBar>();
@@ -34,7 +32,7 @@ public class PlayerBase : CharacterBase {
         if(GetComponent<CharacterFSM>().state != CharacterState.Attack && !Joystick.IsPointerUp)
             MoveDir = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
     }
-    
+
     public bool PlayerInMonsterRange(Vector3 minRange, Vector3 maxRange) {
         return transform.position.x < maxRange.x && transform.position.x > minRange.x && transform.position.z < maxRange.z && transform.position.z > minRange.z;
     }
@@ -73,7 +71,6 @@ public class PlayerBase : CharacterBase {
         ParticleController.PlayParticles("PlayerLevelUpParticle", transform);
     }
 
-
     public void PlayerJumpBtn() {
         if(!IsJumping) {
             Rigid.AddForce(Vector3.up * 80, ForceMode.Impulse);
@@ -85,7 +82,6 @@ public class PlayerBase : CharacterBase {
         AttackBtnPressed = pressed;
     }
 
-    
     protected override void DieAnimEvent() {
         base.DieAnimEvent();
         GameManager.Instance.resurrectUI.SetActive(true);

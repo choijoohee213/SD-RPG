@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67901067f0a6394b9d3050950c65749, type: 3}
   m_Name: TurtleShellItem20
   m_EditorClassIdentifier: 
-  state: 3
+  state: 2
   title: "\uB108\uAC00 \uC5BC\uB9C8\uB098 \uAC15\uD55C\uC9C0 \uC99D\uBA85\uD574\uC918!"
   content: "\uACF5\uC8FC\uB2D8\uC744 \uAD6C\uD558\uB824\uBA74 \uAC15\uD55C \uC0AC\uB78C\uB9CC\uC774
     \uAC08 \uC218 \uC788\uC5B4..!  \uD30C\uB780\uB2EC\uD33D\uC774\uB97C \uCC98\uCE58\uD558\uBA74
     \uB098\uC624\uB294 <color=red>\uD30C\uB780\uB2EC\uD33D\uC774 \uB4F1\uAECD\uC9C8
     20\uAC1C</color>\uB97C \uAC00\uC838\uB2E4\uC918!"
+  completeDialog: "\uB300\uB2E8\uD55C\uAC78? \uB108 \uC815\uB9D0 \uAC15\uD558\uAD6C\uB098..!!
+    \uC5EC\uAE30 \uBCF4\uC0C1\uC774\uC57C!\n"
   collectObjectives:
   - item: {fileID: 11400000, guid: b0e2214bdf6cb6044b315cf347b636e5, type: 2}
-    amount: 5
+    amount: 8
   - item: {fileID: 11400000, guid: 53ba314436087af4fb7af8fcacbbb057, type: 2}
     amount: 1
   rewards:
     ItemReward: {fileID: 11400000, guid: 53ba314436087af4fb7af8fcacbbb057, type: 2}
-    ItemRewardCount: 5
+    ItemRewardCount: 4
     EXPReward: 50

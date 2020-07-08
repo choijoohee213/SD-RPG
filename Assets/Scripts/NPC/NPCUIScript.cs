@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NPCUIScript : Singleton<NPCUIScript>
-{
+public class NPCUIScript : Singleton<NPCUIScript> {
     public NPC InteractableNPC { get; set; }
 
     public QuestGiverUIScript questGiverUIScript;
 
     public GameObject StartTalkingBtn;
-    
+
     public void OnStartTalkingBtn() {
         StartTalkingBtn.SetActive(false);
         InteractableNPC.ShowNPCUI();
@@ -18,7 +15,4 @@ public class NPCUIScript : Singleton<NPCUIScript>
     public void OnNPCUIExitBtn() {
         InteractableNPC.HasInteracted = false;
     }
-
-    
-
 }

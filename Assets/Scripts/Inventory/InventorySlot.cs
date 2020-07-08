@@ -1,17 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEditor.VersionControl;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
-{
+public class InventorySlot : MonoBehaviour {
     public int slotNum;
     public InventoryItem inventoryItem;
     public Image icon;
     public Text num;
-    
+
     public void AddItem(InventoryItem newItem) {
         inventoryItem = newItem;
         icon.sprite = inventoryItem.item.icon;
@@ -37,5 +32,4 @@ public class InventorySlot : MonoBehaviour
         if(inventoryItem != null)
             Inventory.Instance.inventoryUIScript.ShowItemInform(slotNum);
     }
-    
 }

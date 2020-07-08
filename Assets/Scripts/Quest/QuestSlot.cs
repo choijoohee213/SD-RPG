@@ -1,25 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestSlot : MonoBehaviour
-{    
+public class QuestSlot : MonoBehaviour {
     public Quest quest;
     public Text questTitleText, questStateText;
-    
+
     public int slotNum;
 
-    private bool selected;
+    private bool selected = false;
+
     public bool Selected {
         get { return selected; }
         set {
-            if(value) questTitleText.color = Color.red;
-            else questTitleText.color = Color.black;
+            if(value)
+                questTitleText.color = Color.red;
+            else
+                questTitleText.color = Color.black;
         }
     }
-
 
     public void Init() {
         transform.SetAsFirstSibling();
@@ -40,7 +38,6 @@ public class QuestSlot : MonoBehaviour
         }
     }
 
-
     public void CheckCompletable() {
         if(quest.IsCompleteObjectives) {
             questStateText.text = "완료가능";
@@ -50,10 +47,8 @@ public class QuestSlot : MonoBehaviour
             questStateText.text = "";
     }
 
-    public void Removed() {
-        quest.state = QuestState.Complete;
+    public void RemoveQuestSlot() {
         quest = null;
         gameObject.SetActive(false);
     }
-
 }

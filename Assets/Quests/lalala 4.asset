@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67901067f0a6394b9d3050950c65749, type: 3}
   m_Name: lalala 4
   m_EditorClassIdentifier: 
-  state: 1
+  state: 0
   title: 777
   content: 888
   collectObjectives:

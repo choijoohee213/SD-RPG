@@ -7,8 +7,8 @@ public class MonsterFSM : CharacterFSM {
 
     private float moveSpeed = 8f, rotateSpeed = 3f;
     public float DistanceFromPlayer => Vector3.Distance(transform.position, playerBase.transform.position);
-    
-    bool PlayerInAttackRange => DistanceFromPlayer <= 10 && playerBase.transform.position.y - transform.position.y < 1 && !playerBase.IsDie
+
+    private bool PlayerInAttackRange => DistanceFromPlayer <= 10 && playerBase.transform.position.y - transform.position.y < 1 && !playerBase.IsDie
                  && playerBase.PlayerInMonsterRange(monsterBase.limitRange_Min, monsterBase.limitRange_Max);
 
     protected override void Awake() {
@@ -17,9 +17,7 @@ public class MonsterFSM : CharacterFSM {
         monsterBase = GetComponent<MonsterBase>();
     }
 
-
     protected IEnumerator Idle() {
-
         do {
             yield return null;
 
@@ -55,10 +53,10 @@ public class MonsterFSM : CharacterFSM {
     protected IEnumerator Trace() {
         do {
             yield return null;
-            if(!playerBase.IsJumping){
+            if(!playerBase.IsJumping) {
                 MoveController.LookTarget(transform, playerBase.transform, rotateSpeed);
                 MoveController.RigidMovePos(transform, playerBase.transform.position - transform.position, moveSpeed);
-                MoveController.LimitMoveRange(transform, monsterBase.limitRange_Min, monsterBase.limitRange_Max);                
+                MoveController.LimitMoveRange(transform, monsterBase.limitRange_Min, monsterBase.limitRange_Max);
             }
 
             //플레이어와의 거리가 10 이상이거나 높이차이가 1이상일 경우 Idle 상태로 전환
@@ -77,7 +75,7 @@ public class MonsterFSM : CharacterFSM {
             MoveController.LookTarget(transform, playerBase.transform, rotateSpeed);
 
             bool raycastTarget = characterBase.AttackToTarget("Player");
-            if(!raycastTarget){ 
+            if(!raycastTarget) {
                 if(playerBase.IsDie)
                     SetState(CharacterState.Walk);
                 else
@@ -85,5 +83,4 @@ public class MonsterFSM : CharacterFSM {
             }
         } while(!IsNewState); //do 문 종료조건.
     }
-
 }
