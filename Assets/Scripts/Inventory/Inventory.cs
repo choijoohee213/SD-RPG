@@ -32,10 +32,11 @@ public class Inventory : Singleton<Inventory> {
         return true;
     }
 
-    public bool Remove() {
+    public bool Remove(int discardNum) {
         int slotNum = inventoryUIScript.selectedSlotNum;
-        if(!items[slotNum].NumPerCell.Equals(1)) {
-            items[slotNum].NumPerCell--;
+        items[slotNum].NumPerCell -= discardNum;
+
+        if(items[slotNum].NumPerCell > 0) {
             inventoryUIScript.slots[slotNum].UpdateNumText();
             return false;
         }
@@ -94,15 +95,12 @@ public class Inventory : Singleton<Inventory> {
         if(remainder != 0)
             quotient++;
 
-        print(Space - items.Count);
-        print(quotient);
         return Space - items.Count >= quotient;
     }
 
     public void RemoveMultiple(Item removeItem, int count) {
         for(int i = items.Count - 1; i >= 0; i--) {
-            if(!items[i].item.Equals(removeItem))
-                continue;
+            if(!items[i].item.Equals(removeItem)) continue;
 
             if(items[i].NumPerCell - count > 0) {
                 items[i].NumPerCell -= count;

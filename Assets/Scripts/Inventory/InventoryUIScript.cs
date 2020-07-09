@@ -9,10 +9,12 @@ public class InventoryUIScript : MonoBehaviour {
 
     //DetailsUI
     public int selectedSlotNum { get; set; }
+    public int discardNum { get; set; }
 
     public Text ItemNameText;
     public Image ItemImg;
-    public GameObject UseItemBtn;
+    public GameObject UseItemBtn, DiscardUI;
+    public InputField discardNumIF;
 
     private void Awake() {
         Inventory.Instance.Space = slots.Length;
@@ -46,11 +48,28 @@ public class InventoryUIScript : MonoBehaviour {
     }
 
     public void OnDiscardBtn() {
+        DiscardUI.SetActive(!DiscardUI.activeSelf);
+        if(DiscardUI.activeSelf)
+            discardNumIF.text = 1.ToString();
+    }
+
+    public void OnDiscardOKBtn() {
+        discardNum = int.Parse(discardNumIF.text);
         DeleteFromInventory();
     }
 
+    public void LimitInputRange() {
+        int inputNum = int.Parse(discardNumIF.text);
+        if(inputNum < 1) {
+            discardNumIF.text = 1.ToString();
+        }
+        if(inputNum > inventory.items[selectedSlotNum].NumPerCell) {
+            discardNumIF.text = inventory.items[selectedSlotNum].NumPerCell.ToString();
+        }
+    }
+
     private void DeleteFromInventory() {
-        bool deleteFromCell = inventory.Remove();
+        bool deleteFromCell = inventory.Remove(discardNum);
         GameManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
     }
 
