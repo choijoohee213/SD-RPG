@@ -15,6 +15,7 @@ MonoBehaviour:
   state: 0
   title: "\uB77C\uB77C\uB77C\uB77C"
   content: "\uD57C\uB85C\uC6B0 \uD5EC\uB85C\uC6B0 !!!!!! \uBC18\uAC00\uC6CC"
+  completeDialog: 
   collectObjectives:
   - item: {fileID: 11400000, guid: b0e2214bdf6cb6044b315cf347b636e5, type: 2}
     amount: 5

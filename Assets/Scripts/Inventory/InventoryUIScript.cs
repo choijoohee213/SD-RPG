@@ -29,6 +29,7 @@ public class InventoryUIScript : MonoBehaviour {
             else
                 slots[i].ClearSlot();
         }
+        QuestUIScript.Instance.UpdateAllObjectives();
     }
 
     public void ShowItemInform(int slotNum) {

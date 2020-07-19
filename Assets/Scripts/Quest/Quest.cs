@@ -29,7 +29,7 @@ public class Quest : ScriptableObject {
         }
     }
 
-    public Rewards rewards;
+    public Rewards rewards ;
 }
 
 [Serializable]
@@ -57,9 +57,9 @@ public class Rewards {
     public float EXPReward;
 
     public bool Reward() {
-        bool addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
-        if(addable)
-            GameManager.Instance.player.IncreaseExp(EXPReward);
+        bool addable = true;
+        if(ItemReward != null) addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
+        if(addable) GameManager.Instance.player.IncreaseExp(EXPReward);
         return addable;
     }
 }

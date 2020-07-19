@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void Update() {
+        //지워
         if(Input.GetButtonDown("Jump")) {
             Inventory.Instance.AddMultiple(monsteritem, monsterItemcount);
             Debug.Log("iiiiii");
@@ -46,7 +47,6 @@ public class GameManager : Singleton<GameManager> {
         QuestUI.SetActive(!QuestUI.activeSelf);
 
         QuestUIScript.Instance.SetListCountText();
-        QuestUIScript.Instance.UpdateAllObjectives();
         QuestUIScript.Instance.SetObjectivesUI();
 
         UITransition(QuestUI);

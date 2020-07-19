@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class QuestGiver : NPC {
-    private QuestGiverUIScript giverUIScript;
+    private QuestGiverUIScript questGiverUIScript;
     public Quest[] QuestList;
 
     [TextArea(2, 6)]
@@ -24,38 +24,59 @@ public class QuestGiver : NPC {
 
     protected override void Awake() {
         base.Awake();
-        QuestIndex = 0;
-        giverUIScript = NPCUIScript.Instance.questGiverUIScript;
+        SetQuestIndex();
+        questGiverUIScript = NPCUIScript.Instance.questGiverUIScript;
+        SetSpeechBubble();
+    }
+
+    private void SetQuestIndex() {
+        int index = 0;
+        for(int i = 0; i < QuestList.Length; i++) {
+            if(!QuestList[i].state.Equals(QuestState.Complete)){
+                index = i;
+                break;
+            }
+            if(i.Equals(QuestList.Length - 1)) {
+                index = QuestList.Length;
+            }
+        }
+        QuestIndex = index;
     }
 
     public override void ShowNPCUI() {
-        Quest curQuest = QuestList[questIndex];
-        giverUIScript.QuestGiverUI.SetActive(true);
+        base.ShowNPCUI();
+
+        questGiverUIScript.QuestGiverUI.SetActive(true);
+        questGiverUIScript.DisabledRewardsUI();
 
         if(!noQuest) {
-            if(curQuest.state.Equals(QuestState.Startable))
-                giverUIScript.DisabledRewardsUI();
+            Quest curQuest = QuestList[questIndex];
             if(curQuest.state.Equals(QuestState.Progressing))
-                QuestUIScript.Instance.UpdateAllObjectives();
-            if(curQuest.state.Equals(QuestState.Completable))
-                giverUIScript.SetRewardsUI(curQuest);
+                QuestUIScript.Instance.UpdateObjectives(curQuest);
+            if(curQuest.state.Equals(QuestState.Completable)) {
+                if(curQuest.rewards.ItemReward != null)
+                    questGiverUIScript.SetRewardsUI(curQuest);
+            }
 
-            print(curQuest.state);
-            giverUIScript.SetDialog(curQuest);
+            questGiverUIScript.SetDialog(curQuest);
         }
         else
-            giverUIScript.SetDialog(null);
+            questGiverUIScript.SetDialog(null);
 
         CheckQuestState();
     }
 
     public void AcceptQuest() {
-        QuestUIScript.Instance.AddQuest(QuestList[QuestIndex]);
+        QuestUIScript.Instance.AddQuest(QuestList[QuestIndex], this);
+        QuestUIScript.Instance.UpdateObjectives(QuestList[QuestIndex]);
+        SetSpeechBubble();
     }
 
     public void AbandonQuest() {
+        QuestList[QuestIndex].state = QuestState.Complete;
         QuestUIScript.Instance.RemoveQuest(QuestList[QuestIndex]);
         QuestIndex++;
+        SetSpeechBubble();
     }
 
     public void CompleteQuest() {
@@ -64,6 +85,7 @@ public class QuestGiver : NPC {
             QuestList[QuestIndex].state = QuestState.Complete;
             QuestUIScript.Instance.RemoveQuest(QuestList[QuestIndex]);
             QuestIndex++;
+            SetSpeechBubble();
         }
     }
 
@@ -78,8 +100,29 @@ public class QuestGiver : NPC {
         if(!noQuest)
             questState = QuestList[QuestIndex].state;
 
-        giverUIScript.AcceptBtn.SetActive(!noQuest && questState.Equals(QuestState.Startable));
-        giverUIScript.AbandonmentBtn.SetActive(!noQuest && questState.Equals(QuestState.Progressing));
-        giverUIScript.CompleteBtn.SetActive(!noQuest && questState.Equals(QuestState.Completable));
+        questGiverUIScript.AcceptBtn.SetActive(!noQuest && questState.Equals(QuestState.Startable));
+        questGiverUIScript.AbandonmentBtn.SetActive(!noQuest && questState.Equals(QuestState.Progressing));
+        questGiverUIScript.CompleteBtn.SetActive(!noQuest && questState.Equals(QuestState.Completable));
+    }
+
+    public void SetSpeechBubble() {
+        if(!noQuest) {
+            speechBubble.gameObject.SetActive(true);
+            switch(QuestList[QuestIndex].state) {
+                case QuestState.Startable:
+                    speechBubble.sprite = questGiverUIScript.speechBubles[0];
+                    break;
+                case QuestState.Progressing:
+                    speechBubble.sprite = questGiverUIScript.speechBubles[1];
+                    break;
+                case QuestState.Completable:
+                    speechBubble.sprite = questGiverUIScript.speechBubles[2];
+                    break;
+            }
+        }
+
+        else {
+            speechBubble.gameObject.SetActive(false);
+        }
     }
 }

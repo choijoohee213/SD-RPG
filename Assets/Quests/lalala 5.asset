@@ -15,6 +15,7 @@ MonoBehaviour:
   state: 0
   title: 99
   content: 9999
+  completeDialog: 
   collectObjectives:
   - item: {fileID: 11400000, guid: 53ba314436087af4fb7af8fcacbbb057, type: 2}
     amount: 1

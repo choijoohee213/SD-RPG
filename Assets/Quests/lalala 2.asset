@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67901067f0a6394b9d3050950c65749, type: 3}
   m_Name: lalala 2
   m_EditorClassIdentifier: 
-  state: 0
+  state: 3
   title: "\u3147\u3139\u3134\u3139"
   content: "\u3147\u3134\u3141\u3147\u314E\u3136"
+  completeDialog: 
   collectObjectives: []
   rewards:
     ItemReward: {fileID: 0}

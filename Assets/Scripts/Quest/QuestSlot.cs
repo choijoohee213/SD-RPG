@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class QuestSlot : MonoBehaviour {
     public Quest quest;
     public Text questTitleText, questStateText;
+    public QuestGiver QuestGiverNPC { get; set; }
 
     public int slotNum;
 
@@ -45,6 +46,8 @@ public class QuestSlot : MonoBehaviour {
         }
         else
             questStateText.text = "";
+
+        QuestGiverNPC.SetSpeechBubble();
     }
 
     public void RemoveQuestSlot() {

@@ -15,6 +15,7 @@ MonoBehaviour:
   state: 0
   title: 555
   content: 6666
+  completeDialog: 
   collectObjectives: []
   rewards:
     ItemReward: {fileID: 0}

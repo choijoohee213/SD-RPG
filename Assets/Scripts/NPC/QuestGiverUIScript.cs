@@ -2,30 +2,31 @@
 using UnityEngine.UI;
 
 public class QuestGiverUIScript : MonoBehaviour {
-    private NPCUIScript nPCUIScript;
+    private NPCUIScript npcUIScript;
+    
     public GameObject QuestGiverUI, AcceptBtn, AbandonmentBtn, CompleteBtn, rewardsEXP;
     public GameObject[] rewards;
+    
     public Text QuestGiverContentText;
+    public Sprite[] speechBubles;
 
     private void Awake() {
-        nPCUIScript = NPCUIScript.Instance;
+        npcUIScript = NPCUIScript.Instance;
     }
 
     public void OnQuestAcceptBtn() {
-        nPCUIScript.InteractableNPC.GetComponent<QuestGiver>().AcceptQuest();
+        npcUIScript.InteractableNPC.GetComponent<QuestGiver>().AcceptQuest();
     }
 
     public void OnQuestAbandonBtn() {
-        nPCUIScript.InteractableNPC.GetComponent<QuestGiver>().AbandonQuest();
+        npcUIScript.InteractableNPC.GetComponent<QuestGiver>().AbandonQuest();
     }
 
     public void OnQuestCompleteBtn() {
-        nPCUIScript.InteractableNPC.GetComponent<QuestGiver>().CompleteQuest();
+        npcUIScript.InteractableNPC.GetComponent<QuestGiver>().CompleteQuest();
     }
 
     public void SetRewardsUI(Quest quest) {
-        DisabledRewardsUI();
-
         rewards[0].SetActive(true);
         Image itemImg = rewards[0].GetComponent<Image>();
         itemImg.sprite = quest.rewards.ItemReward.icon;
@@ -44,10 +45,10 @@ public class QuestGiverUIScript : MonoBehaviour {
     }
 
     public void SetDialog(Quest quest) {
-        if(quest.state.Equals(QuestState.Completable))
+        if(quest != null && quest.state.Equals(QuestState.Completable))
             QuestGiverContentText.text = quest.title + "\n\n" + quest.completeDialog;
         else if(quest == null)
-            QuestGiverContentText.text = nPCUIScript.InteractableNPC.GetComponent<QuestGiver>().defaultDialog;
+            QuestGiverContentText.text = npcUIScript.InteractableNPC.GetComponent<QuestGiver>().defaultDialog;
         else
             QuestGiverContentText.text = quest.title + "\n\n" + quest.content;
     }

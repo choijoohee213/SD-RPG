@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class QuestUIScript : Singleton<QuestUIScript> {
     public List<QuestSlot> questSlots;
 
-    public Text titleText, contentText, listCountText;
+    public Text titleText, contentText, listCountText, npcNameText;
+    public Image npcImg;
     public GameObject[] objectives;
     private QuestSlot beforeSlot;
 
@@ -17,10 +18,11 @@ public class QuestUIScript : Singleton<QuestUIScript> {
             GameManager.Instance.objectPool.Generate("QuestListSlot", false);
     }
 
-    public void AddQuest(Quest _quest) {
+    public void AddQuest(Quest _quest, QuestGiver questGiver) {
         QuestSlot slot = GameManager.Instance.objectPool.GetObject("QuestListSlot").GetComponent<QuestSlot>();
 
         slot.quest = _quest;
+        slot.QuestGiverNPC = questGiver;
         slot.Init();
 
         questSlots.Add(slot);
@@ -35,6 +37,8 @@ public class QuestUIScript : Singleton<QuestUIScript> {
 
         if(beforeSlot != null && beforeSlot.Equals(slotToRemove)) {
             beforeSlot = null;
+            npcImg.enabled = false;
+            npcNameText.text = "";
             titleText.text = "";
             contentText.text = "";
         }
@@ -47,7 +51,9 @@ public class QuestUIScript : Singleton<QuestUIScript> {
             beforeSlot.Selected = false;
 
         beforeSlot = slot;
-
+        npcImg.enabled = true;
+        npcImg.sprite = slot.QuestGiverNPC.npcSprite;
+        npcNameText.text = slot.QuestGiverNPC.npcName;
         titleText.text = slot.quest.title;
         contentText.text = slot.quest.content + "\n\n";
 
@@ -61,6 +67,18 @@ public class QuestUIScript : Singleton<QuestUIScript> {
                 obj.UpdateItemCount();
             slot.CheckCompletable();
         }
+    }
+
+    public void UpdateObjectives(Quest _quest) {
+        QuestSlot questSlot = null;
+        foreach(var slot in questSlots) {
+            if(slot.quest.Equals(_quest))
+                questSlot = slot;
+        }
+
+        foreach(var obj in questSlot.quest.collectObjectives) 
+            obj.UpdateItemCount();
+        questSlot.CheckCompletable();
     }
 
     public void SetObjectivesUI() {

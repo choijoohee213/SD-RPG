@@ -18,6 +18,7 @@ public class Inventory : Singleton<Inventory> {
             if(items[i].item.Equals(_item) && !items[i].IsFull) {
                 items[i].NumPerCell++;
                 inventoryUIScript.slots[i].UpdateNumText();
+                QuestUIScript.Instance.UpdateAllObjectives();
                 return true;
             }
         }
@@ -38,6 +39,7 @@ public class Inventory : Singleton<Inventory> {
 
         if(items[slotNum].NumPerCell > 0) {
             inventoryUIScript.slots[slotNum].UpdateNumText();
+            QuestUIScript.Instance.UpdateAllObjectives();
             return false;
         }
         else {
@@ -66,7 +68,6 @@ public class Inventory : Singleton<Inventory> {
                 continue;
             }
 
-            isNewItem = false;
             if(items[i].NumPerCell + count > MaxNumPerCell) {
                 count += items[i].NumPerCell - MaxNumPerCell - 1;
                 if(CheckAddable(count)) {
@@ -76,6 +77,8 @@ public class Inventory : Singleton<Inventory> {
                 }
                 else {
                     inventoryUIScript.NotifyInventoryFull();
+                    if(!isNewItem) items.Remove(items[i]);
+                    inventoryUIScript.UpdateUI();
                     return false;
                 }
             }
