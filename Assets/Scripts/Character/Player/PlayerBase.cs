@@ -45,9 +45,11 @@ public class PlayerBase : CharacterBase {
         healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
-    public void IncreaseExp(float monsterExp) {
-        CurrentExp += monsterExp;
+    public void IncreaseExp(float ExpGained) {
+        CurrentExp += ExpGained;
         expBar.OnExpChanged(CurrentExp, MaxExp);
+
+        NotificationManager.Instance.Generate("경험치를 얻었습니다. (+" + ExpGained + ")");
 
         if(CurrentExp.Equals(MaxExp))
             LevelUp();

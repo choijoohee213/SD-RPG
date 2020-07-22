@@ -40,9 +40,10 @@ public class QuestSlot : MonoBehaviour {
     }
 
     public void CheckCompletable() {
-        if(quest.IsCompleteObjectives) {
+        if(!quest.state.Equals(QuestState.Completable) && !quest.state.Equals(QuestState.Complete) && quest.IsCompleteObjectives) {
             questStateText.text = "완료가능";
             quest.state = QuestState.Completable;
+            NotificationManager.Instance.Generate("퀘스트 완료 가능! NPC를 찾아가세요.");
         }
         else
             questStateText.text = "";

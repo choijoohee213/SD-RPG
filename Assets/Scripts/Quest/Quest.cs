@@ -59,7 +59,14 @@ public class Rewards {
     public bool Reward() {
         bool addable = true;
         if(ItemReward != null) addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
-        if(addable) GameManager.Instance.player.IncreaseExp(EXPReward);
+
+        if(addable) {
+            GameManager.Instance.player.IncreaseExp(EXPReward);
+            if(ItemReward != null) NotificationManager.Instance.Generate_GetItem(ItemReward.name, ItemRewardCount);
+        }
+        else
+            NotificationManager.Instance.Generate_InventoryIsFull();
+        
         return addable;
     }
 }

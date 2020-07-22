@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class ItemPickup : Interactable {
     public Item item;
@@ -15,14 +16,24 @@ public class ItemPickup : Interactable {
         rigid.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(4, 7), Random.Range(-2, 2)), ForceMode.Impulse);
 
         particle = ParticleController.PlayParticles("ItemIdleParticle", transform);
-        Invoke("DisableItem", 60f);
+        StartCoroutine(DisableItemCoroutine());
     }
 
     public override void Interact() {
         bool wasPickedup = Inventory.Instance.Add(item);
         if(wasPickedup) {
+            NotificationManager.Instance.Generate_GetItem(item.name, 1);
             DisableItem();
         }
+        else
+            NotificationManager.Instance.Generate_InventoryIsFull();
+
+    }
+
+
+    IEnumerator DisableItemCoroutine() {
+        yield return new WaitForSeconds(60f);
+        DisableItem();
     }
 
     private void DisableItem() {
@@ -30,4 +41,5 @@ public class ItemPickup : Interactable {
         particle.Disable();
         gameObject.SetActive(false);
     }
+    
 }

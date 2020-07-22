@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour {
     private void OnEnable() {
         HasInteracted = false;
     }
-
+    
     public virtual void Interact() {
     }
 
