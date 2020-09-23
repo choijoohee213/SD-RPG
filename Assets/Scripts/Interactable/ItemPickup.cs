@@ -6,6 +6,8 @@ public class ItemPickup : Interactable {
     private Effect particle;
     private Rigidbody rigid;
 
+    bool showingMessage = false;
+
     protected override void Awake() {
         base.Awake();
         rigid = GetComponent<Rigidbody>();
@@ -25,11 +27,19 @@ public class ItemPickup : Interactable {
             NotificationManager.Instance.Generate_GetItem(item.name, 1);
             DisableItem();
         }
-        else
-            NotificationManager.Instance.Generate_InventoryIsFull();
+        else {
+            if(!showingMessage) {
+                showingMessage = true;
+                NotificationManager.Instance.Generate_InventoryIsFull();
+                Invoke("SetNotificationInterval", 2f);
+            }
+        }
 
     }
 
+    void SetNotificationInterval() {
+        showingMessage = false;
+    }
 
     IEnumerator DisableItemCoroutine() {
         yield return new WaitForSeconds(60f);

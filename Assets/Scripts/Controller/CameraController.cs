@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour {
     private Vector3 FirstPoint;
@@ -16,6 +17,8 @@ public class CameraController : MonoBehaviour {
 
     private bool isMouseDown = false;
 
+    Renderer ObstacleRenderer;
+
     private void Start() {
         xAngle = 0;
         yAngle = 12;
@@ -23,6 +26,10 @@ public class CameraController : MonoBehaviour {
     }
 
     private void Update() {
+        CameraRotate();
+    }
+
+    void CameraRotate() {
         if(isCanRotate != false) {
 #if(UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
             if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -84,6 +91,31 @@ public class CameraController : MonoBehaviour {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(yAngle, xAngle, 0.0f), Time.deltaTime * 3f);
             }
 #endif
+        }
+    }
+
+    void MakeTranslucent() {
+        float Distance = Vector3.Distance(transform.position, Player.position);
+        Vector3 Direction = (Player.position - transform.position).normalized;
+
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Direction, out hit, Distance)) {
+
+            ObstacleRenderer = hit.collider.gameObject.GetComponentInChildren<Renderer>();
+
+            if(ObstacleRenderer != null && ObstacleRenderer.gameObject.layer != 9) {
+                
+                /*
+                // Metrial의 Aplha를 바꾼다.
+                Material Mat = ObstacleRenderer.material;
+                Color matColor = Mat.color;
+                matColor.a = 0.5f;
+                Mat.color = matColor;
+                */
+
+
+                
+            }
         }
     }
 }

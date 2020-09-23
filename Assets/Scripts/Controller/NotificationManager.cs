@@ -11,6 +11,9 @@ public class NotificationManager : Singleton<NotificationManager>
 {
     int count = 0;
     int Count { get { return count; } set { if(value >= NotificationTexts.Length)  count = 0;  else count++; } }
+
+    public bool ShowingMessage = false;
+
     public Text[] NotificationTexts;
 
     //나중에 지워!!!!
@@ -21,14 +24,14 @@ public class NotificationManager : Singleton<NotificationManager>
     }
 
     //알림 텍스트 생성 
-    public void Generate (string phrases) {
+    private void Generate (string message) {
         Text textObj = NotificationTexts[count];
        
         if(textObj.gameObject.activeSelf) textObj.gameObject.SetActive(false);
         textObj.gameObject.SetActive(true);
         textObj.transform.SetAsLastSibling();  //최신에 생성된 알림이 맨 아래에 위치하기 위함.
         
-        textObj.text = phrases;
+        textObj.text = message;
         Count++;
     }
 
@@ -39,6 +42,16 @@ public class NotificationManager : Singleton<NotificationManager>
 
     public void Generate_InventoryIsFull() {
         string str = "인벤토리가 꽉 찼습니다. 인벤토리를 비워주세요.";
+        Generate(str);
+    }
+
+    public void Generate_GetExp(float Exp) {
+        string str = "경험치를 얻었습니다. (+" + Exp.ToString() + ")";
+        Generate(str);
+    }
+
+    public void Generate_CompletableQuest() {
+        string str = "퀘스트 완료 가능! NPC를 찾아가세요.";
         Generate(str);
     }
 

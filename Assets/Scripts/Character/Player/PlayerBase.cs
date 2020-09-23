@@ -9,6 +9,7 @@ public class PlayerBase : CharacterBase {
 
     private int resurrectCountDown = 5;
 
+    public Animator Anim_levelup;
     public bool IsJumping { get; set; }
     public bool AttackBtnPressed { get; set; }
     private readonly bool attackEvent;
@@ -49,7 +50,7 @@ public class PlayerBase : CharacterBase {
         CurrentExp += ExpGained;
         expBar.OnExpChanged(CurrentExp, MaxExp);
 
-        NotificationManager.Instance.Generate("경험치를 얻었습니다. (+" + ExpGained + ")");
+        NotificationManager.Instance.Generate_GetExp(ExpGained);
 
         if(CurrentExp.Equals(MaxExp))
             LevelUp();
@@ -70,6 +71,7 @@ public class PlayerBase : CharacterBase {
         expBar.OnExpChanged(CurrentExp, MaxExp);
         GameManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
 
+        Anim_levelup.SetTrigger("levelup");
         ParticleController.PlayParticles("PlayerLevelUpParticle", transform);
     }
 

@@ -38,7 +38,7 @@ public abstract class Objective {
     public int amount;
     public int currentAmount { get; set; }
 
-    public bool IsComplete { get { return currentAmount >= amount; } }
+    public bool IsComplete { get {  return currentAmount >= amount ; } }
 }
 
 [Serializable]
