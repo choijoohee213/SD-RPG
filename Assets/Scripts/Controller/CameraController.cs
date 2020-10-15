@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using Cinemachine;
 
 public class CameraController : MonoBehaviour {
     private Vector3 FirstPoint;

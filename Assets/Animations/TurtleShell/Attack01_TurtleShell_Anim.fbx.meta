@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 18d0edd1f2ba4444d9ba9bdf01f251d4
 ModelImporter:
-  serializedVersion: 19300
+  serializedVersion: 19301
   internalIDToNameTable:
   - first:
       1: 100000
@@ -260,7 +260,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.36028805
+      - time: 0.41791046
         functionName: AttackAnimEvent
         data: 
         objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
@@ -268,7 +268,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4010987
+      - time: 0.4408997
         functionName: AttackEffect
         data: MonsterAttackParticle
         objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
@@ -356,6 +356,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

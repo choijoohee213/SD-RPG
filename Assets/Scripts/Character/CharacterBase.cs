@@ -40,6 +40,7 @@ public abstract class CharacterBase : MonoBehaviour {
 
     public bool AttackToTarget(string layerName) {
         bool isCollider = CheckRaycastHit(layerName);
+        print(AttackStart);
         if(isCollider && !raycastHit.collider.GetComponent<CharacterBase>().IsDie && AttackStart) {
             AttackStart = false;
             raycastHit.collider.GetComponent<CharacterBase>().TakeDamage(Damage);

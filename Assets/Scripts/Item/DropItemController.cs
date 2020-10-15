@@ -35,7 +35,7 @@ public class DropItemController : MonoBehaviour {
             }
         }
 
-        ItemPickup itemPickup = GameManager.Instance.objectPool.GetObject(itemProbabilities[index].ItemName).GetComponent<ItemPickup>();
+        ItemPickup itemPickup = GameManager.Instance.objectPool.GetObject(itemProbabilities[index].itemName).GetComponent<ItemPickup>();
         itemPickup.Init(transform);
     }
 }

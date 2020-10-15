@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4876801818285004340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2709971967746793909}
+  m_Layer: 10
+  m_Name: AttackEffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2709971967746793909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4876801818285004340}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.1, y: 0.74, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5368160292161605880}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5368160292161309872
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605840}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: UppderEyeLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605842}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: UpperTeethCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearRightLeg03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605846}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearRightLeg01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605850}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearRightLeg02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearLeftLeg02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605854}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearLeftLeg03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605856}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LowerTeethCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RearLeftLeg01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605860}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LockCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LowerEyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605864}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontRightLeg03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605866}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605868}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontRightLeg01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontRightLeg02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605872}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontLeftLeg02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605874}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontLeftLeg03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605876}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EyeCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605878}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontLeftLeg01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,9 +653,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605880}
+  - component: {fileID: 9046623713465159753}
+  - component: {fileID: 5366760933603867650}
+  - component: {fileID: 2727336734007018307}
+  - component: {fileID: 395156025922087669}
+  - component: {fileID: 3100338832096358122}
+  - component: {fileID: -5965052578868111328}
   - component: {fileID: 5368160292153900828}
-  m_Layer: 0
-  m_Name: ChestMonsterMesh
+  m_Layer: 10
+  m_Name: ChestMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,13 +676,104 @@ Transform:
   m_GameObject: {fileID: 5368160292161309912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 5368160292161605886}
   - {fileID: 5368160292161605846}
+  - {fileID: 2709971967746793909}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9046623713465159753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086d4f71106408a44bf806fb20723618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackEffectPos: {fileID: 2709971967746793909}
+  MaxHealth: 30
+  CurrentHealth: 0
+  MaxExp: 7
+  MinimalDamage: 2
+  limitRange_Min: {x: 7, y: 0, z: 40}
+  limitRange_Max: {x: 40, y: 0, z: 70}
+--- !u!114 &5366760933603867650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6ca78b05c16d44e94d4fdcbddb3a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+--- !u!114 &2727336734007018307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723cbcd4834e8874f918d0481e10eb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarObj: {fileID: 0}
+--- !u!114 &395156025922087669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a944aa405ac2749b15dc7b23f5374b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropProbability: 4
+  itemProbabilities:
+  - itemName: ChestItem
+    DropProbability: 9
+--- !u!54 &3100338832096358122
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  serializedVersion: 2
+  m_Mass: 5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &-5965052578868111328
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368160292161309912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2406577, z: 1}
+  m_Center: {x: 0, y: 0.7104298, z: 0}
 --- !u!95 &5368160292153900828
 Animator:
   serializedVersion: 3
@@ -675,7 +802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605882}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EyeBallCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368160292161605884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5368160292161605886}
   - component: {fileID: 5368160292158128604}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ChestMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,6 +905,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -789,6 +917,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

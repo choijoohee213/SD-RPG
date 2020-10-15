@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d57bb9f35b232f546851ae283a6a4310
 ModelImporter:
-  serializedVersion: 19300
+  serializedVersion: 19301
   internalIDToNameTable:
   - first:
       1: 100000
@@ -260,7 +260,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3323782
+      - time: 0.3283582
         functionName: DieAnimEvent
         data: 
         objectReferenceParameter: {fileID: 1837317425425208, guid: 3aec22b5d3f3c2947bb81040b56e5f96,
@@ -348,6 +348,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

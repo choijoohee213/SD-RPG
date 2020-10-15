@@ -909,9 +909,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropProbability: 4
   itemProbabilities:
-  - ItemName: HealthPotion30Item
+  - itemName: HealthPotion30Item
     DropProbability: 2
-  - ItemName: TurtleShellItem
+  - itemName: TurtleShellItem
     DropProbability: 10
 --- !u!54 &2105169270
 Rigidbody:
