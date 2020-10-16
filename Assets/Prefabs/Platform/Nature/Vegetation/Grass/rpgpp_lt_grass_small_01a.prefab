@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4607489187838822}
   - component: {fileID: 33112229483180414}
   - component: {fileID: 23875638514360068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_grass_small_01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}

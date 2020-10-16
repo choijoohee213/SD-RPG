@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23815217906729240}
   - component: {fileID: -8499093627256554242}
   - component: {fileID: 3129853281872423224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_barrel_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,7 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &-8499093627256554242
 Rigidbody:
   m_ObjectHideFlags: 0

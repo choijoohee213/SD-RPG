@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4063210846265680}
   - component: {fileID: 33095104521027750}
   - component: {fileID: 23979631273498726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_flower_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4612329036020226}
   - component: {fileID: 33231964671719498}
   - component: {fileID: 23335710059859792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_banner_01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4565743505842534}
   - component: {fileID: 33672154753500630}
   - component: {fileID: 23431043500023986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_hanger_clothes_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

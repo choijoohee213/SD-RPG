@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23678427644670724}
   - component: {fileID: -4332243214703009964}
   - component: {fileID: -9002739935615086261}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_chair_01b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,7 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &-4332243214703009964
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,5 +108,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.581497, y: 1.1444329, z: 0.6306896}
-  m_Center: {x: -0.025491983, y: 0.57221526, z: -0.27806813}
+  m_Size: {x: 0.4704283, y: 1.1444329, z: 0.45687246}
+  m_Center: {x: -0.019739717, y: 0.57221526, z: -0.28273445}

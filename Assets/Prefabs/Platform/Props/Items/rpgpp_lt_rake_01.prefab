@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4423895146491306}
   - component: {fileID: 33671332356214816}
   - component: {fileID: 23425660190277278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_rake_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

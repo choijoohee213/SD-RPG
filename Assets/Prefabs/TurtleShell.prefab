@@ -867,8 +867,8 @@ MonoBehaviour:
   CurrentHealth: 0
   MaxExp: 5
   MinimalDamage: 1
-  limitRange_Min: {x: 95, y: 0, z: 60}
-  limitRange_Max: {x: 130, y: 0, z: 80}
+  limitRange_Min: {x: 68, y: 0, z: 77}
+  limitRange_Max: {x: 98, y: 0, z: 99}
 --- !u!114 &2105169267
 MonoBehaviour:
   m_ObjectHideFlags: 0

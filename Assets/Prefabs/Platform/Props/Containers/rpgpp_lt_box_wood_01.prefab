@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23632355988759734}
   - component: {fileID: 6302009762922729846}
   - component: {fileID: -2771301851009210222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_box_wood_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,7 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &6302009762922729846
 Rigidbody:
   m_ObjectHideFlags: 0

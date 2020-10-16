@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4943165158631084}
   - component: {fileID: 33307047255004924}
   - component: {fileID: 23766729209443882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_broom_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

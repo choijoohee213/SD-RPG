@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4891787282750124}
   - component: {fileID: 33357585134158524}
   - component: {fileID: 23725087489393840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_ladder_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

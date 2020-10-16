@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4568939754381720}
   - component: {fileID: 33042164994484580}
   - component: {fileID: 23864409030199178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_shield_wall_01b
   m_TagString: Untagged
   m_Icon: {fileID: 0}

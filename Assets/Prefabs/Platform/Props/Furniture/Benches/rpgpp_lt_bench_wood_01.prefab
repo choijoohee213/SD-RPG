@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23659940725593842}
   - component: {fileID: 1486337626242860954}
   - component: {fileID: -4822155977377074471}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_bench_wood_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,7 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &1486337626242860954
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4593566136991672}
   - component: {fileID: 33283472172813410}
   - component: {fileID: 23220411763528614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_hanger_wood_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

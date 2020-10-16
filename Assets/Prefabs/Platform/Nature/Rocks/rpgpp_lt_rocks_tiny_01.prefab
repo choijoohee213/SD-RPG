@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4383882971595202}
   - component: {fileID: 33843464718874480}
   - component: {fileID: 23060349023441154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rpgpp_lt_rocks_tiny_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
