@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67901067f0a6394b9d3050950c65749, type: 3}
+  m_Name: SavePrincess_02.KillBossAndSavePrincess
+  m_EditorClassIdentifier: 
+  state: 1
+  title: "<\uB108\uAC00 \uC5BC\uB9C8\uB098 \uAC15\uD55C\uC9C0 \uC99D\uBA85\uD574\uC918!>"
+  content: "\uBCF4\uC2A4\uD55C\uD14C \uAC00\uB294 \uAE38\uC744 \uC5F4\uC5B4\uB450\uC5C8\uC73C\uB2C8\uAE4C
+    \uAC00\uC11C \uBCF4\uC2A4\uB97C \uCC98\uCE58\uD574\uC918..! \uBCF4\uC2A4\uB294
+    \uAC15\uD558\uB2C8\uAE4C \uC870\uC2EC\uD574\uC57C\uD574. \uBCF4\uC2A4\uB294 \uD328\uD134\uC774
+    \uC788\uC73C\uB2C8\uAE4C \uC798 \uD30C\uC545\uD558\uACE0 \uC57D\uD55C \uBAA8\uC2B5\uC744
+    \uBCF4\uC77C \uB54C \uACF5\uACA9\uD574!!! \n\n\n\uBCF4\uC2A4\uB97C \uCC98\uCE58\uD558\uBA74
+    <color=red>\uC5F4\uC1E0</color>\uB97C \uC5BB\uC744 \uC218 \uC788\uC744\uAC70\uC57C.
+    \uADF8 \uC5F4\uC1E0\uB85C \uAC07\uD600\uC788\uB294 <color=red>\uACF5\uC8FC\uB2D8</color>\uC744
+    \uAD6C\uD574\uC918!! \uBAB8 \uC870\uC2EC\uD574."
+  completeDialog: "\uB300\uB2E8\uD55C\uAC78?? \uB108 \uC815\uB9D0 \uAC15\uD558\uAD6C\uB098..!!
+    \uBCF4\uC2A4\uB97C \uC7A1\uC73C\uB7EC \uAC08 \uC218 \uC788\uACA0\uC5B4! \uC5EC\uAE30
+    \uBCF4\uC0C1\uC774\uC57C!\n"
+  collectObjectives:
+  - item: {fileID: 11400000, guid: 7c2d706873c3a8348be577bcfd66f6ca, type: 2}
+    amount: 1
+  rewards:
+    ItemReward: {fileID: 11400000, guid: 53ba314436087af4fb7af8fcacbbb057, type: 2}
+    ItemRewardCount: 8
+    EXPReward: 50

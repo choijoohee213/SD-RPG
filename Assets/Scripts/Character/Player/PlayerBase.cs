@@ -5,7 +5,7 @@ public class PlayerBase : CharacterBase {
 
     private ExpBar expBar;
     public Vector3 MoveDir { get; set; }
-    public Vector3 StartPos { get { return new Vector3(74, 21.79191f, 44); } }
+    public Vector3 StartPos { get { return new Vector3(78, 21.79191f, 30); } }
 
     private int resurrectCountDown = 5;
 
@@ -47,13 +47,20 @@ public class PlayerBase : CharacterBase {
     }
 
     public void IncreaseExp(float ExpGained) {
-        CurrentExp += ExpGained;
+        float resultExp = CurrentExp + ExpGained;
+        if(resultExp >= MaxExp) {
+            while(resultExp >= MaxExp) {
+                resultExp -= MaxExp;
+                LevelUp();
+            }
+            CurrentExp += resultExp;
+        }
+        else {
+            CurrentExp = resultExp;
+        }
         expBar.OnExpChanged(CurrentExp, MaxExp);
 
         NotificationManager.Instance.Generate_GetExp(ExpGained);
-
-        if(CurrentExp.Equals(MaxExp))
-            LevelUp();
     }
 
     private void LevelUp() {
@@ -62,7 +69,7 @@ public class PlayerBase : CharacterBase {
         MaxHealth += 50;
         CurrentHealth = MaxHealth;
 
-        MaxExp += 100;
+        MaxExp += 20;
         CurrentExp = 0;
 
         MinimalDamage += 1;
@@ -106,7 +113,7 @@ public class PlayerBase : CharacterBase {
 
     private void OnCollisionEnter(Collision collision) {
         //플레이어가 플랫폼과 충돌할 때
-        if(collision.gameObject.layer.Equals(8)) {
+        if(collision.gameObject.layer.Equals(13)) {
             IsJumping = false;
         }
     }

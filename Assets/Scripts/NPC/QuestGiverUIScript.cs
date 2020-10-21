@@ -18,10 +18,6 @@ public class QuestGiverUIScript : MonoBehaviour {
         npcUIScript.InteractableNPC.GetComponent<QuestGiver>().AcceptQuest();
     }
 
-    public void OnQuestAbandonBtn() {
-        npcUIScript.InteractableNPC.GetComponent<QuestGiver>().AbandonQuest();
-    }
-
     public void OnQuestCompleteBtn() {
         npcUIScript.InteractableNPC.GetComponent<QuestGiver>().CompleteQuest();
     }

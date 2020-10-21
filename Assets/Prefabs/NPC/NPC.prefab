@@ -781,12 +781,9 @@ MonoBehaviour:
   npcSprite: {fileID: 21300000, guid: 5ed3eaaefc762c74d8e9585b82d7d28a, type: 3}
   speechBubble: {fileID: 653002994}
   QuestList:
-  - {fileID: 11400000, guid: 520dc6493c4cf304d87edffa07af558a, type: 2}
-  - {fileID: 11400000, guid: dbecfa228d642124483f3d500b8d190d, type: 2}
-  - {fileID: 11400000, guid: 07572fe3e2d24b241b620baa02b44239, type: 2}
-  - {fileID: 11400000, guid: 79adacac9b936ac4b98f6fab4266f197, type: 2}
-  defaultDialog: "\uD3C9\uD654\uB85C\uC6B4 \uB9C8\uC744\uC774\uAD70.... \uD3C9\uD654\uB85C\uC6B4
-    \uB9C8\uC744\uC774\uC57C..."
+  - {fileID: 11400000, guid: 12d51661508ce2a45ac005cf08999f89, type: 2}
+  - {fileID: 11400000, guid: 29ec55a4064bc8a4eb5fc99e6eba6fa9, type: 2}
+  defaultDialog: "\uD5EC\uB85C\uC6B0!!! \uBCC4\uC77C \uC5C6\uC9C0?"
 --- !u!1 &7033223611828059038
 GameObject:
   m_ObjectHideFlags: 0

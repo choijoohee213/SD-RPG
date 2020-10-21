@@ -70,13 +70,10 @@ public class QuestGiver : NPC {
         QuestUIScript.Instance.AddQuest(QuestList[QuestIndex], this);
         QuestUIScript.Instance.UpdateObjectives(QuestList[QuestIndex]);
         SetSpeechBubble();
-    }
 
-    public void AbandonQuest() {
-        QuestList[QuestIndex].state = QuestState.Complete;
-        QuestUIScript.Instance.RemoveQuest(QuestList[QuestIndex]);
-        QuestIndex++;
-        SetSpeechBubble();
+        //보스처치 퀘스트인지 확인 
+        if(QuestList[QuestIndex].Equals(BossQuest.Instance.KillBossQuest))
+            BossQuest.Instance.OpenBridge();
     }
 
     public void CompleteQuest() {
@@ -101,7 +98,6 @@ public class QuestGiver : NPC {
             questState = QuestList[QuestIndex].state;
 
         questGiverUIScript.AcceptBtn.SetActive(!noQuest && questState.Equals(QuestState.Startable));
-        questGiverUIScript.AbandonmentBtn.SetActive(!noQuest && questState.Equals(QuestState.Progressing));
         questGiverUIScript.CompleteBtn.SetActive(!noQuest && questState.Equals(QuestState.Completable));
     }
 
