@@ -27,11 +27,6 @@ public class CharacterFSM : MonoBehaviour {
         StartCoroutine(FSMMain());
     }
 
-    private void Update() {
-        //if(characterBase.IsDie)
-        //    SetState(CharacterState.Die);
-    }
-
     private IEnumerator FSMMain() {
         //상태가 바뀌면 해당 상태 코루틴 메소드를 실행
         while(true) {

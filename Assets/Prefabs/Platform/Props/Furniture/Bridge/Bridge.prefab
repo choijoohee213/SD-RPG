@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 198197248019585898}
   - component: {fileID: 9194984741586461020}
   - component: {fileID: 3217730178384797093}
-  m_Layer: 0
+  - component: {fileID: 7548577767210753959}
+  - component: {fileID: -6642103761788645952}
+  m_Layer: 13
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,3 +82,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &7548577767210753959
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790758202547382649}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-6642103761788645952
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790758202547382649}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.034003, y: 1.05, z: 10}
+  m_Center: {x: 4.9999986, y: 0.525, z: 5}

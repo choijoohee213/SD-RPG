@@ -15,9 +15,8 @@ public abstract class CharacterBase : MonoBehaviour {
 
     [Header("Character Inform")]
     public float MaxHealth;
-
     public float CurrentHealth;
-
+   
     public float MaxExp;
     public float CurrentExp { get; set; }
 
