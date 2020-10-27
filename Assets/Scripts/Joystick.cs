@@ -120,6 +120,12 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = Vector2.zero;
     }
 
+    public void PointerUp() {
+        IsPointerUp = true;
+        input = Vector2.zero;
+        handle.anchoredPosition = Vector2.zero;
+    }
+
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition) {
         Vector2 localPoint = Vector2.zero;
         if(RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out localPoint)) {

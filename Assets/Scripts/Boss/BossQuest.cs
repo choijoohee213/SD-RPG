@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class BossQuest : Singleton<BossQuest> {
     public Quest KillBossQuest;
+    public EventCamera eventCamera;
 
-    public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed;
-    public GameObject BossCastleUI, ExitPanel;
+    public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed, BossCastleUI, ExitPanel;
+    public GameObject[] ExclamationMarks;
 
     public bool QuestProgressing { get; set; }
 
-    private Vector3 BridgeEntrancePos = new Vector3(4.3f, 20f, -7.8f);
+    private Vector3 BridgeEntrancePos = new Vector3(-9.6f, 22f, 86f);
 
     //막혀있던 보스 길을 여는 함수  
     public void OpenBridge() {
@@ -24,6 +25,11 @@ public class BossQuest : Singleton<BossQuest> {
         ExitPanel.SetActive(false);
         EntranceOpened.SetActive(false);
         EntranceClosed.SetActive(true);
+
+        GameManager.Instance.objectPool.Canvas.gameObject.SetActive(false);
+        GameManager.Instance.joystick.PointerUp();
+
+        eventCamera.CameraMove();
     }
 
     private void ExitCastle() {
@@ -46,4 +52,5 @@ public class BossQuest : Singleton<BossQuest> {
 
         Time.timeScale = 1f;
     }
+
 }

@@ -5,7 +5,7 @@ public class PlayerBase : CharacterBase {
 
     private ExpBar expBar;
     public Vector3 MoveDir { get; set; }
-    public Vector3 StartPos { get { return new Vector3(78, 21.79191f, 30); } }
+    public Vector3 StartPos { get { return new Vector3(78f, 21.8f, 30f); } }
 
     private int resurrectCountDown = 5;
 
@@ -25,7 +25,7 @@ public class PlayerBase : CharacterBase {
 
     protected override void OnEnable() {
         base.OnEnable();
-        transform.position = StartPos;
+        //transform.position = StartPos;
         transform.rotation = Quaternion.identity;
     }
 
