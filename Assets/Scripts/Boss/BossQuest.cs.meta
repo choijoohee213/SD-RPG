@@ -3,7 +3,16 @@ guid: 0fae86162bf1fca4685416d31cde5e55
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - KillBossQuest: {fileID: 11400000, guid: 67ad8920464c4fa4694832cceb0b3ce3, type: 2}
+  - eventCamera: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - Fence: {instanceID: 0}
+  - FenceBroken: {instanceID: 0}
+  - EntranceOpened: {instanceID: 0}
+  - EntranceClosed: {instanceID: 0}
+  - BossCastleUI: {instanceID: 0}
+  - ExitPanel: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

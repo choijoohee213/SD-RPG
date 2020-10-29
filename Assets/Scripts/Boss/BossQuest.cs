@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BossQuest : Singleton<BossQuest> {
@@ -9,13 +10,14 @@ public class BossQuest : Singleton<BossQuest> {
     public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed, BossCastleUI, ExitPanel;
     public GameObject[] ExclamationMarks;
 
-    public bool QuestProgressing { get; set; }
+    public bool OnQuest { get; set; }
+    public bool OnAnimation { get; set; }
 
     private Vector3 BridgeEntrancePos = new Vector3(-9.6f, 22f, 86f);
 
     //막혀있던 보스 길을 여는 함수  
     public void OpenBridge() {
-        QuestProgressing = true;
+        OnQuest = true;
         Fence.SetActive(false);
         FenceBroken.SetActive(true);
     } 
@@ -26,10 +28,11 @@ public class BossQuest : Singleton<BossQuest> {
         EntranceOpened.SetActive(false);
         EntranceClosed.SetActive(true);
 
+        OnAnimation = true;
         GameManager.Instance.objectPool.Canvas.gameObject.SetActive(false);
         GameManager.Instance.joystick.PointerUp();
 
-        eventCamera.CameraMove();
+        eventCamera.StartAnimation();
     }
 
     private void ExitCastle() {

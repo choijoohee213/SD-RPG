@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void Update() {
-        CameraRotate();
+        if(!BossQuest.Instance.OnAnimation) CameraRotate();
     }
 
     void CameraRotate() {
