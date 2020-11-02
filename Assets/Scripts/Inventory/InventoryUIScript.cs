@@ -40,7 +40,7 @@ public class InventoryUIScript : MonoBehaviour {
         ItemImg.sprite = item.icon;
         UseItemBtn.SetActive(item.isConsumable);
 
-        GameManager.Instance.ItemDetailsUI.SetActive(true);
+        UIManager.Instance.ItemDetailsUI.SetActive(true);
     }
 
     public void OnUseBtn() {
@@ -71,7 +71,7 @@ public class InventoryUIScript : MonoBehaviour {
 
     private void DeleteFromInventory() {
         bool deleteFromCell = inventory.Remove(discardNum);
-        GameManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
+        UIManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
     }
 
     public void NotifyInventoryFull() {

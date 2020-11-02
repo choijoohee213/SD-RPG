@@ -6,13 +6,18 @@ using UnityEngine.UI;
 public class EventCamera : MonoBehaviour
 {
     public GameObject[] ExclamationMarks;
-    public GameObject DialogCanvas;
-    public Text DialogText;
+    private Text DialogText;
+    private GameObject BossDialogUI;
 
     private Vector3 BossPos = new Vector3(-30.9f, 28.8f, 235.2f);
     private Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
 
     private bool NextScene = false;
+
+    private void Awake() {
+        DialogText = UIManager.Instance.dialogText;
+        BossDialogUI = UIManager.Instance.BossDialogUI;
+    }
 
     public void StartAnimation() {
         //이벤트카메라의 시작위치를 메인카메라 위치로 지정
@@ -46,12 +51,12 @@ public class EventCamera : MonoBehaviour
         ExclamationMarks[2].SetActive(false);
 
         //다이얼로그창 활성화를 위해 해당 Canvas를 활성화
-        DialogCanvas.SetActive(true);
+        BossDialogUI.SetActive(true);
 
         //사용자가 다이얼로그창을 누르기전까지 대기
         yield return new WaitUntil(() => NextScene);
-        
-        DialogCanvas.SetActive(false);
+
+        BossDialogUI.SetActive(false);
         StartCoroutine(MoveToPrincess());
     }
 
@@ -62,11 +67,11 @@ public class EventCamera : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, PrincessPos, 15f * Time.deltaTime);
             yield return null;
         }
-        DialogCanvas.SetActive(true);
+        BossDialogUI.SetActive(true);
         DialogText.text = "구해주세요..!!!흑흑..";
 
         yield return new WaitUntil(() => NextScene);
-        DialogCanvas.SetActive(false);
+        BossDialogUI.SetActive(false);
         StartCoroutine(MoveToPlayer());
     }
 
@@ -76,8 +81,10 @@ public class EventCamera : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, playerPos, 30f * Time.deltaTime);
             yield return null;
         }
-        GameManager.Instance.objectPool.Canvas.gameObject.SetActive(true);
-        DialogCanvas.SetActive(false);
+
+        UIManager.Instance.OnOffCanvas(true, true, true);
+        UIManager.Instance.BossUI.SetActive(true);
+        BossDialogUI.SetActive(false);
 
         //메인카메라로 시점을 바꾸기 위해 메인카메라 활성화
         GameManager.Instance.Cam.gameObject.SetActive(true);

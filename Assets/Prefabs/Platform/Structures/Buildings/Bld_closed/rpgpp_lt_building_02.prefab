@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23068381242743466}
   - component: {fileID: -7813406666130815393}
   - component: {fileID: -1000908889401557958}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: rpgpp_lt_building_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

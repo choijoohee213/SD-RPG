@@ -6,7 +6,13 @@ public class ObjectPool : MonoBehaviour {
     public GameObject[] objectPrefabs;
     private List<GameObject> pooledObjs = new List<GameObject>();
 
-    public Transform Canvas, HPCanvas, Particles, Items, QuestArea, DescriptionArea;
+    private Transform DynamicCanvas, HPCanvas;
+    public Transform Particles, Items, QuestArea, DescriptionArea;
+
+    private void Awake() {
+        DynamicCanvas = UIManager.Instance.DynamicCanvas.transform;
+        HPCanvas = UIManager.Instance.HPCanvas.transform;
+    }
 
     public GameObject Generate(string type, bool isActive) {
         for(int i = 0; i < objectPrefabs.Length; i++) {
@@ -19,7 +25,7 @@ public class ObjectPool : MonoBehaviour {
                 else if(objectPrefabs[i].name.Contains("Particle"))
                     newObject.transform.SetParent(Particles);
                 else if(objectPrefabs[i].name.Contains("DamageText"))
-                    newObject.transform.SetParent(Canvas);
+                    newObject.transform.SetParent(DynamicCanvas);
                 else if(objectPrefabs[i].name.Contains("Item"))
                     newObject.transform.SetParent(Items);
                 else if(objectPrefabs[i].name.Contains("QuestListSlot"))

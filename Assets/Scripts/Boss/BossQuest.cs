@@ -7,8 +7,7 @@ public class BossQuest : Singleton<BossQuest> {
     public Quest KillBossQuest;
     public EventCamera eventCamera;
 
-    public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed, BossCastleUI, ExitPanel;
-    public GameObject[] ExclamationMarks;
+    public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed;
 
     public bool OnQuest { get; set; }
     public bool OnAnimation { get; set; }
@@ -23,27 +22,25 @@ public class BossQuest : Singleton<BossQuest> {
     } 
  
     public void EnterCastle() {
-        BossCastleUI.SetActive(true);
-        ExitPanel.SetActive(false);
+        UIManager.Instance.BossExitPanel.SetActive(false);
         EntranceOpened.SetActive(false);
         EntranceClosed.SetActive(true);
 
         OnAnimation = true;
-        GameManager.Instance.objectPool.Canvas.gameObject.SetActive(false);
-        GameManager.Instance.joystick.PointerUp();
+        UIManager.Instance.OnOffCanvas(false, false, true);
+        UIManager.Instance.joystick.PointerUp();
 
         eventCamera.StartAnimation();
     }
 
     private void ExitCastle() {
-        BossCastleUI.SetActive(false);
-        ExitPanel.SetActive(false);
+        UIManager.Instance.OnOffCanvas(true, true, false);
         EntranceOpened.SetActive(true);
         EntranceClosed.SetActive(false);
     }
 
     public void OnExitBtn() {
-        ExitPanel.SetActive(true);
+        UIManager.Instance.BossExitPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 

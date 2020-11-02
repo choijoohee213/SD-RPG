@@ -19,8 +19,8 @@ public class PlayerBase : CharacterBase {
     protected override void Awake() {
         base.Awake();
         expBar = GetComponent<ExpBar>();
-        joystick = GameManager.Instance.joystick;
-        GameManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
+        joystick = UIManager.Instance.joystick;
+        UIManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
     }
 
     protected override void OnEnable() {
@@ -76,7 +76,7 @@ public class PlayerBase : CharacterBase {
 
         healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
         expBar.OnExpChanged(CurrentExp, MaxExp);
-        GameManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
+        UIManager.Instance.playerLevelText.text = "Lv. " + Level.ToString();
 
         Anim_levelup.SetTrigger("levelup");
         ParticleController.PlayParticles("PlayerLevelUpParticle", transform);
@@ -95,17 +95,17 @@ public class PlayerBase : CharacterBase {
 
     protected override void DieAnimEvent() {
         base.DieAnimEvent();
-        GameManager.Instance.resurrectUI.SetActive(true);
+        UIManager.Instance.ResurrectUI.SetActive(true);
         ResurrectTimer();
     }
 
     private void ResurrectTimer() {
-        GameManager.Instance.countDownText.text = resurrectCountDown.ToString();
+        UIManager.Instance.countDownText.text = resurrectCountDown.ToString();
         if(resurrectCountDown-- != 0)
             Invoke("ResurrectTimer", 1f);
         else {
             resurrectCountDown = 5;
-            GameManager.Instance.resurrectUI.SetActive(false);
+            UIManager.Instance.ResurrectUI.SetActive(false);
             gameObject.SetActive(true);
             ParticleController.PlayParticles("PlayerResurrectParticle", transform);
         }
