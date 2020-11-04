@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotNum: 0
+  slotBtn: {fileID: 3629736518855343209}
   icon: {fileID: 5969713041410545142}
   num: {fileID: 4299569198620706110}
 --- !u!1 &6968491804714608784

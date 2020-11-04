@@ -14,7 +14,7 @@ public class UIManager : Singleton<UIManager> {
     public Joystick joystick;
 
     public Text playerLevelText, countDownText, dialogText;
-    public GameObject ResurrectUI, InventoryUI, ItemDetailsUI, QuestUI, BossUI, BossExitPanel, BossDialogUI;
+    public GameObject ResurrectUI, InventoryUI, ItemDetailsUI, QuestUI, BossUI, BossExitPanel, BossDialogUI, AnimationScreen;
 
 
     public void UITransition(GameObject newMenuObj) {

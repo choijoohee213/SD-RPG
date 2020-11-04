@@ -6,7 +6,13 @@ public enum CharacterState {
     Walk = 1,
     Attack = 2,
     Trace = 3,  //몬스터가 플레이어를 쫓아가는 상태
-    Die = 4
+    Die = 4,
+    
+    //보스
+    Attack_Jump = 5,
+    Attack_Fire = 6,
+    Dizzy = 7,
+    Victory = 8,
 }
 
 public class CharacterFSM : MonoBehaviour {

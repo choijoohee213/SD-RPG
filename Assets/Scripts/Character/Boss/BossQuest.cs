@@ -7,16 +7,20 @@ public class BossQuest : Singleton<BossQuest> {
     public Quest KillBossQuest;
     public EventCamera eventCamera;
 
-    public GameObject Player, Fence, FenceBroken, EntranceOpened, EntranceClosed;
+    public GameObject Player, BossObj, Fence, FenceBroken, EntranceOpened, EntranceClosed;
 
     public bool OnQuest { get; set; }
     public bool OnAnimation { get; set; }
+    public bool OnFighting { get; set; }
 
     private Vector3 BridgeEntrancePos = new Vector3(-9.6f, 22f, 86f);
 
-    //막혀있던 보스 길을 여는 함수  
-    public void OpenBridge() {
+      
+    public void StartQuest() {
         OnQuest = true;
+        BossObj.SetActive(true);
+
+        //막혀있던 보스 길 열기
         Fence.SetActive(false);
         FenceBroken.SetActive(true);
     } 
@@ -27,9 +31,6 @@ public class BossQuest : Singleton<BossQuest> {
         EntranceClosed.SetActive(true);
 
         OnAnimation = true;
-        UIManager.Instance.OnOffCanvas(false, false, true);
-        UIManager.Instance.joystick.PointerUp();
-
         eventCamera.StartAnimation();
     }
 

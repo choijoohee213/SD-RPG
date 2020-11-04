@@ -73,7 +73,7 @@ public class QuestGiver : NPC {
 
         //보스처치 퀘스트인지 확인 
         if(QuestList[QuestIndex].Equals(BossQuest.Instance.KillBossQuest))
-            BossQuest.Instance.OpenBridge();
+            BossQuest.Instance.StartQuest();
     }
 
     public void CompleteQuest() {

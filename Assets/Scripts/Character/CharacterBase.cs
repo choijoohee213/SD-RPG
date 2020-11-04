@@ -20,8 +20,11 @@ public abstract class CharacterBase : MonoBehaviour {
     public float MaxExp;
     public float CurrentExp { get; set; }
 
-    public int MinimalDamage;
+    public float MinimalDamage;
     public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); }
+
+
+
 
     protected virtual void Awake() {
         Anim = GetComponent<Animator>();

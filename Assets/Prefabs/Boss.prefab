@@ -1887,6 +1887,8 @@ GameObject:
   m_Component:
   - component: {fileID: 641454694250673535}
   - component: {fileID: 2784936730287371553}
+  - component: {fileID: 3662946739445681207}
+  - component: {fileID: 3575728055749488847}
   - component: {fileID: 641454694258416327}
   - component: {fileID: 8213200180464661392}
   - component: {fileID: 1637027394530840474}
@@ -1926,9 +1928,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46ea5173014e91488e4462874c9c925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackEffectPos: {fileID: 0}
   MaxHealth: 100
   CurrentHealth: 0
-  Exp: 300
+  MaxExp: 300
+  MinimalDamage: 10
+--- !u!114 &3662946739445681207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641454694251030879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27387ec48f66184997f00beafa6d5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+--- !u!114 &3575728055749488847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641454694251030879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723cbcd4834e8874f918d0481e10eb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarObj: {fileID: 0}
 --- !u!95 &641454694258416327
 Animator:
   serializedVersion: 3

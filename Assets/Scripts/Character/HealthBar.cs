@@ -2,11 +2,13 @@
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
+    private CharacterBase characterBase;
+    private CharacterFSM characterFSM;
     public GameObject healthBarObj;
     private Image healthGauge;
     private Text healthText;
 
-    private float visibleTime = 5, lastMadeVisibleTime, gaugeMoveSpeed = 2f;
+    private float visibleTime = 5f, lastMadeVisibleTime, gaugeMoveSpeed = 2f;
     private float currentHP, maxHP, currentHPFill;
 
     private void Awake() {
@@ -15,14 +17,15 @@ public class HealthBar : MonoBehaviour {
             healthBarObj = GameManager.Instance.objectPool.GetObject("HealthBar");
             healthBarObj.SetActive(false);
         }
-
+        characterBase = GetComponent<CharacterBase>();
+        characterFSM = GetComponent<CharacterFSM>();
         healthGauge = healthBarObj.transform.GetChild(0).GetComponent<Image>();
         healthText = healthBarObj.transform.GetChild(1).GetComponent<Text>();
     }
 
     private void OnEnable() {
         if(currentHP == 0) {
-            maxHP = GetComponent<CharacterBase>().MaxHealth;
+            maxHP = characterBase.MaxHealth;
             currentHP = maxHP;
             currentHPFill = 1;
             healthGauge.fillAmount = 1;
@@ -59,6 +62,6 @@ public class HealthBar : MonoBehaviour {
         }
 
         if(currentHP <= 0)
-            GetComponent<CharacterFSM>().SetState(CharacterState.Die);
+            characterFSM.SetState(CharacterState.Die);
     }
 }
