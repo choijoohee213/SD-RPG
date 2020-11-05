@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class EventCamera : MonoBehaviour
 {
     public GameObject[] ExclamationMarks;
-    private GameObject BossDialogUI;
+    GameObject BossDialogUI;
     public Animator blackScreen;
 
-    private TypeEffect DialogText;
+    TypeEffect DialogText;
 
-    private Vector3 BossPos = new Vector3(-30.9f, 28.8f, 235.2f);
-    private Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
+    Vector3 BossPos = new Vector3(-30.9f, 28.8f, 235.2f);
+    Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
 
-    private bool NextScene = false;
+    bool NextScene = false;
 
     private void Awake() {
         DialogText = UIManager.Instance.dialogText.GetComponent<TypeEffect>();
@@ -104,5 +104,9 @@ public class EventCamera : MonoBehaviour
 
     public void OnNextDialogBtn() {
         NextScene = true;
+    }
+
+    public void OffNextDialogBtn() {
+        NextScene = false;
     }
 }

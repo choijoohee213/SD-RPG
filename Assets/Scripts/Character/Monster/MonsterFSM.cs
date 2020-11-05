@@ -2,18 +2,16 @@
 using UnityEngine;
 
 public class MonsterFSM : CharacterFSM {
-    private PlayerBase playerBase;
     private MonsterBase monsterBase;
 
     private float moveSpeed = 8f, rotateSpeed = 3f;
-    public float DistanceFromPlayer => Vector3.Distance(transform.position, playerBase.transform.position);
+    public float DistanceFromPlayer => Vector3.Distance(transform.position, player.transform.position);
 
-    private bool PlayerInAttackRange => DistanceFromPlayer <= 10 && playerBase.transform.position.y - transform.position.y < 1 && !playerBase.IsDie
-                 && playerBase.PlayerInMonsterRange(monsterBase.limitRange_Min, monsterBase.limitRange_Max);
+    private bool PlayerInAttackRange => DistanceFromPlayer <= 10 && player.transform.position.y - transform.position.y < 1 && !player.IsDie
+                 && player.PlayerInMonsterRange(monsterBase.limitRange_Min, monsterBase.limitRange_Max);
 
     protected override void Awake() {
         base.Awake();
-        playerBase = GameManager.Instance.player;
         monsterBase = GetComponent<MonsterBase>();
     }
 
@@ -22,7 +20,7 @@ public class MonsterFSM : CharacterFSM {
             yield return null;
 
             //플레이어와의 거리가 10 이하이고,높이차가 1 미만일 경우 Trace 상태로 전환
-            if(PlayerInAttackRange && !playerBase.IsDie)
+            if(PlayerInAttackRange && !player.IsDie)
                 SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Walk 상태로 전환
@@ -41,7 +39,7 @@ public class MonsterFSM : CharacterFSM {
             MoveController.LimitMoveRange(transform, monsterBase.limitRange_Min, monsterBase.limitRange_Max);
 
             //플레이어와의 거리가 10 이하이고, 높이차가 1 미만일 경우 Trace 상태로 전환
-            if(PlayerInAttackRange && !playerBase.IsDie)
+            if(PlayerInAttackRange && !player.IsDie)
                 SetState(CharacterState.Trace);
 
             //랜덤한 확률로 Idle 상태로 전환
@@ -53,9 +51,9 @@ public class MonsterFSM : CharacterFSM {
     protected IEnumerator Trace() {
         do {
             yield return null;
-            if(!playerBase.IsJumping) {
-                MoveController.LookTarget(transform, playerBase.transform, rotateSpeed);
-                MoveController.RigidMovePos(transform, playerBase.transform.position - transform.position, moveSpeed);
+            if(!player.IsJumping) {
+                MoveController.LookTarget(transform, player.transform, rotateSpeed);
+                MoveController.RigidMovePos(transform, player.transform.position - transform.position, moveSpeed);
                 MoveController.LimitMoveRange(transform, monsterBase.limitRange_Min, monsterBase.limitRange_Max);
             }
 
@@ -72,11 +70,11 @@ public class MonsterFSM : CharacterFSM {
     protected IEnumerator Attack() {
         do {
             yield return null;
-            MoveController.LookTarget(transform, playerBase.transform, rotateSpeed);
+            MoveController.LookTarget(transform, player.transform, rotateSpeed);
 
             bool raycastTarget = characterBase.AttackToTarget("Player");
             if(!raycastTarget) {
-                if(playerBase.IsDie)
+                if(player.IsDie)
                     SetState(CharacterState.Walk);
                 else
                     SetState(CharacterState.Trace);

@@ -2,12 +2,6 @@
 
 public class PlayerFSM : CharacterFSM {
     private float moveSpeed = 10f;
-    private PlayerBase playerBase;
-
-    protected override void Awake() {
-        base.Awake();
-        playerBase = GetComponent<PlayerBase>();
-    }
 
     //모든 개체는 Idle 상태를 가진다.
     protected IEnumerator Idle() {
@@ -15,7 +9,7 @@ public class PlayerFSM : CharacterFSM {
             yield return null;
             if(!Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
-            else if(playerBase.AttackBtnPressed)
+            else if(player.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState); //do 문 종료조건.
     }
@@ -23,12 +17,12 @@ public class PlayerFSM : CharacterFSM {
     protected IEnumerator Walk() {
         do {
             yield return null;
-            MoveController.LookDirection(transform, playerBase.MoveDir);
-            MoveController.RigidMovePos(transform, playerBase.MoveDir, moveSpeed);
+            MoveController.LookDirection(transform, player.MoveDir);
+            MoveController.RigidMovePos(transform, player.MoveDir, moveSpeed);
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
-            if(playerBase.AttackBtnPressed)
+            if(player.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState);
     }
@@ -37,11 +31,11 @@ public class PlayerFSM : CharacterFSM {
         do {
             yield return null;
 
-            bool raycastTarget = playerBase.AttackToTarget("Monster");
+            bool raycastTarget = player.AttackToTarget("Monster");
 
-            if(!playerBase.AttackBtnPressed && Joystick.IsPointerUp || playerBase.IsColliderDie)
+            if(!player.AttackBtnPressed && Joystick.IsPointerUp || player.IsColliderDie)
                 SetState(CharacterState.Idle);
-            else if(!playerBase.AttackBtnPressed && !Joystick.IsPointerUp)
+            else if(!player.AttackBtnPressed && !Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
         } while(!IsNewState);
     }

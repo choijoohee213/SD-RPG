@@ -17,7 +17,7 @@ public enum CharacterState {
 
 public class CharacterFSM : MonoBehaviour {
     protected CharacterBase characterBase;
-
+    protected PlayerBase player;
     public CharacterState state;
 
     //캐릭터의 상태가 바꼈는지 체크하는 변수.
@@ -25,6 +25,7 @@ public class CharacterFSM : MonoBehaviour {
 
     protected virtual void Awake() {
         characterBase = GetComponent<CharacterBase>();
+        player = GameManager.Instance.player;
     }
 
     //모든 캐릭터는 처음에 Idle 상태이며, FSMMain 코루틴을 실행
