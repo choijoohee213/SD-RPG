@@ -38,11 +38,12 @@ public class BossFSM : CharacterFSM
         do {
             yield return null;
             if(transform.position != target) {
-                transform.position = Vector3.MoveTowards(transform.position, target,  distance * Time.deltaTime);
-                
+                transform.position = Vector3.MoveTowards(transform.position, target, distance * Time.deltaTime);
+
             }
-            else
+            else {
                 SetState(CharacterState.Idle);
+            }
         } while(!IsNewState);
     }
 
@@ -52,10 +53,7 @@ public class BossFSM : CharacterFSM
     protected IEnumerator Attack_Fire() {
         do {
             yield return null;
-            if(boss.AttackJumping) {
-                yield return waitForSeconds;
-                SetState(CharacterState.Attack_Jump);
-            }
+
         } while(!IsNewState);
     }
 

@@ -20,7 +20,7 @@ public abstract class CharacterBase : MonoBehaviour {
     public float MaxExp;
     public float CurrentExp { get; set; }
 
-    public float MinimalDamage;
+    public int MinimalDamage;
     public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); }
 
 
@@ -40,11 +40,14 @@ public abstract class CharacterBase : MonoBehaviour {
         return Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), transform.forward, out raycastHit, 2f, 1 << LayerMask.NameToLayer(layerName)) && raycastHit.collider != null;
     }
 
-    public bool AttackToTarget(string layerName) {
+    public virtual bool AttackToTarget(string layerName) {
         bool isCollider = CheckRaycastHit(layerName);
-        if(isCollider && !raycastHit.collider.GetComponent<CharacterBase>().IsDie && AttackStart) {
-            AttackStart = false;
-            raycastHit.collider.GetComponent<CharacterBase>().TakeDamage(Damage);
+        if(isCollider) {
+            CharacterBase character = raycastHit.collider.GetComponent<CharacterBase>();
+            if(!character.IsDie && AttackStart) {
+                AttackStart = false;
+                character.TakeDamage(Damage);
+            }
         }
         return isCollider;
     }
@@ -59,7 +62,7 @@ public abstract class CharacterBase : MonoBehaviour {
         healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
-    private void AttackAnimEvent() {
+    protected virtual void AttackAnimEvent() {
         AttackStart = true;
     }
 
