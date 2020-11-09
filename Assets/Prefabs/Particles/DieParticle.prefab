@@ -42241,7 +42241,7 @@ GameObject:
   - component: {fileID: 1251971528716563474}
   - component: {fileID: -6693096156257621637}
   m_Layer: 0
-  m_Name: MonsterDieParticle
+  m_Name: DieParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46931,6 +46931,8 @@ MonoBehaviour:
   - {fileID: 1251971528716455328}
   - {fileID: 1251971528716455348}
   - {fileID: 1251971528716455338}
+  plusPos: {x: 0, y: 0, z: 0}
+  updatingPos: 1
   lifeTime: 0.6
 --- !u!1 &1251971528734774484
 GameObject:

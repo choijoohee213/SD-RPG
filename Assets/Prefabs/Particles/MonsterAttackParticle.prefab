@@ -4828,4 +4828,5 @@ MonoBehaviour:
   particles:
   - {fileID: 8599006087993537939}
   plusPos: {x: 0, y: 0, z: 0}
+  updatingPos: 1
   lifeTime: 0.4

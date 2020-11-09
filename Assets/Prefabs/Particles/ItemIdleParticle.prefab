@@ -4774,6 +4774,7 @@ MonoBehaviour:
   - {fileID: 7663970036068807745}
   - {fileID: 3203431026888294481}
   plusPos: {x: 0, y: 0, z: 0}
+  updatingPos: 1
   lifeTime: 60
 --- !u!1 &3203431026888294476
 GameObject:

@@ -11,7 +11,7 @@ public class EventCamera : MonoBehaviour
 
     TypeEffect DialogText;
 
-    Vector3 BossPos = new Vector3(-30.9f, 28.8f, 235.2f);
+    Vector3 BossPos = new Vector3(-30.9f, 28.8f, 233f);
     Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
 
     bool NextScene = false;

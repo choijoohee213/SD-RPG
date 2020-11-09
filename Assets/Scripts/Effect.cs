@@ -4,7 +4,7 @@ public class Effect : MonoBehaviour {
     public ParticleSystem[] particles;
     public Vector3 plusPos;
     public Transform StartTransform { get; set; }
-
+    public bool updatingPos;
     public float lifeTime;
 
     public void Init(Transform effectPos) {
@@ -14,7 +14,7 @@ public class Effect : MonoBehaviour {
     }
 
     private void Update() {
-        transform.position = new Vector3(StartTransform.position.x, transform.position.y, StartTransform.position.z);
+        if(updatingPos) transform.position = new Vector3(StartTransform.position.x, transform.position.y, StartTransform.position.z);
     }
 
     public void Disable() {

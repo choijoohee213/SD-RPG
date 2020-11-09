@@ -7,10 +7,16 @@ public class BossFSM : CharacterFSM
     BossBase boss;
     WaitForSeconds waitForSeconds = new WaitForSeconds(4f);
 
+    Vector3 targetPos;
+    float distance;
+
+    public GameObject box;
+    Rigidbody r;
+
     protected override void Awake() {
         base.Awake();
         boss = GetComponent<BossBase>();
-
+        r = box.GetComponent<Rigidbody>();
     }
 
     protected IEnumerator Idle() {
@@ -18,7 +24,7 @@ public class BossFSM : CharacterFSM
             yield return null;
             if(BossQuest.Instance.OnFighting) {
                 yield return waitForSeconds;
-                SetState((CharacterState) Random.Range(5, 6));
+                SetState((CharacterState) Random.Range(6, 7));
             } 
         } while(!IsNewState); //do 문 종료조건.
     }
@@ -30,15 +36,14 @@ public class BossFSM : CharacterFSM
     }
 
     protected IEnumerator Attack_Jump() {
-        Vector3 targetPos = player.transform.position;
-        Vector3 target = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-        float distance = Vector3.Distance(target, transform.position);
-        transform.LookAt(target);
+        targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        distance = Vector3.Distance(targetPos, transform.position);
+        transform.LookAt(targetPos);
 
         do {
             yield return null;
-            if(transform.position != target) {
-                transform.position = Vector3.MoveTowards(transform.position, target, distance * Time.deltaTime);
+            if(transform.position != targetPos) {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, distance * Time.deltaTime);
 
             }
             else {
@@ -49,11 +54,15 @@ public class BossFSM : CharacterFSM
 
 
 
-
+    
     protected IEnumerator Attack_Fire() {
+        Transform targetTrans = player.transform;
+        transform.LookAt(targetTrans.position);
+
         do {
             yield return null;
-
+            boss.CreateFireBall(targetTrans);
+            SetState(CharacterState.Idle);
         } while(!IsNewState);
     }
 

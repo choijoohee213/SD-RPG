@@ -1,31 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour {
-    private Vector3 FirstPoint;
-    private Vector3 SecondPoint;
-    private float xAngle;
-    private float yAngle;
-    private float xAngleTemp;
-    private float yAngleTemp;
+    Vector3 FirstPoint;
+    Vector3 SecondPoint;
+    Vector3 distance = new Vector3(0, 5f, -8f);
 
-    public Transform Player;
+    float xAngle;
+    float yAngle;
+    float xAngleTemp;
+    float yAngleTemp;
 
     [HideInInspector]
     public bool isCanRotate = true;
 
     private bool isMouseDown = false;
+    Transform playerPos;
+    CinemachineBrain cinemachine;
 
-    Renderer ObstacleRenderer;
-
-    private void Start() {
+    private void Awake() {
         xAngle = 0;
         yAngle = 12;
         transform.rotation = Quaternion.Euler(yAngle, xAngle, 0);
+        playerPos = GameManager.Instance.player.transform;
+        cinemachine = GetComponent<CinemachineBrain>();
     }
 
     private void Update() {
+        CameraMove();
         if(!BossQuest.Instance.OnAnimation) CameraRotate();
+    }
+
+    void CameraMove() {
+        transform.position = playerPos.position + distance;
     }
 
     void CameraRotate() {
@@ -93,28 +102,20 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    void MakeTranslucent() {
-        float Distance = Vector3.Distance(transform.position, Player.position);
-        Vector3 Direction = (Player.position - transform.position).normalized;
-
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, Direction, out hit, Distance)) {
-
-            ObstacleRenderer = hit.collider.gameObject.GetComponentInChildren<Renderer>();
-
-            if(ObstacleRenderer != null && ObstacleRenderer.gameObject.layer != 9) {
-                
-                /*
-                // Metrial의 Aplha를 바꾼다.
-                Material Mat = ObstacleRenderer.material;
-                Color matColor = Mat.color;
-                matColor.a = 0.5f;
-                Mat.color = matColor;
-                */
+    public void CameraShake(float amount, float duration) {
+        //cinemachine.enabled = false;
+        StartCoroutine(Shake(amount, duration));
+    }
 
 
-                
-            }
+    IEnumerator Shake(float _amount, float _duration) {
+        float timer = 0;
+        while(timer <= _duration) {
+            transform.localPosition = (Vector3)Random.insideUnitCircle * _amount + transform.position;
+
+            timer += Time.deltaTime;
+            yield return null;
         }
+        //cinemachine.enabled = true;
     }
 }

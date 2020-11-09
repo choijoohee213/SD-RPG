@@ -5,7 +5,13 @@ using UnityEngine;
 public class BossBase : CharacterBase
 {    
     Vector3 BossPos = new Vector3(-29.3f, 21.5f, 248.7f);
-    float attackJumpRange = 8f;
+    CameraController cameraController;
+    float attackJumpRange = 9f;
+
+    protected override void Awake() {
+        base.Awake();
+        cameraController = GameManager.Instance.Cam.GetComponent<CameraController>();
+    }
 
     public override bool AttackToTarget(string layerName) {
         PlayerBase player = GameManager.Instance.player;
@@ -18,12 +24,19 @@ public class BossBase : CharacterBase
         return withInRange;
     }
 
+    public void CreateFireBall(Transform pos) {
+        ParticleController.PlayParticles("BossAttackFireParticle", pos);
+
+    }
+
     protected override void AttackAnimEvent() {
         base.AttackAnimEvent();
         AttackToTarget("Player");
         ParticleController.PlayParticles("BossAttackJumpParticle", transform);
+        cameraController.CameraShake(0.5f, 0.4f);
     }
 
+    //지워
     private void OnDrawGizmos() {
         //Gizmos.DrawWireSphere(transform.position + transform.forward * 0, attackJumpRange);
     }

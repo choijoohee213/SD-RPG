@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1172851387647780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.21, z: 0}
-  m_LocalScale: {x: 3.1, y: 3, z: 3.1}
+  m_LocalScale: {x: 3.6, y: 3.6, z: 3.6}
   m_Children: []
   m_Father: {fileID: 4945707815571746}
   m_RootOrder: 0
@@ -4868,4 +4868,5 @@ MonoBehaviour:
   particles:
   - {fileID: 198798914852134490}
   plusPos: {x: 0, y: 0, z: 0}
+  updatingPos: 1
   lifeTime: 1.5
