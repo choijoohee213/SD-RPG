@@ -8,6 +8,8 @@ public class BossBase : CharacterBase
     CameraController cameraController;
     float attackJumpRange = 9f;
 
+    public int attackFireCount { get; set; }
+
     protected override void Awake() {
         base.Awake();
         cameraController = GameManager.Instance.Cam.GetComponent<CameraController>();
@@ -24,16 +26,20 @@ public class BossBase : CharacterBase
         return withInRange;
     }
 
-    public void CreateFireBall(Transform pos) {
-        ParticleController.PlayParticles("BossAttackFireParticle", pos);
-
+    public void CreateFireBall() {
+        ParticleController.PlayParticles("BossAttackFireParticle", GameManager.Instance.player.transform);
+        if(attackFireCount == 3) AttackStart = false; 
     }
 
-    protected override void AttackAnimEvent() {
-        base.AttackAnimEvent();
+    void AttackJumpAnimEvent() {
         AttackToTarget("Player");
         ParticleController.PlayParticles("BossAttackJumpParticle", transform);
         cameraController.CameraShake(0.5f, 0.4f);
+    }
+
+    void AttackFireAnimEvent() {
+        attackFireCount++;
+        CreateFireBall();
     }
 
     //지워

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 
 public class PlayerFSM : CharacterFSM {
-    private float moveSpeed = 10f;
+    float moveSpeed = 10f;
+    string layerName;
+    public bool BossAttackable { get; set; }
 
     //모든 개체는 Idle 상태를 가진다.
     protected IEnumerator Idle() {
@@ -9,7 +11,7 @@ public class PlayerFSM : CharacterFSM {
             yield return null;
             if(!Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
-            else if(player.AttackBtnPressed)
+            else if(playerBase.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState); //do 문 종료조건.
     }
@@ -17,12 +19,12 @@ public class PlayerFSM : CharacterFSM {
     protected IEnumerator Walk() {
         do {
             yield return null;
-            MoveController.LookDirection(transform, player.MoveDir);
-            MoveController.RigidMovePos(transform, player.MoveDir, moveSpeed);
+            MoveController.LookDirection(transform, playerBase.MoveDir);
+            MoveController.RigidMovePos(transform, playerBase.MoveDir, moveSpeed);
 
             if(Joystick.IsPointerUp)
                 SetState(CharacterState.Idle);
-            if(player.AttackBtnPressed)
+            if(playerBase.AttackBtnPressed)
                 SetState(CharacterState.Attack);
         } while(!IsNewState);
     }
@@ -30,12 +32,14 @@ public class PlayerFSM : CharacterFSM {
     protected IEnumerator Attack() {
         do {
             yield return null;
+            if(BossQuest.Instance.OnFighting && BossAttackable) layerName = "Boss";
+            else layerName = "Monster";
 
-            bool raycastTarget = player.AttackToTarget("Monster");
+            bool raycastTarget = playerBase.AttackToTarget(layerName);
 
-            if(!player.AttackBtnPressed && Joystick.IsPointerUp || player.IsColliderDie)
+            if(!playerBase.AttackBtnPressed && Joystick.IsPointerUp || playerBase.IsColliderDie)
                 SetState(CharacterState.Idle);
-            else if(!player.AttackBtnPressed && !Joystick.IsPointerUp)
+            else if(!playerBase.AttackBtnPressed && !Joystick.IsPointerUp)
                 SetState(CharacterState.Walk);
         } while(!IsNewState);
     }

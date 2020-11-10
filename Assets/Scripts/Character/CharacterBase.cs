@@ -62,7 +62,7 @@ public abstract class CharacterBase : MonoBehaviour {
         healthBar.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
-    protected virtual void AttackAnimEvent() {
+    protected void AttackAnimEvent() {
         AttackStart = true;
     }
 
