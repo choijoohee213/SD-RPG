@@ -1,43 +1,41 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Cinemachine;
 
 public class CameraController : MonoBehaviour {
-    Vector3 FirstPoint;
-    Vector3 SecondPoint;
-    Vector3 distance = new Vector3(0, 5f, -8f);
+    private Vector3 FirstPoint;
+    private Vector3 SecondPoint;
+    private Vector3 distance = new Vector3(0, 5f, -8f);
 
-    float xAngle;
-    float yAngle;
-    float xAngleTemp;
-    float yAngleTemp;
+    private float xAngle;
+    private float yAngle;
+    private float xAngleTemp;
+    private float yAngleTemp;
 
     [HideInInspector]
     public bool isCanRotate = true;
 
     private bool isMouseDown = false;
-    Transform playerPos;
-    CinemachineBrain cinemachine;
+    private Transform playerPos;
 
     private void Awake() {
         xAngle = 0;
         yAngle = 12;
         transform.rotation = Quaternion.Euler(yAngle, xAngle, 0);
         playerPos = GameManager.Instance.player.transform;
-        cinemachine = GetComponent<CinemachineBrain>();
+        //cinemachine = GetComponent<CinemachineBrain>();
     }
 
     private void Update() {
         CameraMove();
-        if(!BossQuest.Instance.OnAnimation) CameraRotate();
+        //if(!BossQuest.Instance.OnAnimation) CameraRotate();
     }
 
-    void CameraMove() {
+    private void CameraMove() {
         transform.position = playerPos.position + distance;
     }
 
-    void CameraRotate() {
+    private void CameraRotate() {
         if(isCanRotate != false) {
 #if(UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
             if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -107,8 +105,7 @@ public class CameraController : MonoBehaviour {
         StartCoroutine(Shake(amount, duration));
     }
 
-
-    IEnumerator Shake(float _amount, float _duration) {
+    private IEnumerator Shake(float _amount, float _duration) {
         float timer = 0;
         while(timer <= _duration) {
             transform.localPosition = (Vector3)Random.insideUnitCircle * _amount + transform.position;

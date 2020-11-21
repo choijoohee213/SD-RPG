@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
 public class PlayerFSM : CharacterFSM {
-    float moveSpeed = 10f;
-    string layerName;
+    private float moveSpeed = 10f;
+    private string layerName;
     public bool BossAttackable { get; set; }
 
     //모든 개체는 Idle 상태를 가진다.
@@ -32,8 +32,10 @@ public class PlayerFSM : CharacterFSM {
     protected IEnumerator Attack() {
         do {
             yield return null;
-            if(BossQuest.Instance.OnFighting && BossAttackable) layerName = "Boss";
-            else layerName = "Monster";
+            if(BossQuest.Instance.OnFighting && BossAttackable)
+                layerName = "Boss";
+            else
+                layerName = "Monster";
 
             bool raycastTarget = playerBase.AttackToTarget(layerName);
 

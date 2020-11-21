@@ -6,6 +6,7 @@ public class UIManager : Singleton<UIManager> {
 
     [Header("Canvas")]
     public Canvas StaticCanvas;
+
     public Canvas DynamicCanvas;
     public Canvas BossCanvas;
     public Canvas HPCanvas;
@@ -15,7 +16,6 @@ public class UIManager : Singleton<UIManager> {
 
     public Text playerLevelText, countDownText, dialogText;
     public GameObject ResurrectUI, InventoryUI, ItemDetailsUI, QuestUI, BossUI, BossExitPanel, BossDialogUI, AnimationScreen;
-
 
     public void UITransition(GameObject newMenuObj) {
         if(activeMenuObj != null && !activeMenuObj.Equals(newMenuObj))
@@ -29,7 +29,6 @@ public class UIManager : Singleton<UIManager> {
         DynamicCanvas.enabled = dynamicCanvas;
         BossCanvas.enabled = bossCanvas;
     }
-
 
     public void OnInventoryBtn() {
         InventoryUI.SetActive(!InventoryUI.activeSelf);
@@ -46,5 +45,4 @@ public class UIManager : Singleton<UIManager> {
 
         UITransition(QuestUI);
     }
-
 }

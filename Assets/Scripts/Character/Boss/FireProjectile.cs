@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireProjectile : MonoBehaviour {
-    Effect effect;
-    Rigidbody rigid;
-    PlayerBase player;
-    
-    Vector3 v = new Vector3(0f, 5f, 0f);
-    readonly float fireDamage = 15f;
+    private Effect effect;
+    private Rigidbody rigid;
+    private PlayerBase player;
+
+    private Vector3 v = new Vector3(0f, 5f, 0f);
+    private readonly float fireDamage = 15f;
 
     private void Awake() {
         effect = GetComponent<Effect>();
@@ -22,7 +20,6 @@ public class FireProjectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.layer.Equals(9)) {
-            Debug.Log("충돌!");
             player.TakeDamage(fireDamage);
         }
     }

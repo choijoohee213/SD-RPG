@@ -25,7 +25,7 @@ public class PlayerBase : CharacterBase {
 
     protected override void OnEnable() {
         base.OnEnable();
-        //transform.position = StartPos;
+        transform.position = StartPos;
         transform.rotation = Quaternion.identity;
     }
 
@@ -84,7 +84,8 @@ public class PlayerBase : CharacterBase {
 
     public void PlayerJumpBtn() {
         if(!IsJumping) {
-            Rigid.AddForce(Vector3.up * 80, ForceMode.Impulse);
+            Rigid.AddForce(Vector3.up * 70, ForceMode.Impulse);
+            SoundManager.Instance.playAudio("Jump");
             IsJumping = true;
         }
     }
@@ -93,8 +94,16 @@ public class PlayerBase : CharacterBase {
         AttackBtnPressed = pressed;
     }
 
+    private void PlayerAttackSound() {
+        SoundManager.Instance.playAudio("PlayerAttack");
+    }
+
     protected override void DieAnimEvent() {
+        SoundManager.Instance.playAudio("PlayerDie");
         base.DieAnimEvent();
+        if(BossQuest.Instance.OnFighting) {
+            BossQuest.Instance.ExitCastle();
+        }
         UIManager.Instance.ResurrectUI.SetActive(true);
         ResurrectTimer();
     }

@@ -5,7 +5,7 @@ public abstract class NPC : Interactable {
 
     public string npcName;
     public Sprite npcSprite;
-    public SpriteRenderer speechBubble; 
+    public SpriteRenderer speechBubble;
 
     protected override void Awake() {
         base.Awake();

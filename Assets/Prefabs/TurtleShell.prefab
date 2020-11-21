@@ -863,7 +863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackEffectPos: {fileID: 2639386304824983795}
-  MaxHealth: 20
+  MaxHealth: 10
   CurrentHealth: 0
   MaxExp: 5
   MinimalDamage: 1
@@ -881,7 +881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6ca78b05c16d44e94d4fdcbddb3a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
 --- !u!114 &5193780481941967705
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class InventoryUIScript : MonoBehaviour {
 
     //DetailsUI
     public int selectedSlotNum { get; set; }
+
     public int discardNum { get; set; }
 
     public Text ItemNameText;
@@ -70,11 +71,7 @@ public class InventoryUIScript : MonoBehaviour {
     }
 
     private void DeleteFromInventory() {
-        bool deleteFromCell = inventory.Remove(discardNum);
+        bool deleteFromCell = inventory.Remove(1);
         UIManager.Instance.ItemDetailsUI.SetActive(!deleteFromCell);
-    }
-
-    public void NotifyInventoryFull() {
-        Debug.Log("inventory is full!!!!! remove items plz");
     }
 }

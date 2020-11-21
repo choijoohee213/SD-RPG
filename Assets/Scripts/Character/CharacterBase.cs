@@ -15,16 +15,14 @@ public abstract class CharacterBase : MonoBehaviour {
 
     [Header("Character Inform")]
     public float MaxHealth;
+
     public float CurrentHealth;
-   
+
     public float MaxExp;
     public float CurrentExp { get; set; }
 
     public int MinimalDamage;
     public float Damage { get => Random.Range(MinimalDamage, MinimalDamage + 3); }
-
-
-
 
     protected virtual void Awake() {
         Anim = GetComponent<Animator>();
@@ -67,8 +65,10 @@ public abstract class CharacterBase : MonoBehaviour {
     }
 
     private void AttackEffect(string particleName) {
-        if(raycastHit.collider != null)
+        if(raycastHit.collider != null) {
             ParticleController.PlayParticles(particleName, AttackEffectPos);
+            SoundManager.Instance.playAudio("Hit");
+        }
     }
 
     protected virtual void DieAnimEvent() {

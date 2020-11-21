@@ -23,7 +23,7 @@ public class DropItemController : MonoBehaviour {
         for(int i = 0; i < dropNum; i++)
             CreateItemObj();
     }
-    
+
     private void CreateItemObj() {
         var randomItem = Random.Range(1, 11);
         int index = 0;

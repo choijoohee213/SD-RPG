@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class BossBase : CharacterBase
-{    
-    Vector3 BossPos = new Vector3(-29.3f, 21.5f, 248.7f);
-    CameraController cameraController;
-    float attackJumpRange = 9f;
+public class BossBase : CharacterBase {
+    private Vector3 BossPos = new Vector3(-29.3f, 21.5f, 248.7f);
+    private CameraController cameraController;
+    private float attackJumpRange = 9f;
 
     public int attackFireCount { get; set; }
 
@@ -28,22 +26,22 @@ public class BossBase : CharacterBase
 
     public void CreateFireBall() {
         ParticleController.PlayParticles("BossAttackFireParticle", GameManager.Instance.player.transform);
-        if(attackFireCount == 3) AttackStart = false; 
+        if(attackFireCount == 3)
+            AttackStart = false;
     }
 
-    void AttackJumpAnimEvent() {
+    private void AttackJumpAnimEvent() {
         AttackToTarget("Player");
         ParticleController.PlayParticles("BossAttackJumpParticle", transform);
         cameraController.CameraShake(0.5f, 0.4f);
     }
 
-    void AttackFireAnimEvent() {
+    private void AttackFireAnimEvent() {
         attackFireCount++;
         CreateFireBall();
     }
 
-    //지워
-    private void OnDrawGizmos() {
-        //Gizmos.DrawWireSphere(transform.position + transform.forward * 0, attackJumpRange);
+    protected override void DieAnimEvent() {
+        SceneManager.LoadScene(1);
     }
 }

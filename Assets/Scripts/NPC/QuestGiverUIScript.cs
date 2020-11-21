@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class QuestGiverUIScript : MonoBehaviour {
     private NPCUIScript npcUIScript;
-    
+
     public GameObject QuestGiverUI, AcceptBtn, CompleteBtn, rewardsEXP;
     public GameObject[] rewards;
-    
+
     public Text QuestGiverContentText;
     public Sprite[] speechBubles;
 

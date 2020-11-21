@@ -61,7 +61,7 @@ public class MonsterFSM : CharacterFSM {
             if(!PlayerInAttackRange)
                 SetState(CharacterState.Idle);
 
-            ////플레이어와 충돌했을 경우 Attack 상태로 전환
+            //플레이어와 충돌했을 경우 Attack 상태로 전환
             if(characterBase.CheckRaycastHit("Player") && !characterBase.IsColliderDie)
                 SetState(CharacterState.Attack);
         } while(!IsNewState); //do 문 종료조건.

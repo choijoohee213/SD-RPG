@@ -1,20 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class EventCamera : MonoBehaviour
-{
+public class EventCamera : MonoBehaviour {
     public GameObject[] ExclamationMarks;
-    GameObject BossDialogUI;
+    private GameObject BossDialogUI;
     public Animator blackScreen;
 
-    TypeEffect DialogText;
+    private TypeEffect DialogText;
 
-    Vector3 BossPos = new Vector3(-30.9f, 28.8f, 233f);
-    Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
+    private Vector3 BossPos = new Vector3(-30.9f, 28.8f, 233f);
+    private Vector3 PrincessPos = new Vector3(-49.1f, 26f, 262.3f);
 
-    bool NextScene = false;
+    private bool NextScene = false;
 
     private void Awake() {
         DialogText = UIManager.Instance.dialogText.GetComponent<TypeEffect>();
@@ -28,16 +25,16 @@ public class EventCamera : MonoBehaviour
 
         //이벤트카메라의 시작위치를 메인카메라 위치로 지정
         transform.position = GameManager.Instance.Cam.transform.position;
-        
+
         //메인카메라 비활성화
         GameManager.Instance.Cam.gameObject.SetActive(false);
 
         StartCoroutine(CameraStop());
     }
 
-    IEnumerator CameraStop() {
+    private IEnumerator CameraStop() {
         yield return new WaitForSeconds(3.5f);
-        
+
         //느낌표 오브젝트 활성화
         ExclamationMarks[0].SetActive(true);
         ExclamationMarks[1].SetActive(true);
@@ -47,7 +44,7 @@ public class EventCamera : MonoBehaviour
         StartCoroutine(MoveToBoss());
     }
 
-    IEnumerator MoveToBoss() {
+    private IEnumerator MoveToBoss() {
         while(transform.position != BossPos) {
             transform.position = Vector3.MoveTowards(transform.position, BossPos, 22f * Time.deltaTime);
             yield return null;
@@ -67,7 +64,7 @@ public class EventCamera : MonoBehaviour
         StartCoroutine(MoveToPrincess());
     }
 
-    IEnumerator MoveToPrincess() {
+    private IEnumerator MoveToPrincess() {
         NextScene = false;
 
         while(transform.position != PrincessPos) {
@@ -82,7 +79,7 @@ public class EventCamera : MonoBehaviour
         StartCoroutine(MoveToPlayer());
     }
 
-    IEnumerator MoveToPlayer() {
+    private IEnumerator MoveToPlayer() {
         Vector3 playerPos = GameManager.Instance.Cam.transform.position;
         while(transform.position != playerPos) {
             transform.position = Vector3.MoveTowards(transform.position, playerPos, 30f * Time.deltaTime);

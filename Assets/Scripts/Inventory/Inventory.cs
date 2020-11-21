@@ -9,10 +9,6 @@ public class Inventory : Singleton<Inventory> {
 
     public List<InventoryItem> items = new List<InventoryItem>();
 
-    public void Init() {
-        //inventoryUIScript.UpdateUI();
-    }
-
     public bool Add(Item _item) {
         for(int i = 0; i < items.Count; i++) {
             if(items[i].item.Equals(_item) && !items[i].IsFull) {
@@ -76,8 +72,8 @@ public class Inventory : Singleton<Inventory> {
                     continue;
                 }
                 else {
-                    inventoryUIScript.NotifyInventoryFull();
-                    if(!isNewItem) items.Remove(items[i]);
+                    if(!isNewItem)
+                        items.Remove(items[i]);
                     inventoryUIScript.UpdateUI();
                     return false;
                 }
@@ -103,7 +99,8 @@ public class Inventory : Singleton<Inventory> {
 
     public void RemoveMultiple(Item removeItem, int count) {
         for(int i = items.Count - 1; i >= 0; i--) {
-            if(!items[i].item.Equals(removeItem)) continue;
+            if(!items[i].item.Equals(removeItem))
+                continue;
 
             if(items[i].NumPerCell - count > 0) {
                 items[i].NumPerCell -= count;

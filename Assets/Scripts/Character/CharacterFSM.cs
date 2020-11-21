@@ -7,9 +7,10 @@ public enum CharacterState {
     Attack = 2,
     Trace = 3,  //몬스터가 플레이어를 쫓아가는 상태
     Die = 4,
-    
+
     //보스
     Attack_Jump = 5,
+
     Attack_Fire = 6,
     Dizzy = 7,
     Victory = 8,
@@ -18,7 +19,7 @@ public enum CharacterState {
 public class CharacterFSM : MonoBehaviour {
     protected CharacterBase characterBase;
     protected PlayerBase playerBase;
-    public CharacterState state;
+    public CharacterState state { get; set; }
 
     //캐릭터의 상태가 바꼈는지 체크하는 변수.
     protected bool IsNewState { get; set; }

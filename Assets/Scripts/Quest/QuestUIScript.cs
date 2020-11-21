@@ -76,7 +76,7 @@ public class QuestUIScript : Singleton<QuestUIScript> {
                 questSlot = slot;
         }
 
-        foreach(var obj in questSlot.quest.collectObjectives) 
+        foreach(var obj in questSlot.quest.collectObjectives)
             obj.UpdateItemCount();
         questSlot.CheckCompletable();
     }

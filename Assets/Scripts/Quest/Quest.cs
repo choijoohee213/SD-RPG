@@ -29,7 +29,7 @@ public class Quest : ScriptableObject {
         }
     }
 
-    public Rewards rewards ;
+    public Rewards rewards;
 }
 
 [Serializable]
@@ -38,7 +38,7 @@ public abstract class Objective {
     public int amount;
     public int currentAmount { get; set; }
 
-    public bool IsComplete { get {  return currentAmount >= amount ; } }
+    public bool IsComplete { get { return currentAmount >= amount; } }
 }
 
 [Serializable]
@@ -46,7 +46,6 @@ public class CollectObjective : Objective {
 
     public void UpdateItemCount() {
         currentAmount = Inventory.Instance.GetItemCount(item);
-        Debug.Log("updateItem!!!!!!!!!!!!");
     }
 }
 
@@ -58,15 +57,17 @@ public class Rewards {
 
     public bool Reward() {
         bool addable = true;
-        if(ItemReward != null) addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
+        if(ItemReward != null)
+            addable = Inventory.Instance.AddMultiple(ItemReward, ItemRewardCount);
 
         if(addable) {
             GameManager.Instance.player.IncreaseExp(EXPReward);
-            if(ItemReward != null) NotificationManager.Instance.Generate_GetItem(ItemReward.name, ItemRewardCount);
+            if(ItemReward != null)
+                NotificationManager.Instance.Generate_GetItem(ItemReward.name, ItemRewardCount);
         }
         else
             NotificationManager.Instance.Generate_InventoryIsFull();
-        
+
         return addable;
     }
 }

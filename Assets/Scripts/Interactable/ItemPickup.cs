@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ItemPickup : Interactable {
     public Item item;
     private Effect particle;
     private Rigidbody rigid;
 
-    bool showingMessage = false;
+    private bool showingMessage = false;
 
     protected override void Awake() {
         base.Awake();
@@ -25,6 +25,7 @@ public class ItemPickup : Interactable {
         bool wasPickedup = Inventory.Instance.Add(item);
         if(wasPickedup) {
             NotificationManager.Instance.Generate_GetItem(item.name, 1);
+            SoundManager.Instance.playAudio("GetItem");
             DisableItem();
         }
         else {
@@ -34,14 +35,13 @@ public class ItemPickup : Interactable {
                 Invoke("SetNotificationInterval", 2f);
             }
         }
-
     }
 
-    void SetNotificationInterval() {
+    private void SetNotificationInterval() {
         showingMessage = false;
     }
 
-    IEnumerator DisableItemCoroutine() {
+    private IEnumerator DisableItemCoroutine() {
         yield return new WaitForSeconds(60f);
         DisableItem();
     }
@@ -51,5 +51,4 @@ public class ItemPickup : Interactable {
         particle.Disable();
         gameObject.SetActive(false);
     }
-    
 }

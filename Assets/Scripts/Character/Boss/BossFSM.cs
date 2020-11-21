@@ -1,16 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BossFSM : CharacterFSM
-{
-    BossBase boss;
-    PlayerFSM playerFSM;
-    readonly WaitForSeconds waitForSeconds = new WaitForSeconds(4f);
+public class BossFSM : CharacterFSM {
+    private BossBase boss;
+    private PlayerFSM playerFSM;
+    private readonly WaitForSeconds waitForSeconds = new WaitForSeconds(4f);
 
-    Vector3 targetPos;
-    float distance;
-    int attackCount = 0;
+    private Vector3 targetPos;
+    private float distance;
+    private int attackCount = 0;
 
     protected override void Awake() {
         base.Awake();
@@ -22,7 +20,7 @@ public class BossFSM : CharacterFSM
         do {
             yield return null;
             if(BossQuest.Instance.OnFighting && !playerBase.IsDie) {
-                if(attackCount != 2) {
+                if(attackCount != 3) {
                     yield return waitForSeconds;
                     attackCount++;
                     SetState((CharacterState)Random.Range(5, 7));
@@ -31,13 +29,13 @@ public class BossFSM : CharacterFSM
                     attackCount = 0;
                     SetState(CharacterState.Dizzy);
                 }
-            } 
+            }
         } while(!IsNewState); //do 문 종료조건.
     }
 
     protected IEnumerator Walk() {
         do {
-            yield return null;           
+            yield return null;
         } while(!IsNewState);
     }
 
@@ -48,24 +46,25 @@ public class BossFSM : CharacterFSM
 
         do {
             yield return null;
-            if(playerBase.IsDie) SetState(CharacterState.Idle);
+            if(playerBase.IsDie || !BossQuest.Instance.OnFighting)
+                SetState(CharacterState.Idle);
 
-            if(transform.position != targetPos) transform.position = Vector3.MoveTowards(transform.position, targetPos, distance * Time.deltaTime);
-            else SetState(CharacterState.Idle);
-         
+            if(transform.position != targetPos)
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, distance * Time.deltaTime);
+            else
+                SetState(CharacterState.Idle);
         } while(!IsNewState);
     }
 
-
-    
     protected IEnumerator Attack_Fire() {
         transform.LookAt(playerBase.transform.position);
         boss.AttackStart = true;
         boss.attackFireCount = 0;
-        
+
         do {
             yield return null;
-            if(playerBase.IsDie) SetState(CharacterState.Idle);
+            if(playerBase.IsDie || !BossQuest.Instance.OnFighting)
+                SetState(CharacterState.Idle);
 
             if(boss.AttackStart == false) {
                 yield return new WaitForSeconds(2f);
@@ -79,8 +78,7 @@ public class BossFSM : CharacterFSM
             playerFSM.BossAttackable = true;
             yield return new WaitForSeconds(10f);
             playerFSM.BossAttackable = false;
-            SetState(CharacterState.Idle);  
+            SetState(CharacterState.Idle);
         } while(!IsNewState);
     }
-
 }

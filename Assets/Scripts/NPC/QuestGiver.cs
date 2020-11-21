@@ -32,7 +32,7 @@ public class QuestGiver : NPC {
     private void SetQuestIndex() {
         int index = 0;
         for(int i = 0; i < QuestList.Length; i++) {
-            if(!QuestList[i].state.Equals(QuestState.Complete)){
+            if(!QuestList[i].state.Equals(QuestState.Complete)) {
                 index = i;
                 break;
             }
@@ -71,7 +71,7 @@ public class QuestGiver : NPC {
         QuestUIScript.Instance.UpdateObjectives(QuestList[QuestIndex]);
         SetSpeechBubble();
 
-        //보스처치 퀘스트인지 확인 
+        //보스처치 퀘스트인지 확인
         if(QuestList[QuestIndex].Equals(BossQuest.Instance.KillBossQuest))
             BossQuest.Instance.StartQuest();
     }
@@ -108,15 +108,16 @@ public class QuestGiver : NPC {
                 case QuestState.Startable:
                     speechBubble.sprite = questGiverUIScript.speechBubles[0];
                     break;
+
                 case QuestState.Progressing:
                     speechBubble.sprite = questGiverUIScript.speechBubles[1];
                     break;
+
                 case QuestState.Completable:
                     speechBubble.sprite = questGiverUIScript.speechBubles[2];
                     break;
             }
         }
-
         else {
             speechBubble.gameObject.SetActive(false);
         }

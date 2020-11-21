@@ -55,7 +55,6 @@ public class ObjectPool : MonoBehaviour {
         return Generate(type, true);
     }
 
-
     public void ReleaseObject(GameObject gameObject) {
         gameObject.SetActive(false);
     }

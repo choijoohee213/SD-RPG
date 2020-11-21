@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BossQuest : Singleton<BossQuest> {
     public Quest KillBossQuest;
@@ -15,7 +12,6 @@ public class BossQuest : Singleton<BossQuest> {
 
     private Vector3 BridgeEntrancePos = new Vector3(-9.6f, 22f, 86f);
 
-      
     public void StartQuest() {
         OnQuest = true;
         BossObj.SetActive(true);
@@ -23,8 +19,8 @@ public class BossQuest : Singleton<BossQuest> {
         //막혀있던 보스 길 열기
         Fence.SetActive(false);
         FenceBroken.SetActive(true);
-    } 
- 
+    }
+
     public void EnterCastle() {
         UIManager.Instance.BossExitPanel.SetActive(false);
         EntranceOpened.SetActive(false);
@@ -34,7 +30,8 @@ public class BossQuest : Singleton<BossQuest> {
         eventCamera.StartAnimation();
     }
 
-    private void ExitCastle() {
+    public void ExitCastle() {
+        OnFighting = false;
         UIManager.Instance.OnOffCanvas(true, true, false);
         EntranceOpened.SetActive(true);
         EntranceClosed.SetActive(false);
@@ -46,6 +43,7 @@ public class BossQuest : Singleton<BossQuest> {
     }
 
     public void OnExitAnswerBtn(bool IsExit) {
+        UIManager.Instance.BossExitPanel.SetActive(true);
         if(IsExit) {
             Player.transform.position = BridgeEntrancePos;
             ExitCastle();
@@ -53,5 +51,4 @@ public class BossQuest : Singleton<BossQuest> {
 
         Time.timeScale = 1f;
     }
-
 }

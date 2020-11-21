@@ -56,7 +56,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     }
 
     public void OnDrag(PointerEventData eventData) {
-        if(BossQuest.Instance.OnAnimation) return;
+        if(BossQuest.Instance.OnAnimation)
+            return;
         IsPointerUp = false;
         cam = null;
         if(canvas.renderMode == RenderMode.ScreenSpaceCamera)

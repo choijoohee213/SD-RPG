@@ -26,6 +26,7 @@ public class MonsterBase : CharacterBase {
     }
 
     protected override void DieAnimEvent() {
+        SoundManager.Instance.playAudio("MonsterDie");
         healthBar.healthBarObj.SetActive(false);
         base.DieAnimEvent();
 

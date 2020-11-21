@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TypeEffect : MonoBehaviour
-{
+public class TypeEffect : MonoBehaviour {
     public GameObject EndCursor;
     public int CharPerSeconds;
-    string targetMsg;
-    Text msgText;
-    int index;
-    float interval;
+    private string targetMsg;
+    private Text msgText;
+    private int index;
+    private float interval;
 
     private void Awake() {
         msgText = GetComponent<Text>();
@@ -21,7 +18,7 @@ public class TypeEffect : MonoBehaviour
         EffectStart();
     }
 
-    void EffectStart() {
+    private void EffectStart() {
         EndCursor.SetActive(false);
         msgText.text = "";
         index = 0;
@@ -30,7 +27,7 @@ public class TypeEffect : MonoBehaviour
         Invoke("Effecting", interval);
     }
 
-    void Effecting() {
+    private void Effecting() {
         if(msgText.text == targetMsg) {
             EffectEnd();
             return;
@@ -41,7 +38,7 @@ public class TypeEffect : MonoBehaviour
         Invoke("Effecting", interval);
     }
 
-    void EffectEnd() {
+    private void EffectEnd() {
         EndCursor.SetActive(true);
     }
 }

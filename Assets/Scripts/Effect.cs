@@ -14,7 +14,8 @@ public class Effect : MonoBehaviour {
     }
 
     private void Update() {
-        if(updatingPos) transform.position = new Vector3(StartTransform.position.x, transform.position.y, StartTransform.position.z);
+        if(updatingPos)
+            transform.position = new Vector3(StartTransform.position.x, transform.position.y, StartTransform.position.z);
     }
 
     public void Disable() {
