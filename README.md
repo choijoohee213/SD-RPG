@@ -1,5 +1,7 @@
 # SD-RPG
+Blog https://codingwell.tistory.com/13?category=910426
 
+Youtube https://www.youtube.com/watch?v=JB2JzF59fRw
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F2R2Us%2FbtqNWEIZ6AZ%2F1xEkl8hYxBKyOEm8ekUYB0%2Fimg.png" width="40%">
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnySE1%2FbtqNVR9UKfV%2FLsyRpWCeqg73i0cIrOolyk%2Fimg.png" width="40%">
