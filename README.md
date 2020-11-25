@@ -1,7 +1,12 @@
 # SD-RPG
 
 
-<image src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\1.PNG" width="300px">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\1.PNG" width="30%">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\2.PNG" width="30%">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\6.PNG" width="30%">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\8.PNG" width="30%">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\10.PNG" width="30%">
+<img src="D:\choij\바탕화면\주희\유니티\실행영상\RPG\15.PNG" width="30%">
 
 유니티로 만든 RPG 모바일 게임입니다.
 
